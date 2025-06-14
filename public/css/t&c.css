@@ -1,0 +1,103 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+
+:root {
+  --primary-color: #0d0d0d;
+  --primary-color-light: #1f2125;
+  --primary-color-extra-light: #35373b;
+  --secondary-color: #696fdd;
+  --secondary-color-dark: #a3a8f0;
+  --text-light: #ccc;
+  --white: #fff;
+  --background-gradient: linear-gradient(135deg, rgb(186, 190, 253) 0%, rgb(66, 71, 158) 100%);
+  --background1: linear-gradient(113.36deg, #000002 -12.22%, #9685de 179.61%);
+  --background2: linear-gradient(180deg, #d6d9fa, rgb(149, 154, 243));
+  --max-width: 1300px;
+}
+
+
+.t-c {
+  width: 100%;
+  margin: 0 auto;
+  background: transparent;
+  padding: 20px 30px;
+  border-radius: 50px;
+  border: 1px solid var(--secondary-color-dark);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.t-c-head {
+  color: #FFF;
+  font-size: 25px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.t-c-title {
+  color: #a8a8b3;
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 15px;
+}
+
+.t-c h3 {
+  color: #fff;
+  font-size: 17px;
+  margin-top: 25px;
+}
+
+.t-c-title a{
+    color: #696fdd;
+}
+
+
+
+
+    /* FLOATING CONTACT  */
+.whatsapp-float {
+  position: fixed;
+  font-family: 'Luckiest Guy', cursive;
+  bottom: 30px;
+  right: 20px;
+  background:  #25d366;
+  color: white;
+  font-size: 26px;
+   padding: 5px 8px;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 1000;
+  box-shadow: 4px 4px var(--primary-color-light);
+  transition: transform 0.3s ease;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+}
+
+
+
+
+
+
+
+/* MY RESPONSIVNESS  */
+@media (max-width: 768px) {
+
+  .t-c {
+  border-radius: 30px;
+}
+
+    .t-c-head {
+  font-size: 20px;
+}
+
+.t-c {
+  padding: 20px 10px;
+}
+
+
+
+
+
+
+}

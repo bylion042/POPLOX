@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#121212">
+  <title>Admin Dashboard</title>
+  <link rel="icon" href="/images/favicon.png" type="image/png">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+
+<body>
+
+    <!-- FOR BIG SCREEN  -->
+    <nav class="hide">
+        <div class="nav__logo">
+            <a href="/"><img src="images/logo.png" alt="logo" /></a>
+        </div>
+
+        <div class="nav-hold">
+            <ul class="nav__links">
+                <li class="link"><a href="/">Home</a></li>
+                <li class="link"><a href="/admin">Payments</a></li>
+                <li class="link"><a href="/admin/services">Services</a></li>
+                <li class="link"><a href="/admin/orders">Orders</a></li>
+            </ul>
+
+            <a href="/login"><button class="btn join__now transparent">Login</button></a>
+            <!-- <a href="/register"><button class="btn join__now">Register</button></a> -->
+        </div>
+    </nav>
+
+
+<!-- NAV FOR SMALL SCREEN  -->
+<div class="small-screen-nav">
+  <div class="link-container">
+    <a href="/admin" class="nav-link">
+      <i class="ri-dashboard-line"></i>
+      <p>PAYMENTS</p>
+    </a>
+
+ <a href="/admin/orders" class="nav-link">
+      <i class="ri-shopping-bag-line"></i>
+      <p>ALL ORDERS</p>
+    </a>
+
+    <a href="/admin/services" class="nav-link">
+      <i class="ri-heart-2-line"></i>
+      <p>SERVICE PRICE</p>
+    </a>
+
+    <a href="/mine" class="nav-link">
+      <i class="ri-home-4-line"></i>
+      <p>Home</p>
+    </a>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  function updateActiveLink() {
+    const currentPath = window.location.pathname;
+
+    navLinks.forEach(link => {
+      const linkURL = new URL(link.href);
+      const linkPath = linkURL.pathname;
+
+      if (linkURL.origin === window.location.origin && linkPath === currentPath) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  }
+
+  updateActiveLink();
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      const linkURL = new URL(link.href);
+
+      if (linkURL.origin === window.location.origin) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+  <!-- BACKGROUND BLUR -->
+  <span class="bg__blur"></span>
+  <span class="footer__blur"></span>
+
+
+
+  <!-- ALL ABOUT Manage Service Prices -->
+  <div class="service" id="admin-services">
+
+    <h1>Manage Service Prices</h1>
+
+    <!-- Platform Filters -->
+    <div class="platform-buttons" data-aos="fade-right" style="margin-bottom: 1rem;">
+      <% const platforms=[ { name: 'TikTok' , icon: 'https://storage.perfectcdn.com/98b10r/ax0uimj7cb0i3h0w.gif' }, {
+        name: 'Instagram' , icon: 'https://storage.perfectcdn.com/98b10r/nfg8qwgiaycag5yu.gif' }, { name: 'Soundcloud' ,
+        icon: 'https://cdn-icons-png.flaticon.com/128/2504/2504939.png' }, { name: 'YouTube' ,
+        icon: 'https://storage.perfectcdn.com/98b10r/0wffic79qprrh2dc.gif' }, { name: 'Snapchat' ,
+        icon: 'https://cdn-icons-png.flaticon.com/128/2504/2504938.png' }, { name: 'Telegram' ,
+        icon: 'https://storage.perfectcdn.com/98b10r/h7j64q32oquy7zt9.gif' }, { name: 'Linkedin' ,
+        icon: 'https://storage.perfectcdn.com/98b10r/aagzsc6n1f8j3h65.gif' }, { name: 'Spotify' ,
+        icon: 'https://cdn-icons-png.flaticon.com/128/2504/2504940.png' }, { name: 'Twitter' ,
+        icon: 'https://storage.perfectcdn.com/98b10r/aqklxpiw36sqmc90.gif' }, { name: 'Website Traffic' ,
+        icon: 'https://cdn-icons-png.flaticon.com/128/1040/1040243.png' }, { name: 'Facebook' ,
+        icon: 'https://storage.perfectcdn.com/98b10r/i25luukokx3adja1.gif' } ]; %>
+
+        <% platforms.forEach(p=> { %>
+          <button type="button" onclick="filterByPlatform('<%= p.name %>')">
+            <img src="<%= p.icon %>" class="btn-icon" />
+            <%= p.name %>
+          </button>
+          <% }) %>
+
+            <button type="button" class="active" onclick="resetFilters()">
+              <img src="https://cdn-icons-png.flaticon.com/128/9073/9073032.png" class="btn-icon" />Reset
+            </button>
+    </div>
+
+    <!-- Search -->
+    <div class="form-group" data-aos="fade-left">
+      <input type="text" id="serviceSearch" placeholder="Search service name or category...">
+    </div>
+
+    <!-- ALL ABOUT THE ENAGEMENTS  -->
+    <% if (typeof services !=='undefined' && services.length> 0) { %>
+
+      <div class="table-scroll">
+      <table class="order-card">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Name</th>
+            <th>API</th>
+            <th>Your Price</th>
+            <th>Min</th>
+            <th>Max</th>
+            <th>Update</th>
+          </tr>
+        </thead>
+        <tbody id="servicesTable">
+          <% services.forEach(service=> { %>
+            <tr data-platform="<%= service.category.toLowerCase() %>"
+              data-search="<%= service.name.toLowerCase() %> <%= service.category.toLowerCase() %>">
+              <td>
+                <%= service.category %>
+              </td>
+              <td>
+                <%= service.name %>
+              </td>
+              <td>$<%= service.api_price %>
+              </td>
+              <td>
+                <form action="/admin/services/update/<%= service._id %>" method="POST">
+                  <input type="number" name="my_price" value="<%= service.my_price %>" step="0.0001" required>
+              </td>
+              <td>
+                <%= service.min %>
+              </td>
+              <td>
+                <%= service.max %>
+              </td>
+              <td>
+                <button type="submit">Save</button>
+                </form>
+              </td>
+            </tr>
+            <% }) %>
+        </tbody>
+      </table>
+      </div>
+      <% } else { %>
+        <p class="fallback-message">No services to display.</p>
+        <% } %>
+
+          <!-- JavaScript -->
+          <script>
+            const rows = document.querySelectorAll('#servicesTable tr');
+            const buttons = document.querySelectorAll('.platform-buttons button');
+
+            function filterByPlatform(platform) {
+              const platformLower = platform.toLowerCase();
+
+              // Remove 'active' from all buttons
+              buttons.forEach(btn => btn.classList.remove('active'));
+
+              // Add 'active' to the clicked button
+              const clickedBtn = Array.from(buttons).find(btn => btn.textContent.trim().includes(platform));
+              if (clickedBtn) clickedBtn.classList.add('active');
+
+              // Filter rows
+              rows.forEach(row => {
+                const category = row.getAttribute('data-platform');
+                row.style.display = category.includes(platformLower) ? '' : 'none';
+              });
+            }
+
+            function resetFilters() {
+              rows.forEach(row => row.style.display = '');
+              document.getElementById('serviceSearch').value = '';
+
+              // Reset active button
+              buttons.forEach(btn => btn.classList.remove('active'));
+              const resetBtn = document.querySelector('.platform-buttons button.active');
+              if (resetBtn) resetBtn.classList.remove('active');
+            }
+
+            document.getElementById('serviceSearch').addEventListener('input', function () {
+              const query = this.value.toLowerCase();
+              rows.forEach(row => {
+                const searchText = row.getAttribute('data-search');
+                row.style.display = searchText.includes(query) ? '' : 'none';
+              });
+
+              // Remove active from all buttons if typing in search
+              if (query.length > 0) {
+                buttons.forEach(btn => btn.classList.remove('active'));
+              }
+            });
+          </script>
+  </div>
+
+
+
+
+
+
+
+
+  <!-- ALL ABOUT Profit Logs -->
+  <div class="profit" id="admin-orders">
+
+    <h1>Profit Logs</h1>
+
+    <% if (typeof orders !=='undefined' && orders.length> 0) { %>
+
+      <!-- Calculate totals FIRST -->
+      <% let totalProfit=0; let totalApiCost=0; let totalCharge=0; orders.forEach(order=> {
+        totalProfit += order.profit || 0;
+        totalApiCost += order.api_price || 0;
+        totalCharge += order.charge || 0;
+        });
+        %>
+
+        <!-- ORDER TOTALS DISPLAY -->
+        <div class="order-card" style="background: #e0ffe0; margin-bottom: 1rem;">
+          <p><strong>Total Charge:</strong> $<%= totalCharge.toFixed(4) %>
+          </p>
+          <p><strong>Total API Cost:</strong> $<%= totalApiCost.toFixed(4) %>
+          </p>
+          <p><strong>Total Profit:</strong> <span style="color: green;">$<%= totalProfit.toFixed(4) %></span></p>
+          <p><strong>Amount to Fund Your API:</strong> <span style="color: red;">$<%= totalApiCost.toFixed(4) %></span>
+          </p>
+        </div>
+
+        <button class="delete-btn" onclick="deleteAllOrders()"><i class="ri-delete-bin-6-line"></i> Delete All
+          Orders</button>
+
+
+
+        <!-- Search -->
+        <div class="form-group" data-aos="fade-left">
+          <input type="text" id="orderSearch" placeholder="Search orders..." />
+        </div>
+
+        <!-- ORDER DETAILS DISPLAY -->
+        <div class="orders-grid">
+          <% orders.forEach(order=> { %>
+            <div class="order-card"
+              data-search="<%= order.order_id %> <%= order.user %> <%= order.service_id %> <%= order.quantity %> <%= order.charge %> <%= order.createdAt ? order.createdAt.toLocaleString() : '' %>">
+              <p><strong>Order ID:</strong>
+                <%= order.order_id %>
+              </p>
+              <p><strong>User:</strong>
+                <%= order.user %>
+              </p>
+              <p><strong>Service:</strong>
+                <%= order.service_id %>
+              </p>
+              <p><strong>Quantity:</strong>
+                <%= order.quantity %>
+              </p>
+              <p><strong>Charge:</strong> $<%= order.charge ? order.charge.toFixed(4) : '0.0000' %>
+              </p>
+              <p><strong>API Cost:</strong> $<%= order.api_price ? order.api_price.toFixed(4) : '0.0000' %>
+              </p>
+              <p><strong>Profit:</strong> <span style="color: green;">$<%= order.profit ? order.profit.toFixed(4)
+                    : '0.0000' %></span></p>
+              <p><strong>Time:</strong>
+                <%= order.createdAt ? order.createdAt.toLocaleString() : '' %>
+              </p>
+
+              <button class="delete-btn" onclick="deleteOrder('<%= order.order_id %>')"><i
+                  class="ri-delete-bin-6-line"></i> Delete Order</button>
+            </div>
+            <% }) %>
+        </div>
+
+        <% } else { %>
+          <p class="fallback-message">No profit logs available.</p>
+          <% } %>
+  </div>
+  <!-- JavaScript Function to Handle Delete order by id -->
+  <script>
+    function deleteOrder(orderId) {
+      if (!confirm("Are you sure you want to delete this order?")) return;
+
+      fetch(`/admin/delete-order/${orderId}`, {
+        method: 'DELETE'
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            alert('Order deleted successfully');
+            location.reload(); // refresh the page to reflect deletion
+          } else {
+            alert('Failed to delete order');
+          }
+        })
+        .catch(err => {
+          console.error(err);
+          alert('An error occurred while deleting the order');
+        });
+    }
+  </script>
+  <!-- JavaScript Function to Handle Delete all orders  -->
+  <script>
+    function deleteAllOrders() {
+      if (!confirm("Are you sure you want to delete ALL orders? This cannot be undone.")) return;
+
+      fetch('/admin/delete-all-orders', {
+        method: 'DELETE'
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            alert('All orders deleted successfully');
+            location.reload();
+          } else {
+            alert('Failed to delete orders');
+          }
+        })
+        .catch(err => {
+          console.error(err);
+          alert('An error occurred while deleting all orders');
+        });
+    }
+  </script>
+
+
+
+
+
+
+
+  <!-- ALL ABOUT PAYMENTS  -->
+  <div class="payments" id="admin-home">
+
+    <h1>Pending Payments</h1>
+
+    <div class="payment-contain">
+      <% if (typeof requests !=='undefined' && requests.length> 0) { %>
+        <% requests.forEach(payment=> { %>
+          <div class="payment">
+            <p><strong>User:</strong>
+              <%= payment.user_id.username || payment.user_id.email || "Unknown" %>
+            </p>
+            <p><strong>Amount:</strong> ₦<%= Number(payment.amount).toLocaleString('en-NG') %>
+            </p>
+            <p><strong>Session ID:</strong>
+              <%= payment.txid %>
+            </p>
+
+            <% if (payment.screenshot) { %>
+              <p><strong>User Payment Screenshot:</strong>
+                <a href="<%= payment.screenshot %>" target="_blank">View Screenshot</a>
+              </p>
+              <% } else { %>
+                <p>No screenshot uploaded.</p>
+                <% } %>
+
+                  <!-- BUTTONS  -->
+                  <form action="/admin/palmpay/verify" method="POST">
+                    <input type="hidden" name="request_id" value="<%= payment._id %>">
+                    <input type="hidden" name="user_id" value="<%= payment.user_id._id %>">
+                    <input type="hidden" name="amount" value="<%= payment.amount %>">
+                    <button type="submit" name="action" value="approve">Approve</button>
+                    <button type="submit" name="action" value="reject">Reject</button>
+                  </form>
+          </div>
+          <% }); %>
+            <% } else { %>
+              <p class="fallback-message">No pending PalmPay payments.</p>
+              <% } %>
+
+    </div>
+  </div>
+
+
+
+
+
+  <!-- FLOATING CONTACT  -->
+  <a href="https://wa.me/2347045167609?text=Hi%20Poplox%20Team%2C%20I'm%20interested%20in%20boosting%20my%20socials%20with%20your%20services.%20Can%20you%20tell%20me%20more%3F"
+    class="whatsapp-float" target="_blank" aria-label="Chat with Poplox on WhatsApp">
+    <i class="ri-whatsapp-line"></i>
+  </a>
+
+
+
+
+
+  <!-- FUNTION FOR // 🧠 Filter table rows IN SERVICES -->
+  <script>
+    // 🧠 Filter table rows
+    document.getElementById('serviceSearch').addEventListener('keyup', function () {
+      const search = this.value.toLowerCase();
+      const rows = document.querySelectorAll('#servicesTable tr');
+
+      rows.forEach(row => {
+        const category = row.children[0].textContent.toLowerCase();
+        const name = row.children[1].textContent.toLowerCase();
+        if (category.includes(search) || name.includes(search)) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    });
+  </script>
+
+
+
+  <!-- Search script -->
+  <script>
+    document.getElementById('orderSearch').addEventListener('input', function () {
+      const query = this.value.toLowerCase();
+      const cards = document.querySelectorAll('.order-card');
+
+      cards.forEach(card => {
+        const text = card.getAttribute('data-search')?.toLowerCase() || '';
+        card.style.display = text.includes(query) ? '' : 'none';
+      });
+    });
+  </script>
+
+
+
+  <!-- FUNCTION TO SHOW AND HIDE ADMIN, ORDER AND SERVICES  -->
+  <script>
+    const path = window.location.pathname;
+
+    // Hide all sections by default
+    document.getElementById("admin-home").style.display = "none";
+    document.getElementById("admin-orders").style.display = "none";
+    document.getElementById("admin-services").style.display = "none";
+
+    // Show the correct one based on path
+    if (path === "/admin") {
+      document.getElementById("admin-home").style.display = "block";
+    } else if (path === "/admin/orders") {
+      document.getElementById("admin-orders").style.display = "block";
+    } else if (path === "/admin/services") {
+      document.getElementById("admin-services").style.display = "block";
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+
+</html>

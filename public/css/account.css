@@ -1,0 +1,157 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+
+:root {
+  --primary-color: #0d0d0d;
+  --primary-color-light: #1f2125;
+  --primary-color-extra-light: #35373b;
+  --secondary-color: #696fdd;
+  --secondary-color-dark: #a3a8f0;
+  --text-light: #ccc;
+  --white: #fff;
+  --background-gradient: linear-gradient(135deg, rgb(186, 190, 253) 0%, rgb(66, 71, 158) 100%);
+  --background1: linear-gradient(113.36deg, #000002 -12.22%, #9685de 179.61%);
+  --background2: linear-gradient(180deg, #d6d9fa, rgb(149, 154, 243));
+  --max-width: 1300px;
+}
+
+
+
+
+.api-key-section {
+  background: var(--primary-color-light);
+  color: var(--text-light);
+  padding: 20px;
+  border-radius: 15px;
+  width: 50%;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+.api-key-section h2 {
+  color: var(--white);
+  margin-bottom: 20px;
+}
+
+.api-box {
+  display: flex;
+  align-items: center;
+  background: var(--primary-color-extra-light);
+  border: 1px solid var(--secondary-color-dark);
+  border-radius: 7px;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+}
+
+.api-box input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--white);
+  font-family: monospace;
+  font-size: 17px;
+  outline: none;
+}
+
+.copy-btn {
+  background-color: var(--secondary-color);
+  color: var(--white);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.copy-btn:hover {
+  background-color: var(--secondary-color-dark);
+}
+
+.created-at {
+  font-size: 13px;
+  color: var(--text-light);
+  margin-bottom: 20px;
+}
+
+.regen-btn {
+  background: var(--background-gradient);
+  border: none;
+  color: var(--white);
+  padding: 12px 20px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 15px;
+  margin-bottom: 10px;
+  width: 100%;
+  transition: transform 0.2s;
+}
+
+.regen-btn:hover {
+  transform: scale(1.05);
+}
+
+.divider {
+  border: 0;
+  border-top: 1px solid #444;
+  margin: 30px 0;
+}
+
+.guide-title{
+    margin-bottom: 10px;
+}
+
+.usage-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.usage-list li {
+  margin-bottom: 10px;
+  font-size: 15px;
+  color: var(--white);
+}
+
+.usage-list li span{
+margin-right: 10px;
+}
+
+.usage-list li code {
+  color: var(--secondary-color);
+  font-size: 17px;
+  font-family: monospace;
+}
+
+
+
+
+
+
+
+@media (max-width: 800px) {
+
+
+  .api-key-section {
+  padding: 20px 10px;
+  border-radius: 15px;
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 8rem;
+}
+
+.api-box input {
+    font-size: 15px;
+}
+
+.copy-btn {
+  padding: 8px 5px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.divider {
+  margin: 20px 0;
+}
+
+
+}

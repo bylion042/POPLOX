@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#121212">
+  <title>add funds</title>
+  <link rel="icon" href="/images/favicon.png" type="image/png">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <link rel="stylesheet" href="/css/wallet.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+
+<body>
+  <div class="container">
+    <%- include ('partials/sidebar') %>
+
+      <!-- Main content -->
+      <main class="main-content">
+        <span class="bg__blur"></span>
+        <span class="footer__blur"></span>
+        <%- include ('partials/profiles') %>
+
+          <!-- ALL ABOUT entered-content -->
+          <div class="centered-content">
+            <h2>Welcome <%= user.name %>
+            </h2>
+            <p>Your journey starts here.</p>
+          </div>
+
+
+          <!-- ALL ABOUT THE MAIN CONTENT REGARDIN WALLET -->
+          <div class="contents">
+            <div class="wallet-container">
+
+              <!-- ALL ABOUT WALLET FUNDING  -->
+              <div class="wallet-funding">
+                <h2 class="wallet">Fund Wallet to our PalmPay</h2>
+                <p class="wallet-text">
+                  Copy the account number below and send your desired amount to our PalmPay to fund your wallet.
+                </p>
+
+
+                <!-- BANK DETAILS -->
+                <div class="bank-detils">
+                  <!-- <p>Send payment to:</p> -->
+                  <ul>
+                    <li>
+                      <strong>Account Number:</strong>
+                      <span id="account-number">7045167609</span>
+                      <button class="copy-btn" onclick="copyAccount(this)">Copy</button>
+                    </li>
+                    <li><strong>Bank Name:</strong> PalmPay MFB</li>
+                    <li><strong>Account Name:</strong> Chidera Kingsley Ezeaka</li>
+                  </ul>
+                </div>
+
+
+
+                <% if (typeof msg !=="undefined" ) { %>
+                  <p class="success">
+                    <%= msg %>
+                  </p>
+                  <% } %>
+
+                    <!-- CONFIRM TRANSACTION FORM  -->
+                    <h2 class="wallet">Fill your Transaction Details</h2>
+                    <p class="wallet-text">
+                      Please make sure to enter the exact amount you sent, provide the correct transaction Session ID,
+                      and optionally upload a screenshot of the payment for faster verification.
+                    </p>
+
+                    <form action="/submit" method="POST" enctype="multipart/form-data">
+                      <div>
+                        <label>Amount Sent</label>
+                        <input type="number" name="amount" placeholder="₦1000" required />
+                      </div>
+
+                      <div>
+                        <label>Transaction Session ID</label>
+                        <input type="text" name="txid" placeholder="1034768902XXXXXXXXXXXXXXXXXXX" required />
+                      </div>
+
+                      <div>
+                        <label>Upload Screenshot (Optional)</label>
+                        <input type="file" name="screenshot" accept="image/*" />
+                      </div>
+
+                      <div class="chain">
+                        <button type="submit">Submit Payment Details</button>
+                        <button onclick="showImage()">Find Transaction Session ID</button>
+                      </div>
+                     <script>
+  function showImage() {
+    document.getElementById("overlay").style.display = "flex";
+  }
+
+  function hideImage() {
+    document.getElementById("overlay").style.display = "none";
+  }
+</script>
+
+
+
+                    </form>
+
+                   <div id="overlay" class="image-overlay" onclick="hideImage()">
+  <div class="image-popup" onclick="event.stopPropagation()">
+    <img src="/images/review4.jpg" alt="Transaction ID Example">
+  </div>
+</div>
+              </div>
+
+
+
+
+              <!-- ALL ABOUT PAYMENT HISTORY  -->
+              <div class="payment-history">
+                <h2 class="wallet">My Transaction Payment History</h2>
+                <p class="wallet-text">
+                  Here you can view the status of all your wallet funding transactions, including whether they are
+                  pending, approved, or rejected.
+                </p>
+
+                <!-- Filter Buttons -->
+                <div class="history-btn">
+                  <form method="GET" action="/wallet" id="filter-form">
+                    <button type="submit" name="status" value="" class="all">All</button>
+                    <button type="submit" name="status" value="pending" class="pending"
+                      onclick="setBorderClass('pending')">Pending</button>
+                    <button type="submit" name="status" value="approved" class="approved"
+                      onclick="setBorderClass('approved')">Approved</button>
+                    <button type="submit" name="status" value="rejected" class="rejected"
+                      onclick="setBorderClass('rejected')">Rejected</button>
+                  </form>
+
+                </div>
+
+
+                <!-- Payment History Display -->
+                <div class="payment-contain">
+                <% if (payments.length===0) { %>
+                  <p>No payments found.</p>
+                  <% } else { %>
+                    <% payments.forEach(payment=> { %>
+                        <div class="payment-entry">
+                          <p><strong>Amount:</strong> ₦<%= Number(payment.amount).toLocaleString('en-NG') %>
+                          </p>
+                          <p><strong>Status:</strong>
+                            <%= payment.status %>
+                          </p>
+                          <p><strong>Session ID:</strong>
+                            <%= payment.txid %>
+                          </p>
+                          <% if (payment.screenshot) { %>
+                            <a href="<%= payment.screenshot %>" target="_blank">View Screenshot</a>
+                            <% } %>
+                        </div>
+                        <% }); %>
+                        <% } %>
+                      </div>
+              </div>
+
+            </div>
+          </div>
+
+      </main>
+
+
+      <!-- INCLUDE BOT  -->
+      <%- include('partials/bot') %>
+  </div>
+
+
+  <!-- COPY BUTTON  -->
+  <script>
+    function copyAccount(button) {
+      const accountNumber = document.getElementById("account-number").innerText;
+      navigator.clipboard.writeText(accountNumber).then(() => {
+        const originalText = button.innerText;
+        button.innerText = "Copied!";
+        button.disabled = true;
+        setTimeout(() => {
+          button.innerText = originalText;
+          button.disabled = false;
+        }, 2000);
+      });
+    }
+  </script>
+
+
+  <!-- FUNCTION TO ADD ACTIVE TO HISTORY BUTTONS border  -->
+  <script>
+    // Get the current `status` from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const status = urlParams.get('status') || 'all';
+
+    // Remove any existing classes and add the current one
+    document.body.classList.remove('all', 'pending', 'approved', 'rejected');
+    document.body.classList.add(status);
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- <script src="/js/orders.js"></script> -->
+  <script src="/js/dashboard.js"></script>
+</body>
+
+</html>

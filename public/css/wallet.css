@@ -1,0 +1,421 @@
+
+:root {
+  --primary-color: #0d0d0d;
+  --primary-color-light: #1f2125;
+  --primary-color-extra-light: #35373b;
+  --secondary-color: #696fdd;
+  --secondary-color-dark: #a3a8f0;
+  --text-light: #ccc;
+  --white: #fff;
+  --background-gradient: linear-gradient(135deg, rgb(186, 190, 253) 0%, rgb(66, 71, 158) 100%);
+  --background1: linear-gradient(113.36deg, #000002 -12.22%, #9685de 179.61%);
+  --background2: linear-gradient(180deg, #d6d9fa, rgb(149, 154, 243));
+  --max-width: 1300px;
+}
+
+.contents{
+    padding: 0;
+}
+
+.wallet-container {
+    display: flex;
+  margin: 1rem auto;
+  gap: 30px;
+  padding: 0rem 1rem;
+  /* background: var(--primary-color-light); */
+  color: var(--text-light);
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  width: 100%;
+}
+
+.wallet-funding , .payment-history{
+    width: 100%;
+    height: 85vh;
+}
+
+.wallet{
+  color: var(--white);
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+.wallet-text{
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.bank-detils {
+  margin-bottom: 1rem;
+}
+
+
+ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style-type: none;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  border: none;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  background: transparent;
+}
+
+/* Add background image using a ::before pseudo-element */
+ul::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/images/palmpay.jpeg'); /* Replace with your image path */
+  background-size: cover;
+  background-position: center;
+  filter: blur(2px);
+  z-index: -1;
+  opacity: 0.6; /* optional: adjust visibility */
+}
+
+
+
+
+ul li {
+    color: var(--white);
+  position: relative;
+  font-weight: 500;
+}
+ul li strong {
+  color: var(--primary-color);
+  font-size: 15px;
+}
+
+.copy-btn {
+  margin-left: 0.5rem;
+  padding: 0.2rem 0.6rem;
+  background: var(--secondary-color);
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background 0.3s;
+}
+
+.copy-btn:disabled {
+  background: #4e54b8;
+  cursor: default;
+}
+
+
+.success{
+  background: var(--text-light);
+  border-radius: 5px;
+  font-size: 15px;
+  border-left: 6px solid #25d366;
+padding: 10px;
+color: green;
+margin-bottom: 10px;
+}
+
+form {
+  background: var(--primary-color-extra-light);
+  padding: 1rem;
+  border-radius: 20px;
+  margin-bottom: 2rem;
+}
+
+form div{
+    margin-bottom: 0.5rem;
+}
+
+form label {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: var(--white);
+  font-weight: 500;
+}
+
+form input[type="number"],
+form input[type="text"],
+form input[type="file"] {
+  width: 100%;
+  padding: 1rem;
+  font-size: 15px;
+  border: 1px solid var(--secondary-color-dark);
+  border-radius: 6px;
+  background: var(--primary-color);
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+
+form button{
+    background: var(--background-gradient);
+    color: var(--white);
+    border: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+form button:hover{
+    background: var(--secondary-color);
+}
+
+.chain{
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
+    font-size: 14px;
+  background: var(--primary-color-extra-light);
+  color: var(--white);
+  border: 1px solid var(--secondary-color);
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  /* margin-right: 0.5rem; */
+  transition: background 0.2s ease;
+}
+
+
+/* IMAGE  */
+/* Fullscreen blur background */
+.image-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  background: rgba(0, 0, 0, 0.4);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* Popup image container */
+.image-popup {
+  max-width: 100%;
+  max-height: 100%;
+  animation: popupFadeIn 0.3s ease-in-out;
+}
+
+.image-popup img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 2px solid var(--secondary-color);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+}
+
+/* Smooth animation */
+@keyframes popupFadeIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+
+
+
+/* ALL ABOUT PAYMENT HISTORY  */
+.history-btn {
+  margin-bottom: 1rem;
+}
+
+#filter-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  background: var(--primary-color-extra-light);
+  padding: 0.30rem;
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+
+.history-btn button {
+  border: none;
+  padding: 9px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--white);
+  background: var(--primary-color-extra-light);
+  transition: all 0.3s;
+  width: 100%;
+}
+
+
+/* Default (All) */
+body.all .payment-entry {
+  border: 1px solid var(--secondary-color-dark);
+}
+
+/* Pending */
+body.pending .payment-entry {
+  border: 1px solid rgb(245, 180, 60);
+}
+
+/* Approved */
+body.approved .payment-entry {
+  border: 1px solid #25d366;
+}
+
+/* Rejected */
+body.rejected .payment-entry {
+  border: 1px solid rgb(227, 43, 80);
+}
+
+.history-btn .all {
+  background: var(--secondary-color);
+}
+
+.history-btn .pending {
+  background: rgb(245, 180, 60);
+}
+
+.history-btn .approved {
+  background: #25d366;
+}
+
+.history-btn .rejected {
+  background: rgb(227, 43, 80);
+}
+
+
+
+/* PAYMENT ENTRY  */
+.payment-contain {
+  width: 100%;
+  height: 80%;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.payment-entry {
+    cursor: pointer;
+  background: var(--primary-color);
+  padding: 0.50rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border: 1px solid var(--secondary-color-dark);
+  color: var(--text-light);
+}
+
+.payment-entry p {
+  margin-bottom: 0.3rem;
+  font-size: 14px;
+}
+
+.payment-entry a {
+  color: var(--secondary-color);
+  text-decoration: underline;
+}
+
+/* Custom vertical scrollbar */
+.payment-contain::-webkit-scrollbar {
+  width: 4px;
+}
+
+.payment-contain::-webkit-scrollbar-thumb {
+  background: var(--secondary-color);
+  border-radius: 10px;
+}
+
+
+
+
+
+
+
+
+@media (max-width: 800px) {
+
+.wallet-funding , .payment-history{
+    width: 100%;
+    height: 100vh;
+}
+
+
+.wallet-container {
+  flex-direction: column;
+    gap: 100px;
+    padding: 0rem;
+    padding-bottom: 5rem;
+    box-shadow: none;
+    /* background: var(--primary-color-light); */
+}
+
+.payment-contain {
+   padding-bottom: 2rem;
+}
+
+
+.wallet{
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.wallet-text {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.chain{
+    display: flex;
+   flex-direction: column;
+   gap: 13px;
+}
+
+form {
+    padding: 0.70rem 0.80rem;
+    border-radius: 10px;
+    /* background: none; */
+}
+
+form input[type="number"], form input[type="text"], form input[type="file"]{
+    width: 100%;
+    padding: 0.80rem 1rem;
+}
+
+form button {
+  font-size: 15px;
+    padding: 13px;
+    border-radius: 6px;
+}
+
+
+#filter-form {
+    padding: 0.40rem;
+}
+
+
+
+/* Popup image container */
+.image-popup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-popup img {
+  width: 90%;
+}
+
+}

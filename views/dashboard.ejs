@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#121212">  
+    <title>dashboard</title>
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" href="/css/orders.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <!-- <link rel="stylesheet" href="/css/notification.css"> -->
+</head>
+
+<body>
+    <div class="container">
+        <%- include ('partials/sidebar') %>
+
+
+            <!-- Main content -->
+            <main class="main-content">
+                <span class="bg__blur"></span>
+                <span class="footer__blur"></span>
+
+                <%- include ('partials/profiles') %>
+
+
+                    <!-- ALL ABOUT entered-content -->
+                    <div class="centered-content">
+                        <h2>Welcome <%= user.name %>
+                        </h2>
+                        <p>Your journey starts here.</p>
+                    </div>
+
+                    <!-- BALANCE CARD  -->
+                    <%- include('partials/balance', { user: user }) %>
+
+
+
+                        <!-- ALL ABOUT THE MAIN CONTENT REGARDIN ODERS -->
+                        <div class="contents">
+                            <!-- ALL ABOUT ORDER  -->
+                          <%- include('partials/oders') %>
+                        </div>
+
+            </main>
+
+
+            <!-- INCLUDE BOT  -->
+            <%- include('partials/bot') %>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/orders.js"></script>
+    <script src="/js/dashboard.js"></script>
+</body>
+
+</html>

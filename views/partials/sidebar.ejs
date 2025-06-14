@@ -1,0 +1,279 @@
+<!-- NAV FOR SMALL SCREEN  -->
+<div class="small-screen-nav">
+  <div class="link-container">
+    <a href="/dashboard" class="nav-link">
+      <i class="ri-dashboard-line"></i>
+      <p>DASHBOARD</p>
+    </a>
+
+    <a href="/wallet" class="nav-link">
+      <i class="ri-wallet-line"></i>
+      <p>MY WALLETS</p>
+    </a>
+
+    <a href="/my-order" class="nav-link">
+      <i class="ri-shopping-bag-line"></i>
+      <p>ALL ORDERS</p>
+    </a>
+    <a href="/account" class="nav-link">
+      <i class="ri-user-line"></i>
+      <p>ACCOUNT</p>
+    </a>
+  </div>
+</div>
+
+
+
+<!-- Nav bar DUPLICATE  -->
+<div class="small-screen-nav nav-duplicate">
+  <div class="link-container">
+    <a href="/dashboard" class="nav-link">
+      <i class="ri-dashboard-line"></i>
+      <p>DASHBOARD</p>
+    </a>
+
+    <a href="/wallet" class="nav-link">
+      <i class="ri-wallet-line"></i>
+      <p>MY WALLETS</p>
+    </a>
+
+    <a href="/my-order" class="nav-link">
+      <i class="ri-shopping-bag-line"></i>
+      <p>ALL ORDERS</p>
+    </a>
+
+    <a href="/new-update" class="nav-link">
+      <i class="ri-user-line"></i>
+      <p>NEW UPDATES</p>
+    </a>
+  </div>
+</div>
+
+
+
+
+
+
+<!-- SIDE BAR FOR SMALL SCREEN  -->
+<div class="contain-hamburger">
+  <div class="hamburger" id="hamburger-menu">
+    <i class="ri-menu-3-line" id="open-menu"></i>
+  </div>
+
+  <header class="header">
+    <div class="profile-summary">
+      <div class="profile-img-wrapper">
+        <div class="profile-initials">
+          <% const nameParts=user.name.trim().split(' ');
+                    let initials = '';
+                    if (nameParts.length === 1) {
+                    initials = nameParts[0].substring(0, 2);
+                    } else {
+                    initials = nameParts[0][0] + nameParts[1][0]; }%>
+                  <%= initials.toUpperCase() %>
+                </div>
+
+              </div>
+             <div class="profile-text">
+               <h2 class="username"><%= user.name %></h2>
+               <p class="email"><%= user.email %></p>
+             </div>
+        </div>
+    </header>
+</div>
+
+<div class="menu-container" id="menu-container">
+  
+    <!-- CLOSE ICON INSIDE -->
+  <div class="hamburger close-menu" id="close-menu">
+        <i class="ri-close-line"></i>
+  </div>
+
+  <div class="menu">
+        <a href="/dashboard" class="on active">
+      <i class="ri-shopping-cart-line"></i>
+      <span>New Order</span>
+    </a>
+    <a href="/wallet" class="on  toasts">
+      <i class="ri-wallet-line"></i>
+      <span>Fund Wallet</span>
+    </a>
+    <a href="/my-order" class="on toasts">
+      <i class="ri-shopping-bag-line"></i>
+      <span>All Orders</span>
+    </a>
+    <a href="/support" class="on toasts">
+      <i class="ri-customer-service-2-line"></i>
+      <span>Support</span>
+    </a>
+    <a href="/account" class="on buyAccount">
+      <i class="ri-user-line"></i>
+      <span>Account</span>
+    </a>
+    <a href="/engagement" class="on">
+      <i class="ri-heart-2-line"></i>
+      <span>Engagements</span>
+    </a>
+    <a href="/api-init" class="on">
+      <i class="ri-links-line"></i>
+      <span>API Usage</span>
+    </a>
+    <a href="/new-update" class="on">
+      <i class="ri-notification-2-line"></i>
+      <span>New Updates</span>
+    </a>
+    <a href="#" class="on pending-container">
+      <i class="ri-trophy-line"></i>
+      <span>Affiliates</span>
+      <span class="pending-dot">pending</span>
+    </a>
+    <a href="#" class="on pending-container">
+      <i class="ri-global-line"></i>
+      <span>Child Panel</span>
+      <span class="pending-dot">pending</span>
+    </a>
+    <a href="/auth/logout" class="on">
+      <i class="ri-logout-box-line"></i>
+      <span>Logout</span>
+    </a>
+
+      <!-- ALL ABOUT SOURCE CODE -->
+    <data>
+      <div class="sars source-code-btn">
+        <a href="/select-card">
+          <button>
+            <i class="ri-code-s-slash-line"></i> Get Source Code
+          </button></a>
+      </div>
+    </data>
+
+  </div>
+</div>
+
+
+
+
+
+
+<!-- SIDE BAR FOR LARGE SCREEN  -->
+<div class="sidebar" id="sidebar">
+  <div class="logo">
+    <img src="/images/logo.png" alt="logo" width="65%">
+  </div>
+  <div class="menu">
+    <a href="/dashboard" class="on active">
+      <i class="ri-shopping-cart-line"></i>
+      <span>New Order</span>
+    </a>
+    <a href="/wallet" class="on  toasts">
+      <i class="ri-wallet-line"></i>
+      <span>Fund Wallet</span>
+    </a>
+    <a href="/my-order" class="on toasts">
+      <i class="ri-shopping-bag-line"></i>
+      <span>All Orders</span>
+    </a>
+    <a href="/support" class="on toasts">
+      <i class="ri-customer-service-2-line"></i>
+      <span>Support</span>
+    </a>
+    <a href="#" class="on pending-container">
+      <i class="ri-trophy-line"></i>
+      <span>Affiliates</span>
+      <span class="pending-dot">pending</span>
+    </a>
+    <a href="/account" class="on buyAccount">
+      <i class="ri-user-line"></i>
+      <span>Account</span>
+    </a>
+    <a href="/engagement" class="on">
+      <i class="ri-heart-2-line"></i>
+      <span>Engagements</span>
+    </a>
+    <a href="/api-init" class="on">
+      <i class="ri-links-line"></i>
+      <span>API Usage</span>
+    </a>
+    <a href="/new-update" class="on">
+      <i class="ri-notification-2-line"></i>
+      <span>New Updates</span>
+    </a>
+    <a href="#" class="on pending-container">
+      <i class="ri-global-line"></i>
+      <span>Child Panel</span>
+      <span class="pending-dot">pending</span>
+    </a>
+    <a href="/auth/logout" class="on">
+      <i class="ri-logout-box-line"></i>
+      <span>Logout</span>
+    </a>
+
+    <!-- ALL ABOUT SOURCE CODE -->
+    <data>
+      <div class="sars source-code-btn">
+        <a href="/select-card">
+          <button>
+            <i class="ri-code-s-slash-line"></i> Get Source Code
+          </button></a>
+      </div>
+    </data>
+  </div>
+</div>
+
+<!-- Tooltip message -->
+<div class="tooltip-message" id="sourceTooltip">
+  <h1>Attention!!</h1>
+  <p>
+    Ready to own your own Poplox-style website? We' ve made it super easy for you! Download our source code and with
+            just a few simple customizations, you'll have your platform up and running in no time. Here's how: </p>
+
+            <p><span class="check-icon"><i class="ri-check-line"></i></span> Message the admin.</p>
+            <p><span class="check-icon"><i class="ri-check-line"></i></span> Buy the code folder for <code>$5</code>.
+            </p>
+            <p><span class="check-icon"><i class="ri-check-line"></i></span> Go to install dependencies (check
+              <code>package.json</code> ).
+            </p>
+            <p><span class="check-icon"><i class="ri-check-line"></i></span> Fill in all private details inside
+              <code>.env </code>in the root folder.
+            </p>
+            <p><span class="check-icon"><i class="ri-check-line"></i></span> Customize your branding – change the logo,
+              colors
+              ETC.</p>
+            <p><span class="check-icon"><i class="ri-check-line"></i></span> Then you are good to run the code</p>
+            <p><span class="check-icon"><i class="ri-check-line"></i></span> Start the server using
+              <code>npm start</code> or
+              <code>node server.js</code>.
+            </p>
+            <p><span class="check-icon"><i class="ri-check-line"></i></span> Need help? Click the
+              <strong>WhatsApp</strong> icon,
+              The dev is just a click away
+            </p>
+        </div>
+
+        <!-- Arrow to toggle sidebar -->
+        <div class="toggle-sidebar" id="toggle-btn">
+          <i class="ri-menu-3-line"></i>
+        </div>
+
+
+
+
+
+
+        <!-- FUNCTION FOR SOURCE CODE  -->
+        <script>
+          const btn = document.querySelector('.source-code-btn');
+          const tooltip = document.getElementById('sourceTooltip');
+
+          btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            tooltip.style.display = tooltip.style.display === 'block' ? 'none' : 'block';
+          });
+
+          // Optional: hide tooltip if clicked outside
+          document.addEventListener('click', function (e) {
+            if (!btn.contains(e.target) && !tooltip.contains(e.target)) {
+              tooltip.style.display = 'none';
+            }
+          });
+        </script>

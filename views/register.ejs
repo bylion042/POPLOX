@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0d0d0d">
+    <title>Register</title>
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" href="/css/register.css">
+</head>
+
+<body>
+    <!-- BACKGROUND BLUR -->
+    <span class="bg__blur"></span>
+
+
+    <div class="container">
+        <img src="/images/logo.png" alt="">
+        <p>Register an account!</p>
+
+        <form action="/auth/register" method="POST">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="poplox" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="poplox042@example.com" required>
+
+            <label for="password">Password</label>
+            <div class="input-container">
+                <input type="password" id="password" name="password" required placeholder="password">
+                <i class="ri-eye-off-line toggle-password" onclick="togglePassword('password', this)"></i>
+            </div>
+
+            <label for="confirmPassword">Confirm Password</label>
+            <div class="input-container">
+                <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="password">
+                <i class="ri-eye-off-line toggle-password" onclick="togglePassword('confirmPassword', this)"></i>
+            </div>
+
+            <div class="checkbox-container">
+                <input type="checkbox" id="terms" name="terms" value="true" required>
+                <label for="terms">I agree to the <a href="/t&c">Terms & Conditions</a> Policy</label>
+            </div>
+
+            <button type="submit" class="btn">Sign up</button>
+
+        </form>
+
+
+        <!-- Google OAuth -->
+<div class="google-login">
+    <p>or</p>
+    <a href="/auth/google" class="google-btn">
+        <img src="/images/google-logo.png" alt="Google logo" class="google-logo">
+        Sign up with Google
+    </a>
+</div>
+
+
+
+        <p>Already have an account? <a href="/login">Sign in</a></p>
+        <a href="/" class="back-link"><i class="ri-arrow-left-line"></i> Back to Home</a>
+    </div>
+
+    <!-- BACKGROUND BLUR -->
+    <span class="footer__blur"></span>
+
+
+
+
+
+    <!-- Password Toggle Script -->
+    <script>
+        function togglePassword(fieldId, icon) {
+            let input = document.getElementById(fieldId);
+            if (input.type === "password") {
+                input.type = "text";
+                icon.classList.replace("ri-eye-off-line", "ri-eye-line");
+            } else {
+                input.type = "password";
+                icon.classList.replace("ri-eye-line", "ri-eye-off-line");
+            }
+        }
+    </script>
+
+    <!-- Password Match Checker -->
+    <script>
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('confirmPassword');
+
+        confirmPassword.addEventListener('input', () => {
+            if (confirmPassword.value === "") {
+                confirmPassword.style.border = "1px solid #a3a2a2";
+            } else if (confirmPassword.value !== password.value) {
+                confirmPassword.style.border = "2px solid #ff4d4f";
+            } else {
+                confirmPassword.style.border = "2px solid #4caf50";
+            }
+        });
+
+        password.addEventListener('input', () => {
+            if (confirmPassword.value !== "") {
+                confirmPassword.dispatchEvent(new Event('input'));
+            }
+        });
+    </script>
+
+    <!-- Toastify Script -->
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <% if (typeof message !== 'undefined') { %>
+        <script>
+            Toastify({
+                text: "<%= message %>",
+                duration: 3000,
+                gravity: "top",
+                position: "right",
+                backgroundColor: "<%= messageType === 'error' ? 'red' : 'green' %>",
+                close: true
+            }).showToast();
+        </script>
+    <% } %>
+
+    <script src="/js/scripts.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,228 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+:root {
+  --primary-color: #0d0d0d;
+  --primary-color-light: #1f2125;
+  --primary-color-extra-light: #35373b;
+  --secondary-color: #696fdd;
+  --secondary-color-dark: #a3a8f0;
+  --text-light: #ccc;
+  --white: #fff;
+  --background-gradient: linear-gradient(135deg, rgb(186, 190, 253) 0%, rgb(66, 71, 158) 100%);
+  --background1: linear-gradient(113.36deg, #000002 -12.22%, #9685de 179.61%);
+  --background2: linear-gradient(180deg, #d6d9fa, rgb(149, 154, 243));
+  --max-width: 1300px;
+}
+
+
+
+/* search  */
+.form-group {
+  margin: 10px 0;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.form-group input {
+  font-size: 15px;
+  color: var(--white);
+  background: transparent;
+  border: 1px solid var(--secondary-color-dark);
+  margin-top: 1rem;
+  border-radius: 10px;
+  padding: 11px;
+  width: 100%;
+}
+
+#searchInput:focus {
+  border: 1px solid var(--secondary-color);
+  outline: none;
+}
+
+
+
+
+
+/* BUTTONS  */
+/* ALL ABOU Platform Buttons */
+.platform-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 1rem;
+}
+
+.platform-buttons button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 24.20%;
+  /* width: 15.50%; */
+  padding: 5px 12px;
+  background: #2c2c2c;
+  border: none;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 10px;
+  background: #52536a;
+  padding: 10px;
+  margin: 3px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+button .btn-icon {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.platform-buttons button:hover {
+  background: var(--background2);
+  color: #000;
+}
+
+.platform-buttons button.active {
+  background: var(--background-gradient);
+  color: white;
+}
+
+
+
+
+/* SERVICE DISPLAY  */
+#services-container {
+  width: 100%;
+  margin: 0 auto;
+  background: transparent;
+  padding: 20px 30px;
+  border-radius: 50px;
+  font-size: 15px;
+  color: var(--white);
+  border: 1px solid var(--secondary-color-dark);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#services-container {
+  margin-top: 20px;
+}
+
+.category {
+  margin-bottom: 20px;
+}
+
+.category h2 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: var(--white);
+  font-size: 17px;
+}
+
+.service {
+  padding: 12px;
+  margin-bottom: 8px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  color: var(--primary-color-light);
+  border-radius: 6px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.service:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-2px);
+}
+
+
+
+
+
+
+/* FLOATING CONTACT  */
+.whatsapp-float {
+  position: fixed;
+  font-family: 'Luckiest Guy', cursive;
+  bottom: 30px;
+  left: 20px;
+  background: #25d366;
+  color: white;
+  font-size: 26px;
+  padding: 5px 8px;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 1000;
+  box-shadow: 4px 4px var(--primary-color-light);
+  transition: transform 0.3s ease;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+}
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 600px) {
+
+  /* BUTTONS  */
+  .platform-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+
+  .platform-buttons button {
+    padding: 9px;
+    margin: 3px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 47%;
+  }
+
+button .btn-icon {
+    width: 25px;
+    height: 25px;
+}
+
+  .category h2 {
+    font-size: 14px;
+  }
+
+  .t-c h3 {
+    font-size: 15px;
+  }
+
+  .t-c-title {
+    font-size: 14px;
+  }
+
+
+  #services-container {
+    border-radius: 30px;
+    padding: 20px 10px;
+  }
+}

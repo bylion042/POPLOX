@@ -1,0 +1,153 @@
+<!-- Toggle Button -->
+<button class="updates" id="openToggleBtn" onclick="toggleQuoteBox(true)">
+    <i class="ri-arrow-right-s-line"></i>
+    <span class="notification-dot">3</span>
+</button>
+
+
+<div class="quote-box" id="quoteBox">
+
+    <!-- CONTENT 1 -->
+    <div class="quote-content active" id="content1">
+
+        <h3 class="attention">Advertise With Us!</h3>
+        <p class="subtext">
+            Want to spotlight your product or service? Your ad will be featured prominently across every page of our
+            site making sure it's seen often!
+        </p>
+
+        <h3 class="guide-title">Guide:</h3>
+
+        <ul class="guide-list">
+            <li><span class="check-icon"><i class="ri-check-line"></i></span> Just $1 for 1 full month of visibility
+            </li>
+            <li><span class="check-icon"><i class="ri-check-line"></i></span> Visit our <a href="/contact-us">Contact
+                    us</a> page</li>
+            <li><span class="check-icon"><i class="ri-check-line"></i></span> Click on the Whatsapp icon</li>
+            <li><span class="check-icon"><i class="ri-check-line"></i></span> Send a quick message to the developer</li>
+        </ul>
+
+        <img src="/images/review1.jpg" alt="ig" class="ig">
+    </div>
+
+
+    <!-- CONTENT 2 -->
+    <div class="quote-content" id="content2">
+        <h3 class="attention">Attention!</h3>
+        <p class="subtext">Before ordering Instagram followers, remember to disable the “Flag for review” option. to
+            avoid any delays or issues with your order.
+        </p>
+        <h3 class="guide-title">Guide:</h3>
+
+        <ul class="guide-list">
+            <li><span class="check-icon"><i class="ri-check-line"></i></span> Go to Settings and activity</li>
+            <li><span class="check-icon"><i class="ri-check-line"></i></span> Select Follow and invite friends</li>
+            <li><span class="check-icon"><i class="ri-check-line"></i></span> Turn off Flag for review</li>
+            <li><span class="check-icon"><i class="ri-check-line"></i></span> That’s it we’ll handle the rest!</li>
+        </ul>
+
+        <img src="/images/review2.png" alt="ig" class="ig">
+    </div>
+
+
+    <!-- CONTENT 3 -->
+    <div class="quote-content" id="content3">
+        <h3 class="attention">Buy the Source Code</h3>
+        <p class="subtext">
+            Interested in launching your own SMM platform like Poplox? You can purchase our full, production-ready
+            source code instantly.
+        </p>
+
+        <h3 class="guide-title">Guide:</h3>
+        <ul class="guide-list">
+            <li><span class="check-icon"><i class="ri-check-line"></i></span>Contact Developer for pricing and details</li>
+            <li><span class="check-icon"><i class="ri-check-line"></i></span> Visit the <a href="/contact-us">Contact us</a> page</li>
+            <li><span class="check-icon"><i class="ri-check-line"></i></span>Click the WhatsApp icon to chat instantly</li>
+            <li><span class="check-icon"><i class="ri-check-line"></i></span> We'll guide you through the setup</li>
+        </ul>
+
+        <img src="/images/review3.jpg" alt="Buy Source Code" class="ig">
+    </div>
+
+
+
+    <!-- Navigation Buttons -->
+    <div class="button-hold">
+        <button id="left" class="left"><i class="ri-arrow-left-s-line"></i></button>
+        <button id="right" class="right"><i class="ri-arrow-right-s-line"></i></button>
+    </div>
+
+    <!-- Close Buttons -->
+    <button class="updates inner-toggle" id="closeToggleBtn" onclick="toggleQuoteBox(false)">
+        <i class="ri-arrow-left-s-line"></i>
+        <span class="notification-dot">3</span>
+    </button>
+</div>
+
+
+
+
+
+
+
+
+<!-- SLIDE OUT UPDATES  -->
+<script>
+    function toggleQuoteBox(open) {
+        const box = document.getElementById('quoteBox');
+        const openBtn = document.getElementById('openToggleBtn');
+        const closeBtn = document.getElementById('closeToggleBtn');
+
+        if (open) {
+            box.classList.add('active');
+            openBtn.style.display = 'none';
+            closeBtn.style.display = 'block';
+        } else {
+            box.classList.remove('active');
+            openBtn.style.display = 'block';
+            closeBtn.style.display = 'none';
+        }
+    }
+    // Initialize (hide the inner close button initially)
+    document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById('closeToggleBtn').style.display = 'none';
+    });
+</script>
+
+
+
+
+<!-- SLIDE OUT CONTENTS TO VIEW  -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const slideContents = [
+      document.getElementById("content1"),
+      document.getElementById("content2"),
+      document.getElementById("content3"),
+    ];
+
+    let currentSlideIndex = 0;
+
+    const leftBtn = document.getElementById("left");
+    const rightBtn = document.getElementById("right");
+
+    function switchContent(direction) {
+      if (!slideContents[currentSlideIndex]) return;
+      slideContents[currentSlideIndex].classList.remove("active");
+
+      currentSlideIndex = (currentSlideIndex + direction + slideContents.length) % slideContents.length;
+
+      if (slideContents[currentSlideIndex]) {
+        slideContents[currentSlideIndex].classList.add("active");
+      }
+    }
+
+    if (leftBtn) {
+      leftBtn.addEventListener("click", () => switchContent(-1));
+    }
+
+    if (rightBtn) {
+      rightBtn.addEventListener("click", () => switchContent(1));
+    }
+  });
+</script>

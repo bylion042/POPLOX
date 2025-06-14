@@ -1,0 +1,158 @@
+<div class="order-contain">
+    <!--ALL ABOU Platform Buttons -->
+    <div class="form-group platform-buttons">
+        <button type="button" onclick="filterByPlatform('TikTok')">
+            <img src="https://storage.perfectcdn.com/98b10r/ax0uimj7cb0i3h0w.gif" class="btn-icon" />TikTok
+        </button>
+        <button type="button" onclick="filterByPlatform('Instagram')">
+            <img src="https://storage.perfectcdn.com/98b10r/nfg8qwgiaycag5yu.gif" class="btn-icon" />Instagram
+        </button>
+        <button type="button" onclick="filterByPlatform('Soundcloud')">
+            <img src="https://cdn-icons-png.flaticon.com/128/2504/2504939.png" class="btn-icon" />Soundcloud
+        </button>
+        <button type="button" onclick="filterByPlatform('YouTube')">
+            <img src="https://storage.perfectcdn.com/98b10r/0wffic79qprrh2dc.gif" class="btn-icon" />YouTube
+        </button>
+        <button type="button" onclick="filterByPlatform('Snapchat')">
+            <img src="https://cdn-icons-png.flaticon.com/128/2504/2504938.png" class="btn-icon" />Snapchat
+        </button>
+        <button type="button" onclick="filterByPlatform('Telegram')">
+            <img src="https://storage.perfectcdn.com/98b10r/h7j64q32oquy7zt9.gif" class="btn-icon" />Telegram
+        </button>
+        <button type="button" onclick="filterByPlatform('Linkedin')">
+            <img src="https://storage.perfectcdn.com/98b10r/aagzsc6n1f8j3h65.gif" class="btn-icon" />Linkdin
+        </button>
+        <button type="button" onclick="filterByPlatform('Spotify')">
+            <img src="https://cdn-icons-png.flaticon.com/128/2504/2504940.png" class="btn-icon" />Spotify
+        </button>
+        <button type="button" onclick="filterByPlatform('Twitter')">
+            <img src="https://storage.perfectcdn.com/98b10r/aqklxpiw36sqmc90.gif" class="btn-icon" />Twitter
+        </button>
+        <button type="button" onclick="filterByPlatform('Website')">
+            <img src="https://cdn-icons-png.flaticon.com/128/1040/1040243.png" class="btn-icon" />Website Traffic
+        </button>
+        <button type="button" onclick="filterByPlatform('Facebook')">
+            <img src="https://storage.perfectcdn.com/98b10r/i25luukokx3adja1.gif" class="btn-icon" />Facebook
+        </button>
+        <button type="button" onclick="resetFilters()">
+            <img src="https://cdn-icons-png.flaticon.com/128/9073/9073032.png" class="btn-icon" />Reset
+        </button>
+    </div>
+
+
+
+    <div class="form-family">
+        <!-- ALL ABOUT OTHER TO SUBMMIT  -->
+        <form action="/order" method="POST">
+            <!-- Search Bar -->
+            <div class="form-group search">
+                <input type="text" id="searchInput" placeholder="Search Services..." oninput="filterAll()">
+            </div>
+
+            <!-- Category -->
+            <div class="form-group">
+                <label for="category">Category:</label>
+                <select id="category" onchange="populateServices(); updateCharge();" required>
+                    <option value="">Select a category</option>
+                    <% for (let category in servicesByCategory) { %>
+                        <option value="<%= category %>">
+                            <%= category %>
+                        </option>
+                        <% } %>
+                </select>
+            </div>
+
+            <!-- Service -->
+            <div class="form-group">
+                <label for="service">Service:</label>
+                <select name="service" id="service" required onchange="updateCharge()">
+                    <option value="">Select a service</option>
+                </select>
+            </div>
+
+            <!-- Service Info Summary -->
+            <div class="form-group" id="serviceInfo" style="display: none;">
+                <strong class="mm">Min:</strong> <span id="minQty">-</span> |
+                <strong class="mm">Max:</strong> <span id="maxQty">-</span> |
+                <strong class="mm">Avg Time:</strong> <span id="avgTime">-</span>
+            </div>
+
+            <!-- Link -->
+            <div class="form-group">
+                <label for="link">Link:</label>
+                <input type="url" name="link" required>
+            </div>
+
+            <!-- Quantity -->
+            <div class="form-group">
+                <label for="quantity">Quantity:</label>
+                <input type="number" name="quantity" id="quantity" required oninput="updateCharge()">
+            </div>
+
+            <!-- Charge Preview -->
+            <div class="form-group">
+                <label>Charge: $ <span id="charge">0.00</span></label>
+            </div>
+
+            <button type="submit">Place Order</button>
+        </form>
+
+
+
+        <!-- ALL ABOUT TRACKING ORDER  -->
+        <div class="intro">
+            <form action="/status" method="POST">
+                <h1 class="heading">Track Your Order</h1>
+                <div class="form-group">
+                    <label for="orderId">Order ID:</label>
+                    <input type="text" name="orderId" required placeholder="Enter Order ID">
+                </div>
+                <button type="submit">Check Status</button>
+            </form>
+
+
+            <!-- ALL ABOUT INFORMATION  -->
+            <div class="quote-content">
+                <h1 class="heading">Attention!!</h1>
+                <p class="subtext">
+                    Before ordering Instagram followers, remember to disable the “Flag for review” option.
+                    to avoid any delays or issues with your order.
+                </p>
+
+                <h3 class="guide-title">Guide:</h3>
+
+                <ul class="guide-list">
+                    <li><span class="check-icon"><i class="ri-check-line"></i></span> Go to Settings and activity </li>
+                    <li><span class="check-icon"><i class="ri-check-line"></i></span> Select Follow and invite friends</li>
+                    <li><span class="check-icon"><i class="ri-check-line"></i></span> Turn off Flag for review</li>
+                    <li><span class="check-icon"><i class="ri-check-line"></i></span> That’s it we’ll handle the rest!</li>
+                </ul>
+
+                <!-- <SHOW IMAGE SAMPLE -->
+                <button onclick="showImage()"><i class="ri-image-line"></i> View IG Screenshot</button>
+                <script>
+                    function showImage() {
+                        document.getElementById("overlay").style.display = "flex";
+                    }
+                    function hideImage() {
+                        document.getElementById("overlay").style.display = "none";
+                    }
+                </script>
+            </div>
+
+            <div id="overlay" class="image-overlay" onclick="hideImage()">
+                <div class="image-popup" onclick="event.stopPropagation()">
+                    <img src="/images/review2.jpg" alt="ig image">
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+<!-- Script Section -->
+<script>
+    const servicesByCategory = <%- JSON.stringify(servicesByCategory) %>;
+</script>

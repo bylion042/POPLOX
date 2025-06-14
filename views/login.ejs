@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <meta name="theme-color" content="#0d0d0d">
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+
+<body>
+    <!-- BACKGROUND BLUR -->
+    <span class="bg__blur"></span>
+
+    <div class="container">
+        <img src="/images/logo.png" alt="Logo">
+        <p>Sign in now to start trading!</p>
+
+        <form action="/auth/login" method="POST">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="poplox042@example.com" required>
+
+            <label for="password">Password</label>
+            <div class="input-container">
+                <input type="password" id="password" name="password" required placeholder="password">
+                <i class="ri-eye-off-line toggle-password" onclick="togglePassword('password', this)"></i>
+            </div>
+
+            <button type="submit" class="btn">Log in</button>
+        </form>
+
+
+
+        <!-- Google OAuth -->
+        <div class="google-login">
+            <p>or</p>
+            <a href="/auth/google" class="google-btn">
+                <img src="/images/google-logo.png" alt="Google logo" class="google-logo">
+                Sign in with Google
+            </a>
+        </div>
+
+
+        <p>New on our platform? <a href="/register">Create an account</a></p>
+        <div class="links">
+            <a href="/" class="back-link"><i class="ri-arrow-left-line"></i> Back to Home</a>
+            <a href="/forgot-password" class="back-link">Forgot password?</a>
+        </div>
+    </div>
+
+    <!-- BACKGROUND BLUR -->
+    <span class="footer__blur"></span>
+
+
+
+
+
+
+    <!-- Password toggle -->
+    <script>
+        function togglePassword(fieldId, icon) {
+            let input = document.getElementById(fieldId);
+            if (input.type === "password") {
+                input.type = "text";
+                icon.classList.replace("ri-eye-off-line", "ri-eye-line");
+            } else {
+                input.type = "password";
+                icon.classList.replace("ri-eye-line", "ri-eye-off-line");
+            }
+        }
+    </script>
+
+    <!-- Toastify Script -->
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <% if (typeof message !=='undefined' ) { %>
+        <script>
+            Toastify({
+                text: "<%= message %>",
+                duration: 3000,
+                gravity: "top",
+                position: "right",
+                backgroundColor: "<%= messageType === 'error' ? 'red' : 'green' %>",
+                close: true
+            }).showToast();
+        </script>
+        <% } %>
+
+            <!-- App Script -->
+            <script src="/js/scripts.js"></script>
+</body>
+
+</html>

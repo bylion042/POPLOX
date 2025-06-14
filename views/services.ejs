@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0d0d0d">
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/services.css" />
+    <title>services</title>
+</head>
+
+<body>
+    <span class="bg__blur"></span>
+
+
+    <!-- ALL ABOUT NAV AND HAMBURGER  -->
+
+    <!-- FOR BIG SCREEN  -->
+    <nav class="hide">
+        <div class="nav__logo">
+            <a href="/"><img src="images/logo.png" alt="logo" /></a>
+        </div>
+
+        <div class="nav-hold">
+            <ul class="nav__links">
+                <li class="link"><a href="/">Home</a></li>
+                <li class="link"><a href="/api">API</a></li>
+                <li class="link"><a href="/contact-us">Contact US</a></li>
+                <li class="link"><a href="/t&c">Terms & Conditions</a></li>
+            </ul>
+
+            <a href="/login"><button class="btn join__now transparent">Login</button></a>
+            <a href="/register"><button class="btn join__now">Register</button></a>
+        </div>
+    </nav>
+
+
+
+
+    <!-- FOR SMALL SCREEN  -->
+    <nav class="mobile-nav hide1">
+        <div class="nav__logo">
+            <a href="/"><img src="images/logo.png" alt="logo"></a>
+        </div>
+
+        <!-- Hamburger Icon -->
+        <div class="hamburger" id="menu-toggle" aria-label="Open menu">
+            <i class="ri-menu-3-line"></i>
+        </div>
+
+        <!-- Sliding Menu -->
+        <div class="hold3" id="mobile-menu">
+            <div class="hamburger" id="menu-close" aria-label="Close menu">
+                <i class="ri-close-line"></i>
+            </div>
+
+            <ul class="nav__links">
+               <li class="link"><a href="/">Home</a></li>
+              <li class="link"><a href="/api">API</a></li>
+              <li class="link"><a href="/contact-us">Contact US</a></li>
+              <li class="link"><a href="/t&c">Terms & Conditions</a></li>
+            </ul>
+
+            <div class="btn-hold">
+                <a href="/login"><button class="btn join__now">Login</button></a>
+                <a href="/register"><button class="btn join__now">Register</button></a>
+                <button class="installBtn btn join__now small-screen" style="display: none;">Install Our App</button>
+                <a href="/forgot-password"><button class="btn join__now">Forgot your password?</button></a>
+            </div>
+        </div>
+    </nav>
+
+
+
+
+
+
+
+    <!-- Available Engagement Services -->
+ <section class="review section__container">
+        <h2 class="section__header">Engagement Services</h2>
+        <p class="section__subheader">
+              Explore our wide range of social media engagement services designed to boost your presence across
+              platforms like TikTok, Instagram, Facebook, Twitter, YouTube, and more. From likes and views to followers
+              and comments — Poplox helps you grow fast, organically, and affordably.
+        </p>
+        <br>
+
+  <!-- Search -->
+  <div class="form-group" data-aos="fade-left">
+    <input type="text" id="searchInput" placeholder="Search Services..." oninput="filterAll()">
+  </div>
+
+  <!-- Platform Filters -->
+<div class="form-group platform-buttons" data-aos="fade-right">
+        <button type="button" onclick="filterByPlatform('TikTok', this)">
+            <img src="https://storage.perfectcdn.com/98b10r/ax0uimj7cb0i3h0w.gif" class="btn-icon"/>TikTok
+        </button>
+        <button type="button" onclick="filterByPlatform('Instagram', this)">
+            <img src="https://storage.perfectcdn.com/98b10r/nfg8qwgiaycag5yu.gif" class="btn-icon"/>Instagram
+        </button>
+        <button type="button" onclick="filterByPlatform('Soundcloud', this)">
+            <img src="https://cdn-icons-png.flaticon.com/128/2504/2504939.png" class="btn-icon"/>Soundcloud
+        </button>
+        <button type="button" onclick="filterByPlatform('YouTube', this)">
+            <img src="https://storage.perfectcdn.com/98b10r/0wffic79qprrh2dc.gif" class="btn-icon"/>YouTube
+        </button>
+        <button type="button" onclick="filterByPlatform('Snapchat', this)">
+            <img src="https://cdn-icons-png.flaticon.com/128/2504/2504938.png" class="btn-icon"/>Snapchat
+        </button>
+        <button type="button" onclick="filterByPlatform('Telegram', this)">
+            <img src="https://storage.perfectcdn.com/98b10r/h7j64q32oquy7zt9.gif" class="btn-icon"/>Telegram
+        </button>
+        <button type="button" onclick="filterByPlatform('Linkedin', this)">
+            <img src="https://storage.perfectcdn.com/98b10r/aagzsc6n1f8j3h65.gif" class="btn-icon"/>Linkdin
+        </button>
+        <button type="button" onclick="filterByPlatform('Spotify', this)">
+            <img src="https://cdn-icons-png.flaticon.com/128/2504/2504940.png" class="btn-icon"/>Spotify
+        </button>
+        <button type="button" onclick="filterByPlatform('Twitter', this)">
+            <img src="https://storage.perfectcdn.com/98b10r/aqklxpiw36sqmc90.gif" class="btn-icon"/>Twitter
+        </button>
+        <button type="button" onclick="filterByPlatform('Website Traffic', this)">
+            <img src="https://cdn-icons-png.flaticon.com/128/1040/1040243.png" class="btn-icon"/>Website Traffic
+        </button>
+        <button type="button" onclick="filterByPlatform('Facebook', this)">
+            <img src="https://storage.perfectcdn.com/98b10r/i25luukokx3adja1.gif" class="btn-icon"/>Facebook
+        </button>
+        <button type="button" class="active"  onclick="resetFilters()">
+            <img src="https://cdn-icons-png.flaticon.com/128/9073/9073032.png" class="btn-icon"/>Reset
+        </button>
+    </div>
+
+  <!-- Services Display -->
+  <div id="services-container" data-aos="fade-left">Loading ...</div>
+</section>  
+
+
+
+
+
+<!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" class="scroll-to-top-btn">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+
+
+
+       <!-- FLOATING CONTACT  -->
+    <a href="https://wa.me/2347045167609?text=Hi%20Poplox%20Team%2C%20I'm%20interested%20in%20boosting%20my%20socials%20with%20your%20services.%20Can%20you%20tell%20me%20more%3F"
+        class="whatsapp-float" target="_blank" aria-label="Chat with Poplox on WhatsApp">
+        <i class="ri-whatsapp-line"></i>
+    </a>
+
+
+   
+
+<!-- FOOTER PARTIAL  -->
+<%- include('partials/footer') %>
+    <span class="footer__blur"></span>
+
+
+
+<!-- ALL FUNCTIONS -->
+<script>
+  let servicesByCategory = {};
+  let allServicesList = [];
+
+  async function fetchServices() {
+    const container = document.getElementById('services-container');
+    try {
+      const res = await fetch('/services/json');
+      if (!res.ok) throw new Error('Network error');
+      servicesByCategory = await res.json();
+
+      allServicesList = [];
+      for (const [category, services] of Object.entries(servicesByCategory)) {
+        services.forEach(service => {
+          allServicesList.push({ ...service, category });
+        });
+      }
+
+      renderServices(allServicesList);
+    } catch (err) {
+      container.textContent = 'Failed to load services.';
+      console.error(err);
+    }
+  }
+
+  function renderServices(services) {
+    const container = document.getElementById('services-container');
+    container.innerHTML = '';
+
+    const grouped = {};
+    services.forEach(s => {
+      if (!grouped[s.category]) grouped[s.category] = [];
+      grouped[s.category].push(s);
+    });
+
+    if (services.length === 0) {
+      container.textContent = 'No matching services found.';
+      return;
+    }
+
+    for (const [category, services] of Object.entries(grouped)) {
+      const catDiv = document.createElement('div');
+      catDiv.className = 'category';
+
+      const catTitle = document.createElement('h2');
+      catTitle.textContent = category;
+      catDiv.appendChild(catTitle);
+
+      services.forEach(service => {
+        const serviceDiv = document.createElement('div');
+        serviceDiv.className = 'service';
+        serviceDiv.textContent = `${service.name} — Platform: ${service.platform || 'N/A'}`;
+        catDiv.appendChild(serviceDiv);
+      });
+
+      container.appendChild(catDiv);
+    }
+  }
+
+  function filterAll() {
+    const query = document.getElementById('searchInput').value.toLowerCase();
+    const filtered = allServicesList.filter(service => {
+      return (
+        service.name.toLowerCase().includes(query) ||
+        (service.category && service.category.toLowerCase().includes(query)) ||
+        (service.platform && service.platform.toLowerCase().includes(query))
+      );
+    });
+    renderServices(filtered);
+  }
+
+  function filterByPlatform(platform, button) {
+    document.getElementById('searchInput').value = platform;
+    filterAll();
+
+    // Remove active from all buttons
+    const buttons = document.querySelectorAll('.platform-buttons button');
+    buttons.forEach(btn => btn.classList.remove('active'));
+
+    // Add active to clicked button
+    button.classList.add('active');
+  }
+
+  function resetFilters() {
+    document.getElementById('searchInput').value = '';
+    renderServices(allServicesList);
+
+    // Reset active state to 'All'
+    const buttons = document.querySelectorAll('.platform-buttons button');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    const allBtn = document.querySelector('.platform-buttons button');
+    if (allBtn) allBtn.classList.add('active');
+  }
+
+  fetchServices();
+</script>
+
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {
+                    pageLanguage: 'en',
+                    includedLanguages: 'en,fr,de,es,it,pt,ru,ar,hi,ja,zh-CN,ko,tr,id,th,pl,nl,sv,cs,ro,fa,uk,vi', // Add desired language codes
+                    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                },
+                'google_translate_element'
+            );
+        }
+    </script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init();</script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+    <script src="/js/index.js"></script>
+</body>
+
+</html>

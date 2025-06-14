@@ -1,0 +1,206 @@
+:root {
+  --primary-color: #0d0d0d;
+  --primary-color-light: #1f2125;
+  --primary-color-extra-light: #35373b;
+  --secondary-color: #696fdd;
+  --secondary-color-dark: #a3a8f0;
+  --text-light: #ccc;
+  --white: #fff;
+  --background-gradient: linear-gradient(135deg, rgb(186, 190, 253) 0%, rgb(66, 71, 158) 100%);
+  --background2: linear-gradient(180deg, #d6d9fa, rgb(149, 154, 243));
+  --max-width: 1300px;
+}
+
+
+.updates {
+    position: fixed;
+    bottom: 30px;
+    left: 20px;
+    z-index: 1000;
+  background: var(--background-gradient);    color: #fff;
+    border: none;
+    border-radius: 50%;
+    padding: 5px 8px;
+    font-size: 1.50rem;
+    cursor: pointer;
+  box-shadow: 4px 4px var(--primary-color-light);
+    transition: background-color 0.3s ease;
+}
+
+.updates:hover {
+    background: var(--background2);
+}
+
+
+.notification-dot {
+    position: absolute;
+    top: -2px;
+    right: -3px;
+    background-color: rgb(222, 66, 66);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 3px 6px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+
+
+
+
+
+/* SHOW MESSAGE  */
+.quote-box {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 25%;
+  height: 100vh;
+  background: #2c2d3f;
+  padding: 40px 20px;
+  color: white;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transform: translateX(-120%);
+  transition: transform 0.4s ease;
+  z-index: 1009;
+}
+
+.quote-box.active {
+  transform: translateX(0);
+}
+
+.quote-content {
+  display: none;
+  animation: slideIn 0.4s ease forwards;
+}
+
+.quote-content.active {
+  display: block;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(30%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+.button-hold{
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+}
+
+.left,.right{
+    z-index: 1000;
+  background: var(--background-gradient);    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 8px;
+    font-size: 1.50rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.left:hover,.right:hover {
+    background: var(--background2);
+}
+
+
+
+
+/* CONTENT 123  */
+.attention {
+  color: var(--white);
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.subtext {
+  /* text-align: center;/ */
+  margin-top: 10px;
+  font-size: 16px;
+  color: var(--text-light);
+}
+
+.guide-title {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 20px;
+  font-size: 1.2rem;
+}
+
+.quote-content ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 1rem;
+}
+
+.quote-content ul li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+  color: var(--white);
+  font-size: 15px;
+}
+.quote-content ul li a {
+  color: var(--secondary-color-dark);
+  text-decoration: underline;
+}
+
+.check-icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--background-gradient); 
+  color: var(--white);
+  border-radius: 50%;
+  width: 23px;
+  height: 23px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.ig{
+    width: 100%;
+    margin-bottom: 1rem;
+    border: 2px solid var(--secondary-color);
+}
+
+
+
+
+
+
+
+/* MY RESPONSIVNESS  */
+@media (max-width: 768px) {
+
+/* SHOW MESSAGE  */
+.quote-box {
+  width: 100%;
+  padding: 20px 10px;
+}
+
+.subtext {
+    font-size: 14px;
+}
+.quote-content ul li {
+    font-size: 14px;
+}
+
+
+}

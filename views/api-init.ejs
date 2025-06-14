@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0d0d0d">
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/api.css" />
+    <title>api</title>
+</head>
+
+<body>
+    <span class="bg__blur"></span>
+
+
+    <!-- ALL ABOUT NAV AND HAMBURGER  -->
+
+    <!-- FOR BIG SCREEN  -->
+   <nav class="hide">
+        <div class="nav__logo">
+            <a href="/dashboard"><img src="images/logo.png" alt="logo" /></a>
+        </div>
+
+        <div class="nav-hold">
+            <ul class="nav__links">
+                <li class="link"><a href="/dashboard">Dashboard</a></li>
+                <li class="link"><a href="/wallet">Fund Wallet</a></li>
+                <li class="link"><a href="/engagement">Services</a></li>
+                <li class="link"><a href="/support">Support</a></li>
+            </ul>
+
+            <a href="/"><button class="btn join__now transparent">Logout</button></a>
+        </div>
+    </nav>
+
+
+
+
+
+    <!-- FOR SMALL SCREEN  -->
+    <nav class="mobile-nav hide1">
+        <div class="nav__logo">
+            <a href="/"><img src="images/logo.png" alt="logo"></a>
+        </div>
+
+        <!-- Hamburger Icon -->
+        <div class="hamburger" id="menu-toggle" aria-label="Open menu">
+            <i class="ri-menu-3-line"></i>
+        </div>
+
+        <!-- Sliding Menu -->
+        <div class="hold3" id="mobile-menu">
+            <div class="hamburger" id="menu-close" aria-label="Close menu">
+                <i class="ri-close-line"></i>
+            </div>
+
+            <ul class="nav__links">
+               <li class="link"><a href="/dashboard">Dashboard</a></li>
+               <li class="link"><a href="/support">Support</a></li>
+               <li class="link"><a href="/account">Account</a></li>
+               <li class="link"><a href="/engagement">Services</a></li>
+               <li class="link"><a href="/wallet">Fund Wallet</a></li>
+            </ul>
+
+            <div class="btn-hold">
+                <a href="/"><button class="btn join__now">Logout</button></a>
+            </div>
+        </div>
+    </nav>
+
+
+
+
+
+
+
+
+
+
+    <!-- ALL ABOUT TERMS AND CONDITIONS  -->
+    <section class="review section__container">
+        <h2 class="section__header">Poplox API</h2>
+        <p class="section__subheader">
+            Welcome to the Poplox API — your gateway to automate orders and access your account data programmatically.
+            This API is designed for developers who want to integrate social media services directly into their own platforms.
+        </p>
+        <br>
+
+        <div class="api">
+
+            <!-- INFO AND RESPONSE  -->
+
+            <!-- SECTION 1 -->
+            <section class="content" data-aos="fade-left">
+                <section class="header">
+                    <div class="icon-title">
+                        <div class="icon">💻</div>
+                        <span>API Documentation</span>
+                    </div>
+                </section>
+
+                <div class="parameters first">
+                    <div>
+                        <strong>Parameters</strong>
+                        <p>Base </p>
+                        <p>API Key</p>
+                        <p>Action</p>
+                        <p>Response format</p>
+                    </div>
+                    <div>
+                        <strong>Description</strong>
+                        <p><a href="/account">https://poplox.com/api/v2</a></p>
+                        <p>Get your API key on the <a href="/account">Account page</a></p>
+                        <p>Send your API Key as Key in POST body</p>
+                        <p>JSON.</p>
+                    </div>
+                </div>
+            </section>
+
+
+
+            <!-- SECTION 2  -->
+            <section class="content" data-aos="fade-right">
+                <section class="header">
+                    <div class="icon-title">
+                        <div class="icon">💻</div>
+                        <span>Service list</span>
+                    </div>
+                </section>
+
+                <div class="parameters">
+                    <div>
+                        <strong>Parameters</strong>
+                        <p>key</p>
+                        <p>action</p>
+                    </div>
+                    <div>
+                        <strong>Description</strong>
+                        <p>Your API key</p>
+                        <p>services</p>
+                    </div>
+                </div>
+
+                <h3 class="example">Example response</h3>
+                <div class="code-box">
+                    <pre>
+[
+  {
+    "service": 1,
+    "name": "Followers",
+    "type": "Default",
+    "category": "First Category",
+    "rate": "0.90",
+    "min": "50",
+    "max": "10000",
+    "refill": true,
+    "cancel": true
+  },
+  {
+    "service": 2,
+    "name": "Comments",
+    "type": "Custom Comments",
+    "category": "Second Category",
+    "rate": "8",
+    "min": "10",
+    "max": "1500",
+    "refill": false,
+    "cancel": true
+  }
+]
+</pre>
+                </div>
+            </section>
+
+
+
+            <!-- SECTION 3  -->
+            <section class="content" data-aos="fade-left">
+                <section class="header">
+                    <div class="icon-title">
+                        <div class="icon">💻</div>
+                        <span>Add Order</span>
+                    </div>
+                </section>
+
+                <div class="parameters">
+                    <div>
+                        <strong>Parameters</strong>
+                        <p>key</p>
+                        <p>action</p>
+                        <p>service</p>
+                        <p>link</p>
+                        <p>quantity	</p>
+                        <p>runs (optional)</p>
+                        <p>interval (optional)</p>
+                    </div>
+                    <div>
+                        <strong>Description</strong>
+                        <p>Your API key</p>
+                        <p>add</p>
+                        <p>Service ID</p>
+                        <p>Link to page</p>
+                        <p>Needed quantity</p>
+                        <p>Runs to deliver</p>
+                        <p>Interval in minutes</p>
+                    </div>
+                </div>
+
+                <h3 class="example">Example response</h3>
+                <div class="code-box">
+                    <pre>
+{
+    "order": 23501
+}
+</pre>
+                </div>
+            </section>
+
+
+
+                        <!-- SECTION 4  -->
+            <section class="content" data-aos="fade-right">
+                <section class="header">
+                    <div class="icon-title">
+                        <div class="icon">💻</div>
+                        <span>Order status</span>
+                    </div>
+                </section>
+
+                <div class="parameters">
+                    <div>
+                        <strong>Parameters</strong>
+                        <p>key</p>
+                        <p>action</p>
+                        <p>order</p>
+                    </div>
+                    <div>
+                        <strong>Description</strong>
+                        <p>Your API key</p>
+                        <p>status</p>
+                        <p>Order ID</p>
+                </div>
+                </div>
+
+
+                <h3 class="example">Example response</h3>
+                <div class="code-box">
+                    <pre>
+{
+    "charge": "0.27819",
+    "start_count": "3572",
+    "status": "Partial",
+    "remains": "157",
+    "currency": "USD"
+}
+</pre>
+                </div>
+            </section>
+
+
+                        <!-- SECTION 5  -->
+            <section class="content" data-aos="fade-left">
+                <section class="header">
+                    <div class="icon-title">
+                        <div class="icon">💻</div>
+                        <span>Multiple orders status</span>
+                    </div>
+                </section>
+
+                <div class="parameters">
+                    <div>
+                        <strong>Parameters</strong>
+                        <p>key</p>
+                        <p>action</p>
+                        <p>order</p>
+                    </div>
+                    <div>
+                        <strong>Description</strong>
+                        <p>Your API key</p>
+                        <p>status</p>
+                        <p>Order IDs (separated by a comma, up to 100 IDs)</p>
+                </div>
+                </div>
+
+
+                <h3 class="example">Example response</h3>
+                <div class="code-box">
+                    <pre>
+{
+    "1": {
+        "charge": "0.27819",
+        "start_count": "3572",
+        "status": "Partial",
+        "remains": "157",
+        "currency": "USD"
+    },
+    "10": {
+        "error": "Incorrect order ID"
+    },
+    "100": {
+        "charge": "1.44219",
+        "start_count": "234",
+        "status": "In progress",
+        "remains": "10",
+        "currency": "USD"
+    }
+}
+</pre>
+                </div>
+            </section>
+
+
+                        <!-- SECTION 6  -->
+            <section class="content" data-aos="fade-right">
+                <section class="header">
+                    <div class="icon-title">
+                        <div class="icon">💻</div>
+                        <span>Create refill</span>
+                    </div>
+                </section>
+
+                <div class="parameters">
+                    <div>
+                        <strong>Parameters</strong>
+                        <p>key</p>
+                        <p>action</p>
+                        <p>order</p>
+                    </div>
+                    <div>
+                        <strong>Description</strong>
+                        <p>Your API key</p>
+                        <p>refill</p>
+                        <p>Order ID</p>
+                </div>
+                </div>
+
+
+                <h3 class="example">Example response</h3>
+                <div class="code-box">
+                    <pre>
+{
+    "refill": "1"
+}
+</pre>
+                </div>
+            </section>
+
+
+
+                                  <!-- SECTION 7  -->
+            <section class="content" data-aos="fade-left">
+                <section class="header">
+                    <div class="icon-title">
+                        <div class="icon">💻</div>
+                        <span>Create multiple refill</span>
+                    </div>
+                </section>
+
+                <div class="parameters">
+                    <div>
+                        <strong>Parameters</strong>
+                        <p>key</p>
+                        <p>action</p>
+                        <p>order</p>
+                    </div>
+                    <div>
+                        <strong>Description</strong>
+                        <p>Your API key</p>
+                        <p>	refill</p>
+                        <p>Order IDs (separated by a comma, up to 100 IDs)</p>
+                </div>
+                </div>
+
+
+                <h3 class="example">Example response</h3>
+                <div class="code-box">
+                    <pre>
+[
+    {
+        "order": 1,
+        "refill": 1
+    },
+    {
+        "order": 2,
+        "refill": 2
+    },
+    {
+        "order": 3,
+        "refill": {
+            "error": "Incorrect order ID"
+        }
+    }
+]
+</pre>
+                </div>
+            </section>
+
+
+                                  <!-- SECTION 8  -->
+            <section class="content" data-aos="fade-right">
+                <section class="header">
+                    <div class="icon-title">
+                        <div class="icon">💻</div>
+                        <span>Get refill status</span>
+                    </div>
+                </section>
+
+                <div class="parameters">
+                    <div>
+                        <strong>Parameters</strong>
+                        <p>key</p>
+                        <p>action</p>
+                        <p>refills</p>
+                    </div>
+                    <div>
+                        <strong>Description</strong>
+                        <p>Your API key</p>
+                        <p>refill_status</p>
+                        <p>Refill ID</p>
+                </div>
+                </div>
+
+
+                <h3 class="example">Example response</h3>
+                <div class="code-box">
+                    <pre>
+{
+    "status": "Completed"
+}
+</pre>
+                </div>
+            </section>
+
+
+                                <!-- SECTION 9  -->
+            <section class="content" data-aos="fade-left">
+                <section class="header">
+                    <div class="icon-title">
+                        <div class="icon">💻</div>
+                        <span>Get multiple refill status</span>
+                    </div>
+                </section>
+
+                <div class="parameters">
+                    <div>
+                        <strong>Parameters</strong>
+                        <p>key</p>
+                        <p>action</p>
+                        <p>refills</p>
+                    </div>
+                    <div>
+                        <strong>Description</strong>
+                        <p>Your API key</p>
+                        <p>refill_status</p>
+                        <p>Refill IDs (separated by a comma, up to 100 IDs)</p>
+                </div>
+                </div>
+
+
+                <h3 class="example">Example response</h3>
+                <div class="code-box">
+                    <pre>
+[
+    {
+        "refill": 1,
+        "status": "Completed"
+    },
+    {
+        "refill": 2,
+        "status": "Rejected"
+    },
+    {
+        "refill": 3,
+        "status": {
+            "error": "Refill not found"
+        }
+    }
+]
+</pre>
+                </div>
+            </section>
+
+
+
+                                <!-- SECTION 10  -->
+            <section class="content" data-aos="fade-right">
+                <section class="header">
+                    <div class="icon-title">
+                        <div class="icon">💻</div>
+                        <span>Create cancel</span>
+                    </div>
+                </section>
+
+                <div class="parameters">
+                    <div>
+                        <strong>Parameters</strong>
+                        <p>key</p>
+                        <p>action</p>
+                        <p>orders</p>
+                    </div>
+                    <div>
+                        <strong>Description</strong>
+                        <p>Your API key</p>
+                        <p>cancel</p>
+                        <p>Order IDs (separated by a comma, up to 100 IDs)</p>
+                </div>
+                </div>
+
+
+                <h3 class="example">Example response</h3>
+                <div class="code-box">
+                    <pre>
+[
+    {
+        "order": 9,
+        "cancel": {
+            "error": "Incorrect order ID"
+        }
+    },
+    {
+        "order": 2,
+        "cancel": 1
+    }
+]
+</pre>
+                </div>
+            </section>
+
+
+
+                                <!-- SECTION 11  -->
+            <section class="content" data-aos="fade-left">
+                <section class="header">
+                    <div class="icon-title">
+                        <div class="icon">💻</div>
+                        <span>User balance</span>
+                    </div>
+                </section>
+
+                <div class="parameters">
+                    <div>
+                        <strong>Parameters</strong>
+                        <p>key</p>
+                        <p>action</p>
+                    </div>
+                    <div>
+                        <strong>Description</strong>
+                        <p>Your API key</p>
+                        <p>balance</p>
+                </div>
+                </div>
+
+
+                <h3 class="example">Example response</h3>
+                <div class="code-box">
+                    <pre>
+{
+    "balance": "100.84292",
+    "currency": "USD"
+}
+</pre>
+                </div>
+            </section>
+
+
+
+
+
+
+
+
+        </div>
+
+    </section>
+
+
+
+
+
+    <!-- FLOATING CONTACT  -->
+    <a href="https://wa.me/2347045167609?text=Hi%20Poplox%20Team%2C%20I'm%20interested%20in%20boosting%20my%20socials%20with%20your%20services.%20Can%20you%20tell%20me%20more%3F"
+        class="whatsapp-float" target="_blank" aria-label="Chat with Poplox on WhatsApp">
+        <i class="ri-whatsapp-line"></i>
+    </a>
+
+
+
+
+
+    <!-- FOOTER PARTIAL  -->
+    <%- include('partials/footer') %>
+        <span class="footer__blur"></span>
+
+
+
+
+        <script type="text/javascript">
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement(
+                    {
+                        pageLanguage: 'en',
+                        includedLanguages: 'en,fr,de,es,it,pt,ru,ar,hi,ja,zh-CN,ko,tr,id,th,pl,nl,sv,cs,ro,fa,uk,vi', // Add desired language codes
+                        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                    },
+                    'google_translate_element'
+                );
+            }
+        </script>
+        <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script>AOS.init();</script>
+        <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+        <script src="/js/index.js"></script>
+</body>
+
+</html>

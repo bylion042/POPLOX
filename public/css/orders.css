@@ -1,0 +1,398 @@
+
+:root {
+  --primary-color: #0d0d0d;
+  --primary-color-light: #1f2125;
+  --primary-color-extra-light: #35373b;
+  --secondary-color: #696fdd;
+  --secondary-color-dark: #a3a8f0;
+  --text-light: #ccc;
+  --white: #fff;
+  --background-gradient: linear-gradient(135deg, rgb(186, 190, 253) 0%, rgb(66, 71, 158) 100%);
+  --background1: linear-gradient(113.36deg, #000002 -12.22%, #9685de 179.61%);
+  --background2: linear-gradient(180deg, #d6d9fa, rgb(149, 154, 243));
+  --max-width: 1300px;
+}
+
+.order-contain{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ALL ABOU Platform Buttons */
+.platform-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    text-align: center;
+    width: 100%;
+    padding: 0 1rem;
+    margin-top: 10px;
+}
+
+.platform-buttons button {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+    width: 15.50%;
+    padding: 5px 12px;
+    background: var(--secondary-color);
+    background: #2c2c2c;
+    color: #ddd;
+    border: none;
+    border: 1px solid #444;
+    cursor: pointer;
+    transition: background 0.35s ease, color 0.3s ease;
+}
+
+button .btn-icon {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+
+.platform-buttons button:hover {
+    background: #444;
+    color: #fff;
+}
+
+
+
+
+
+.form-family{
+display: flex;
+  margin: 0rem auto;
+  gap: 30px;
+  padding: 2rem 1rem;
+  color: var(--text-light);
+  width: 100%;
+}
+
+form:first-child{
+    width: 50%;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #ccc;
+}
+
+input[type="text"],
+input[type="url"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 12px 14px;
+    background: #1e1e1e;
+    color: #ffffff;
+    border: 1px solid var(--secondary-color);
+    border-radius: 6px;
+    transition: border-color 0.3s ease, background 0.3s ease;
+    appearance: none;
+}
+
+input[type="text"]:focus,
+input[type="url"]:focus,
+input[type="number"]:focus,
+select:focus {
+    border-color: var(--secondary-color-dark);
+    outline: none;
+    background: #252525;
+}
+
+select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px 16px;
+    padding-right: 36px;
+}
+
+button {
+    padding: 12px 20px;
+    background: var(--secondary-color);
+    color: #fff;
+    border: none;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    transition: background 0.5s ease;
+}
+
+button:hover {
+    background: var(--secondary-color-dark);
+}
+
+#charge {
+    font-weight: bold;
+    color: #00ff7f;
+    font-size: 1.2em;
+}
+
+.form-group{
+    color: #fff;
+}
+
+.form-group .mm{
+    font-size: 14px;
+    color: var(--secondary-color);
+}
+.form-group span{
+    font-size: 13px;
+    color: #ccc;
+}
+
+input[type="text"]#searchInput {
+    margin-bottom: 10px;
+    padding: 12px;
+    background: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 6px;
+    color: #eee;
+}
+
+input[type="text"]#searchInput:focus {
+    border-color: #00bfff;
+    background: #252525;
+}
+
+.heading {
+    /* text-align: center; */
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+
+
+/* LL ABOUT INFORMATION */
+.intro{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 50%;
+}
+
+.intro form {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+
+.quote-content{
+    border: 1px solid var(--secondary-color-dark);
+    padding: 20px 15px;
+    border-radius: 30px;
+}
+
+.subtext {
+  margin-top: 10px;
+  font-size: 16px;
+  color: var(--white);
+}
+
+.guide-title {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 10px;
+  font-size: 1.2rem;
+  color: var(--white);
+}
+
+.quote-content ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 1rem;
+}
+
+.quote-content ul li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+  color: var(--white);
+  font-size: 15px;
+}
+.quote-content ul li a {
+  color: var(--secondary-color-dark);
+  text-decoration: underline;
+}
+
+.check-icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--background-gradient); 
+  color: var(--white);
+  border-radius: 50%;
+  width: 23px;
+  height: 23px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.ig{
+    width: 100%;
+    margin-bottom: 1rem;
+    border: 2px solid var(--secondary-color);
+}
+
+
+/* IMAGE  */
+/* Fullscreen blur background */
+.image-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  background: rgba(0, 0, 0, 0.4);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* Popup image container */
+.image-popup {
+  max-width: 100%;
+  max-height: 100%;
+  animation: popupFadeIn 0.3s ease-in-out;
+}
+
+.image-popup img {
+  width: 80%;
+  height: auto;
+  border-radius: 10px;
+  border: 2px solid var(--secondary-color);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+}
+
+/* Smooth animation */
+@keyframes popupFadeIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+
+
+
+
+
+
+@media (max-width: 600px) {
+    body {
+        /* padding: 15px; */
+    }
+
+    button {
+        width: 100%;
+        margin-top: 5px;
+    }
+
+    input[type="text"]#searchInput {
+    margin-bottom: 0px;
+    padding: 14px 10px;
+    border-radius: 10px;
+}
+
+    input[type="text"], input[type="url"], input[type="number"], select {
+    padding: 15px 14px;
+    font-size: 15px;
+}
+
+select {
+    font-size: 15px;
+}
+
+    .form-family {
+flex-direction: column;
+    gap: 40px;
+    width: 100%;
+    padding: 2rem 0;
+    padding-bottom: 8rem;
+  }
+
+form:first-child {
+    width: 100%;
+}
+.intro {
+    width: 100%;
+}
+
+
+
+/* ALL ABOU Platform Buttons */
+.platform-buttons {
+display: flex;
+align-items: center;
+justify-content: center;
+
+    gap: 10px;
+    text-align: center;
+    width: 100%;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.platform-buttons button {
+  flex-direction: column;
+    gap: 0px; 
+    width: 20%;
+    padding: 7px 53px;
+    border: none;
+    border-radius: 10px;
+}
+
+button .btn-icon {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+}
+
+.platform-buttons button {
+  font-size: 0;
+}
+
+.platform-buttons button img {
+  font-size: initial;
+  vertical-align: middle; 
+}
+
+
+/* Popup image container */
+.image-popup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-popup img {
+  width: 90%;
+}
+
+
+
+    
+}

@@ -1,0 +1,322 @@
+:root {
+  --primary-color: #0d0d0d;
+  --primary-color-light: #1f2125;
+  --primary-color-extra-light: #35373b;
+  --secondary-color: #696fdd;
+  --secondary-color-dark: #a3a8f0;
+  --text-light: #ccc;
+  --white: #fff;
+  --background-gradient: linear-gradient(135deg, rgb(186, 190, 253) 0%, rgb(66, 71, 158) 100%);
+  --background1: linear-gradient(113.36deg, #000002 -12.22%, #9685de 179.61%);
+  --background2: linear-gradient(180deg, #d6d9fa, rgb(149, 154, 243));
+  --max-width: 1300px;
+}
+
+
+.contents{
+  gap: 30px;
+}
+
+
+/* status  */
+.status1{
+  width: 40%;
+}
+.status2{
+  width: 60%;
+}
+
+.header{
+  color: var(--white);
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+
+
+/* Form Styling */
+form {
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  margin-bottom: 2rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #ccc;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #333;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  background: #2a2a2a;
+  color: #fff;
+}
+
+button {
+  background: #696fdd;
+  color: #fff;
+  padding: 12px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+  width: 100%;
+}
+
+button:hover {
+  background: #5d63c9;
+}
+
+
+
+/* Status & Order Info */
+ul {
+  background: #e0ffe0;
+  padding: 1rem;
+  border-radius: 20px;
+  list-style: none;
+  max-width: 500px;
+  margin-bottom: 1rem;
+  border: none;
+  border-left: 6px solid #25d366;
+}
+
+ul li {
+  margin-bottom: 0.5rem;
+  color: var(--primary-color-light);
+  font-size: 15px;
+}
+
+
+
+
+ /* ALL ABOUT SUCEESS ODER MESSAGe  */
+.sucess-message{
+  background: #e0ffe0;
+  color: var(--white);
+  padding: 1rem;
+  border-radius: 20px;
+  list-style: none;
+  max-width: 500px;
+  margin-bottom: 1rem;
+  border: none;
+  border-left: 6px solid #25d366;
+}
+
+.sucess-message p{
+  font-size: 14px;
+margin-bottom: 5px;
+color: var(--primary-color-light);
+}
+
+.sucess-message a{
+  font-size: 15px;
+  color: var(--secondary-color);
+}
+
+.sucess-message a:hover{
+  color: var(--secondary-color-dark);
+  text-decoration: underline;
+}
+
+
+.error-message{
+  margin-bottom: 10px;
+  color: var(--white);
+  font-size: 15px;
+}
+
+.error-message p{
+  font-size: 17px;
+}
+
+
+
+
+  
+
+  /* ALL ABOUT BUTTON  */
+#filter-buttons{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+  .filter-btn {
+    color: var(--white);
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    width: 18%;
+    transition: background-color 0.2s ease;
+  }
+    .filter-btn:hover {
+    background: var(--secondary-color-dark);
+  }
+  .filter-btn.active {
+    background: var(--background-gradient);
+    color: white;
+  }
+
+.all {
+  background: var(--secondary-color);
+}
+
+.pending {
+  background: rgb(245, 180, 60);
+}
+
+.approved {
+  background: #25d366;
+}
+
+.rejected {
+  background: rgb(227, 43, 80);
+}
+
+.progress{
+  background: #007bff;
+}
+
+
+
+
+  /* ALL  ABOUT ARDER ATBLE  */
+  #orders-table thead{
+ background: var(--background-gradient);
+  }
+
+ #orders-table th, td{
+color: var(--white);
+font-size: 15px;
+padding: 10px 0;
+ }
+
+#orders-table td {
+  padding: 12px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  color: var(--primary-color-light);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+}
+
+ #orders-table td:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-2px);
+}
+
+
+
+
+
+
+
+
+@media (max-width: 800px) {
+
+  /* status  */
+.status1{
+  width: 100%;
+}
+.status2{
+  width: 100%;
+}
+
+ /* ALL ABOUT BUTTON  */
+#filter-buttons{
+  flex-wrap: wrap;
+  justify-content: start;
+  align-items: start;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+  .filter-btn {
+    width: 48%;
+  }
+   
+
+.table-scroll{
+ width: 100%;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 1rem;
+  margin-bottom: 8rem;
+  -webkit-overflow-scrolling: touch;
+}
+/* Custom Scrollbar */
+.table-scroll::-webkit-scrollbar {
+  height: 4px;
+}
+.table-scroll::-webkit-scrollbar-thumb {
+  background-color: var(--secondary-color);
+  border-radius: 10px;
+}
+.table-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+
+  #orders-table {
+  width: 100%;
+  border-collapse: separate; /* ← enables spacing */
+  border-spacing: 5px 10px;     /* ← adds vertical spacing between rows */
+  min-width: 800px;           /* ← forces overflow to trigger scroll */
+}
+
+
+  #orders-table thead {
+  background: var(--secondary-color);
+}
+
+/* Top-left corner */
+#orders-table thead th:first-child {
+  border-top-left-radius: 20px;
+}
+
+/* Top-right corner */
+#orders-table thead th:last-child {
+  border-top-right-radius: 20px;
+}
+
+
+#orders-table th,
+#orders-table td {
+  padding: 15px 16px;
+  font-size: 16px;
+  text-align: left;
+  white-space: nowrap;
+  color: var(--white);
+}
+
+#orders-table td {
+  padding: 12px;
+  background-color: #fff;
+  border: none;
+  color: var(--primary-color-light);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+}
+
+
+
+
+
+}

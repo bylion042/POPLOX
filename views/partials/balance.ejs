@@ -1,0 +1,53 @@
+<!-- ALL BOUT ADDING FUNDS  -->
+<div class="dashboard-cards">
+    <div class="card">
+        <div class="icon">
+            <img src="https://promovk.ru/panel/images/h2.svg" alt="Balance Icon" />
+        </div>
+        <!-- Balance Display -->
+        <div class="info">
+            <p>Balance</p>
+            <h2>$<%= (user.balance_usd || 0).toFixed(2) %>
+            </h2>
+            <p class="ngn-balance">≈ ₦<%= (user.balance || 0).toLocaleString('en-NG') %>
+            </p>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="icon">
+            <img src="https://promovk.ru/panel/images/h2.svg" alt="Spending Icon" />
+        </div>
+        <!-- Spendings Display -->
+        <div class="info">
+            <p>Spendings</p>
+            <h2>$<%= totalSpent.toFixed(2) %>
+            </h2>
+        </div>
+
+    </div>
+
+    <div class="card">
+        <div class="icon">
+            <img src="https://promovk.ru/panel/images/h4.svg" alt="Orders Icon" />
+        </div>
+        <div class="info">
+            <p>Total Orders</p>
+            <h2>
+                <%= totalOrders %>
+            </h2>
+        </div>
+
+    </div>
+
+
+    <div class="card">
+        <div class="icon">
+            <img src="https://promovk.ru/panel/images/h4.svg" alt="Status Icon" />
+        </div>
+        <div class="info">
+            <p>Status</p>
+            <h2>NEW</h2>
+        </div>
+    </div>
+</div>
