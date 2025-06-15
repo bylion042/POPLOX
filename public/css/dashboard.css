@@ -558,10 +558,6 @@ font-weight: bold;
         backdrop-filter: blur(10px);
     }
 
-    .nav-duplicate{
-        display: none;
-    }
-
     .link-container {
         display: flex;
         justify-content: space-around;
@@ -721,13 +717,17 @@ font-weight: bold;
     .menu {
         display: flex;
         flex-direction: column;
-        padding: 0px 30px;
-        margin-top: 4.50rem;
+        padding: 0px 10px;
+        margin-top: 7rem;
+
+          /* Make scrollable */
+  overflow-y: auto;
+  overflow-x: hidden;
     }
     .menu a {
         margin-bottom: 0px;
         /* color: #fff; */
-        font-size: 16px;
+        font-size: 17px;
     }
 .menu span{
     font-size: 1rem;

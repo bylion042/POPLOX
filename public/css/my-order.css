@@ -148,7 +148,7 @@ color: var(--primary-color-light);
   justify-content: center;
   align-items: center;
   gap: 15px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
   .filter-btn {
@@ -192,9 +192,30 @@ color: var(--primary-color-light);
 
 
   /* ALL  ABOUT ARDER ATBLE  */
+
+.table-scroll{
+ width: 100%;
+}
+#orders-table{
+ width: 100%;
+}
+
+
+
+
   #orders-table thead{
  background: var(--background-gradient);
+ width: 100%;
   }
+
+  /* Top-left corner */
+#orders-table thead th:first-child {
+  border-top-left-radius: 20px;
+}
+/* Top-right corner */
+#orders-table thead th:last-child {
+  border-top-right-radius: 20px;
+}
 
  #orders-table th, td{
 color: var(--white);

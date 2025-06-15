@@ -119,7 +119,7 @@ margin-right: 10px;
 .usage-list li code {
   color: var(--secondary-color);
   font-size: 17px;
-  font-family: monospace;
+  /* font-family: monospace; */
 }
 
 
@@ -144,7 +144,7 @@ margin-right: 10px;
 }
 
 .copy-btn {
-  padding: 8px 5px;
+  padding: 8px 10px;
   border-radius: 8px;
   font-size: 14px;
 }

@@ -93,25 +93,22 @@
                         <button type="submit">Submit Payment Details</button>
                         <button onclick="showImage()">Find Transaction Session ID</button>
                       </div>
-                     <script>
-  function showImage() {
-    document.getElementById("overlay").style.display = "flex";
-  }
+                      <script>
+                        function showImage() {
+                          document.getElementById("overlay").style.display = "flex";
+                        }
 
-  function hideImage() {
-    document.getElementById("overlay").style.display = "none";
-  }
-</script>
-
-
+                        function hideImage() {
+                          document.getElementById("overlay").style.display = "none";
+                        }
+                      </script>
 
                     </form>
-
-                   <div id="overlay" class="image-overlay" onclick="hideImage()">
-  <div class="image-popup" onclick="event.stopPropagation()">
-    <img src="/images/review4.jpg" alt="Transaction ID Example">
-  </div>
-</div>
+                    <div id="overlay" class="image-overlay" onclick="hideImage()">
+                      <div class="image-popup" onclick="event.stopPropagation()">
+                        <img src="/images/review4.jpg" alt="Transaction ID Example">
+                      </div>
+                    </div>
               </div>
 
 
@@ -142,10 +139,10 @@
 
                 <!-- Payment History Display -->
                 <div class="payment-contain">
-                <% if (payments.length===0) { %>
-                  <p>No payments found.</p>
-                  <% } else { %>
-                    <% payments.forEach(payment=> { %>
+                  <% if (payments.length===0) { %>
+                    <p>No payments found.</p>
+                    <% } else { %>
+                      <% payments.forEach(payment=> { %>
                         <div class="payment-entry">
                           <p><strong>Amount:</strong> ₦<%= Number(payment.amount).toLocaleString('en-NG') %>
                           </p>
@@ -160,8 +157,8 @@
                             <% } %>
                         </div>
                         <% }); %>
-                        <% } %>
-                      </div>
+                          <% } %>
+                </div>
               </div>
 
             </div>

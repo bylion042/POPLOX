@@ -1141,7 +1141,7 @@ font-size: 1rem;
     font-size: 1.50rem;
     cursor: pointer;
     color: var(--white);
-    z-index: 1300;
+    z-index: 1000;
   }
 
   /* Slide-down menu container */

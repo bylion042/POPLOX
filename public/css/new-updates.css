@@ -83,16 +83,6 @@
 
 
 @media (max-width: 800px) {
-  /* Small Screen Navigation */
-    .small-screen-nav {
-        display: none;
-    }
-
-    .nav-duplicate{
-        display: block;
-    }
-
-
 
 
 .new-update {

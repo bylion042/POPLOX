@@ -68,7 +68,7 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   transform: translateX(-120%);
   transition: transform 0.4s ease;
-  z-index: 1009;
+  z-index: 1999;
 }
 
 .quote-box.active {
@@ -177,6 +177,7 @@
 .ig{
     width: 100%;
     margin-bottom: 1rem;
+    border-radius: 10px;
     border: 2px solid var(--secondary-color);
 }
 
@@ -188,11 +189,39 @@
 
 /* MY RESPONSIVNESS  */
 @media (max-width: 768px) {
+  /* SHOW MESSAGE  */
+  .quote-box {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 15px;
+  height: 100vh;
+  background: #2c2d3f;
+  color: white;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transform: translateX(-120%);
+  transition: transform 0.4s ease;
+  z-index: 1999;
 
-/* SHOW MESSAGE  */
-.quote-box {
-  width: 100%;
-  padding: 20px 10px;
+  /* Make scrollable */
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+
+.inner-toggle{
+  position: fixed;
+}
+
+
+
+
+
+
+.attention {
+ margin-top: 2rem;
 }
 
 .subtext {

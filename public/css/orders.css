@@ -347,7 +347,7 @@ form:first-child {
 .platform-buttons {
 display: flex;
 align-items: center;
-justify-content: center;
+justify-content:center;
 
     gap: 10px;
     text-align: center;
@@ -359,8 +359,8 @@ justify-content: center;
 .platform-buttons button {
   flex-direction: column;
     gap: 0px; 
-    width: 20%;
-    padding: 7px 53px;
+    width: 23%;
+    padding: 7px 0px;
     border: none;
     border-radius: 10px;
 }
