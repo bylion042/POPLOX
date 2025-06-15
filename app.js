@@ -16,6 +16,8 @@ const palmpayRoutes = require('./routes/palmpay');
 const orderroutes = require('./routes/order');
 const apiRoutes = require('./routes/api');
 
+// about site map
+const sitemapRoute = require('./routes/sitemap');
 
 
 // Passport config
@@ -57,6 +59,9 @@ app.use('/', palmpayRoutes);
 app.use('/', orderroutes);
 app.use('/api', apiRoutes);
 
+
+app.use('/', sitemapRoute);
+// about site map
 
 
 // Start server
