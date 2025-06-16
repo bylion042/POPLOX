@@ -46,7 +46,7 @@ textarea {
     width: 100%;
     padding: 15px;
     border: 1px solid var(--secondary-color-dark);
-    border-radius: 4px;
+    border-radius: 10px;
     font-size: 18px;
     background: transparent;
     color: #fff;
@@ -62,7 +62,7 @@ textarea {
     background: var(--background-gradient);
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 10px;
     cursor: pointer;
     font-size: 17px;
     font-weight: bold;
@@ -220,13 +220,17 @@ textarea {
     background: var(--background-gradient);
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 10px;
     cursor: pointer;
     font-size: 15px;
     font-weight: bold;
 }
 
-
+input[type="text"],
+input[type="email"],
+textarea {
+    border-radius: 10px;
+}
 
 
 

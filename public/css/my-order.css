@@ -101,7 +101,7 @@ ul li {
   background: #e0ffe0;
   color: var(--white);
   padding: 1rem;
-  border-radius: 20px;
+  border-radius: 5px;
   list-style: none;
   max-width: 500px;
   margin-bottom: 1rem;
@@ -135,6 +135,7 @@ color: var(--primary-color-light);
 .error-message p{
   font-size: 17px;
 }
+
 
 
 
@@ -248,6 +249,14 @@ padding: 10px 0;
 
 
 @media (max-width: 800px) {
+.hamburger1, .notification-panel{
+  display: none;
+}
+
+  .profile-summary{
+display: none;
+}
+
 
   /* status  */
 .status1{
@@ -257,17 +266,25 @@ padding: 10px 0;
   width: 100%;
 }
 
+.header{
+  font-size: 15px;
+}
+.error-message p {
+    font-size: 15px;
+}
+
  /* ALL ABOUT BUTTON  */
 #filter-buttons{
   flex-wrap: wrap;
   justify-content: start;
   align-items: start;
   gap: 10px;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
 }
 
   .filter-btn {
     width: 48%;
+    padding: 10px;
   }
    
 
@@ -318,7 +335,7 @@ padding: 10px 0;
 
 #orders-table th,
 #orders-table td {
-  padding: 15px 16px;
+  padding: 11px 16px;
   font-size: 16px;
   text-align: left;
   white-space: nowrap;

@@ -2,106 +2,114 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#121212">
-    <title>account</title>
-    <link rel="icon" href="/images/favicon.png" type="image/png">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <link rel="stylesheet" href="/css/account.css">
-    <link rel="stylesheet" href="/css/dashboard.css">
-    <!-- <link rel="stylesheet" href="/css/notification.css"> -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#121212">
+  <title>account</title>
+  <link rel="icon" href="/images/favicon.png" type="image/png">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <link rel="stylesheet" href="/css/account.css">
+  <link rel="stylesheet" href="/css/ads.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/notification.css">
 </head>
 
 <body>
-    <div class="container">
-        <%- include ('partials/sidebar') %>
+  <div class="container">
+    <%- include ('partials/sidebar') %>
 
 
-            <!-- Main content -->
-            <main class="main-content">
-                <span class="bg__blur"></span>
-                <span class="footer__blur"></span>
+      <!-- Main content -->
+      <main class="main-content">
+        <span class="bg__blur"></span>
+        <span class="footer__blur"></span>
 
-                <%- include ('partials/profiles') %>
-
-
-                    <!-- ALL ABOUT entered-content -->
-                    <div class="centered-content">
-                        <h2>Welcome <%= user.name %>
-                        </h2>
-                        <p>Your journey starts here.</p>
-                    </div>
-
-                    <!-- BALANCE CARD  -->
-                    <%- include('partials/balance', { user: user }) %>
+        <%- include ('partials/profiles') %>
 
 
+          <!-- ALL ABOUT entered-content -->
+          <div class="centered-content">
+            <h2>Welcome <%= user.name %>
+            </h2>
+            <p>Your journey starts here.</p>
+          </div>
 
-                        <!-- ALL ABOUT THE MAIN CONTENT REGARDIN ODERS -->
-                        <div class="contents">
-                            <!-- ALL ABOUT ACCOUNT  -->
- <div class="api-key-section">
-  <h3 class="guide-title">🔑 Your API Key</h3>
+          <!-- BALANCE CARD  -->
+          <%- include('partials/balance', { user: user }) %>
 
-  <% if (user.apiKey) { %>
-    <div class="api-box">
-      <input type="text" id="apiKey" readonly value="<%= user.apiKey %>">
-      <button class="copy-btn" onclick="copyApiKey()">Copy</button>
-    </div>
-    <p class="created-at">Created At: <%= new Date(user.apiKeyCreatedAt).toLocaleString() %></p>
-    <form action="/account/api/regenerate" method="POST">
-      <button type="submit" class="regen-btn">Regenerate API Key</button>
-    </form>
-  <% } else { %>
-    <p>You don't have an API key yet.</p>
-    <form action="/account/api/generate" method="POST">
-      <button type="submit" class="regen-btn">Generate new API Key</button>
-    </form>
-  <% } %>
 
-  <hr class="divider">
 
-  <h3 class="guide-title">Guide:</h3>
-        <ul class="usage-list">
-            <li><span class="check-icon"><i class="ri-check-line"></i></span>Send requests to: <code>https://poplox.com/api/v2</code></li>
-            <li><span class="check-icon"><i class="ri-check-line"></i></span>Include your API key in the request as <code>api_key</code></li>
-            <li><span class="check-icon"><i class="ri-check-line"></i></span>All responses will be in <code>JSON</code> format</li>
-        </ul>
+            <!-- ALL ABOUT THE MAIN CONTENT REGARDIN ODERS -->
+            <div class="contents">
+              <!-- ALL ABOUT ACCOUNT  -->
+
+              <div class="section1">
+              <div class="api-key-section">
+                <h3 class="guide-title">🔑 Your API Key</h3>
+
+                <% if (user.apiKey) { %>
+                  <div class="api-box">
+                    <input type="text" id="apiKey" readonly value="<%= user.apiKey %>">
+                    <button class="copy-btn" onclick="copyApiKey()">Copy</button>
+                  </div>
+                  <p class="created-at">Created At: <%= new Date(user.apiKeyCreatedAt).toLocaleString() %>
+                  </p>
+                  <form action="/account/api/regenerate" method="POST">
+                    <button type="submit" class="regen-btn">Regenerate API Key</button>
+                  </form>
+                  <% } else { %>
+                    <p>You don't have an API key yet.</p>
+                    <form action="/account/api/generate" method="POST">
+                      <button type="submit" class="regen-btn">Generate new API Key</button>
+                    </form>
+                    <% } %>
+
+                      <hr class="divider">
+
+                      <h3 class="guide-title">Guide:</h3>
+                      <ul class="usage-list">
+                        <li><span class="check-icon"><i class="ri-check-line"></i></span>Send requests to:
+                          <code>https://poplox.com/api/v2</code></li>
+                        <li><span class="check-icon"><i class="ri-check-line"></i></span>Include your API key in the
+                          request as <code>api_key</code></li>
+                        <li><span class="check-icon"><i class="ri-check-line"></i></span>All responses will be in
+                          <code>JSON</code> format</li>
+                      </ul>
+              </div>
+              <!-- ADS  -->
+              <%- include ('partials/ads') %>
 </div>
 
-<script>
-  function copyApiKey() {
-    const input = document.getElementById("apiKey");
-    input.select();
-    input.setSelectionRange(0, 99999);
-    document.execCommand("copy");
-
-    const originalText = document.querySelector('.copy-btn').innerText;
-    document.querySelector('.copy-btn').innerText = "Copied!";
-    setTimeout(() => {
-      document.querySelector('.copy-btn').innerText = originalText;
-    }, 2000);
-  }
-</script>
+            </div>
+      </main>
 
 
-                        </div>
-            </main>
-
-
-            <!-- INCLUDE BOT  -->
-            <%- include('partials/bot') %>
-    </div>
+      <!-- INCLUDE BOT  -->
+      <%- include('partials/bot') %>
+  </div>
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/js/orders.js"></script>
-    <script src="/js/dashboard.js"></script>
+  <script>
+    function copyApiKey() {
+      const input = document.getElementById("apiKey");
+      input.select();
+      input.setSelectionRange(0, 99999);
+      document.execCommand("copy");
+
+      const originalText = document.querySelector('.copy-btn').innerText;
+      document.querySelector('.copy-btn').innerText = "Copied!";
+      setTimeout(() => {
+        document.querySelector('.copy-btn').innerText = originalText;
+      }, 2000);
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="/js/orders.js"></script>
+  <script src="/js/dashboard.js"></script>
 </body>
 
 </html>

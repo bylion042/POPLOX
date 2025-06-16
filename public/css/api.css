@@ -130,6 +130,11 @@
 
 /* MY RESPONSIVNESS  */
 @media (max-width: 768px) {
+ .section__container {
+        padding: 3rem 10px;
+    }
+
+
 .content{
     width: 100%;
 }

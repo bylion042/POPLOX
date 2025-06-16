@@ -7,7 +7,8 @@
         <!-- Balance Display -->
         <div class="info">
             <p>Balance</p>
-            <h2>$<%= (user.balance_usd || 0).toFixed(2) %>
+            <h2>
+                $<%= (user.balance_usd || 0).toFixed(2) %>
             </h2>
             <p class="ngn-balance">≈ ₦<%= (user.balance || 0).toLocaleString('en-NG') %>
             </p>
@@ -21,7 +22,8 @@
         <!-- Spendings Display -->
         <div class="info">
             <p>Spendings</p>
-            <h2>$<%= totalSpent.toFixed(2) %>
+            <h2>
+                $<%= totalSpent.toFixed(2) %>
             </h2>
         </div>
 

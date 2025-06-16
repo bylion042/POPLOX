@@ -17,6 +17,50 @@
     padding: 0;
 }
 
+/* ABOUT TOGGLE */
+  .toggle {
+    display: flex;
+    margin: 15px 0;
+    background: #1f1f1f;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .toggle button {
+    flex: 1;
+    padding: 11px;
+    background: none;
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 15px;
+    border-radius: 0;
+  }
+
+  .toggle button.active {
+    background: var(--background-gradient);
+    color: white;
+  }
+
+  .total{
+    margin-bottom: 1rem;
+  }
+
+  .total h3 {
+    margin: 10px 0 0;
+    font-size: 13px;
+    color: #aaa;
+  }
+  
+  .total h1 {
+    margin-top: 3px;
+    font-size: 30px;
+    color: var(--white);
+  }
+
+
+
 .wallet-container {
     display: flex;
   margin: 1rem auto;
@@ -79,13 +123,17 @@ ul::before {
   z-index: -1;
   opacity: 0.6; /* optional: adjust visibility */
 }
+/* Add background image using a ::before pseudo-element */
+.binance::before {
+  background-image: url('/images/binance.jpeg'); /* Replace with your image path */
+}
 
 
 
 
 ul li {
     color: var(--white);
-  position: relative;
+  /* position: relative; */
   font-weight: 500;
 }
 ul li strong {
@@ -116,13 +164,14 @@ ul li strong {
   border-radius: 5px;
   font-size: 15px;
   border-left: 6px solid #25d366;
+  border-right: 6px solid #25d366;
 padding: 10px;
 color: green;
 margin-bottom: 10px;
 }
 
 form {
-  background: var(--primary-color-extra-light);
+  background: #1f1f1f;
   padding: 1rem;
   border-radius: 20px;
   margin-bottom: 2rem;
@@ -143,7 +192,7 @@ form input[type="number"],
 form input[type="text"],
 form input[type="file"] {
   width: 100%;
-  padding: 1rem;
+  padding: 0.80rem 1rem;
   font-size: 15px;
   border: 1px solid var(--secondary-color-dark);
   border-radius: 6px;
@@ -346,6 +395,37 @@ body.rejected .payment-entry {
 
 
 @media (max-width: 800px) {
+.contain-hamburger {
+  display: none;
+}
+
+/* ABOUT TOGGLE */
+.header h2{
+  font-size: 16px;
+}
+
+  .toggle {
+    display: flex;
+    margin: 15px 0;
+    border-radius: 30px;
+    overflow: hidden;
+  }
+  
+  .toggle button {
+    padding: 9px;
+    font-size: 14px;
+  }
+  
+  .total h1 {
+    font-size: 25px;
+  }
+
+  .ngn-balance{
+    font-size: 12px;
+    font-weight: 900;
+    color: #aaa;
+  }
+
 
 .wallet-funding , .payment-history{
     width: 100%;
@@ -368,12 +448,12 @@ body.rejected .payment-entry {
 
 
 .wallet{
-    margin-top: 1rem;
-    text-align: center;
+    margin-top: 1.50rem;
+    /* text-align: center; */
 }
 
 .wallet-text {
-    text-align: center;
+    /* text-align: center; */
     margin-bottom: 20px;
 }
 

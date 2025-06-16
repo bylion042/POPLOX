@@ -1,0 +1,141 @@
+ :root {
+  --primary-color: #0d0d0d;
+  --primary-color-light: #1f2125;
+  --primary-color-extra-light: #35373b;
+  --secondary-color: #696fdd;
+  --secondary-color-dark: #a3a8f0;
+  --text-light: #ccc;
+  --white: #fff;
+  --background-gradient: linear-gradient(135deg, rgb(186, 190, 253) 0%, rgb(66, 71, 158) 100%);
+  --background1: linear-gradient(113.36deg, #000002 -12.22%, #9685de 179.61%);
+  --background2: linear-gradient(180deg, #d6d9fa, rgb(149, 154, 243));
+  --max-width: 1300px;
+}
+ 
+
+
+.review-contain{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  gap: 20px;
+  width: 100%;
+} 
+ 
+ .review-box {
+  background: #f8f9fa;
+  border-left: 4px solid #696fdd;
+  padding: 16px 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+  width: 32%;
+}
+
+.review-box:hover {
+  transform: scale(1.01);
+}
+
+
+
+.review-box p {
+  color: #444;
+  margin-bottom: 8px;
+  line-height: 1.5;
+  font-size: 15px;
+  overflow: hidden;
+}
+
+
+.review-box:hover {
+  transform: translateY(-3px);
+}
+
+.review-box h3 {
+  font-size: 18px;
+  margin: 10px 0 15px;
+  color: #333;
+}
+
+.review-box p {
+  margin: 4px 0;
+  font-size: 14.5px;
+  color: #555;
+}
+
+.review-box a {
+  color: #696fdd;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.review-box a:hover {
+  text-decoration: underline;
+}
+
+.long-review {
+  margin-top: 10px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #222;
+  word-wrap: break-word;         /* Break long words */
+  overflow-wrap: break-word;     /* Ensures wrapping in modern browsers */
+  white-space: normal;           /* Allow normal wrapping */
+}
+
+.review-box time,
+.review-box small {
+  font-size: 13px;
+  color: #888;
+}
+
+
+
+
+    /* FLOATING CONTACT  */
+.whatsapp-float {
+  position: fixed;
+  font-family: 'Luckiest Guy', cursive;
+  bottom: 30px;
+  right: 20px;
+  background:  #25d366;
+  color: white;
+  font-size: 26px;
+   padding: 5px 8px;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 1000;
+  box-shadow: 4px 4px var(--primary-color-light);
+  transition: transform 0.3s ease;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+}
+
+
+.nan{
+    color: var(--text-light);
+    font-size: 16px;
+    text-align: center;
+}
+
+
+
+@media (max-width: 800px) {
+.review-contain{
+    flex-direction: column;
+  gap: 15px;
+} 
+ 
+ .review-box {
+  padding: 15px 10px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+  width: 100%;
+}
+
+
+}

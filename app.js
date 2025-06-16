@@ -14,6 +14,7 @@ const forgotpasswordRoutes = require('./routes/forgotpassword');
 const adminRoutes = require('./routes/admin');
 const palmpayRoutes = require('./routes/palmpay');
 const orderroutes = require('./routes/order');
+const reviewRoutes = require('./routes/review');
 const apiRoutes = require('./routes/api');
 
 // about site map
@@ -57,6 +58,7 @@ app.use('/auth', forgotpasswordRoutes);
 app.use('/admin', adminRoutes);
 app.use('/', palmpayRoutes);
 app.use('/', orderroutes);
+app.use('/', reviewRoutes);
 app.use('/api', apiRoutes);
 
 

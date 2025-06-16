@@ -16,14 +16,17 @@
 }
 
 
-
+.section1{
+  width: 50%;
+}
 
 .api-key-section {
   background: var(--primary-color-light);
   color: var(--text-light);
   padding: 20px;
   border-radius: 15px;
-  width: 50%;
+  width: 100%;
+  margin-bottom: 1rem;
   box-shadow: 0 0 20px rgba(0,0,0,0.4);
 }
 
@@ -129,14 +132,22 @@ margin-right: 10px;
 
 
 @media (max-width: 800px) {
+/* .hamburger1, .notification-panel{
+  display: none;
+} */
 
+
+.section1{
+  width: 100%;
+  padding-bottom: 7rem;
+}
 
   .api-key-section {
   padding: 20px 10px;
   border-radius: 15px;
   width: 100%;
   margin-top: 1rem;
-  margin-bottom: 8rem;
+  /* margin-bottom: 8rem; */
 }
 
 .api-box input {

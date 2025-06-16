@@ -12,13 +12,13 @@
     </a>
 
     <a href="/my-order" class="nav-link">
-      <i class="ri-shopping-cart-line"></i>
+      <i class="ri-shopping-basket-line"></i>
       <p>ALL ORDERS</p>
     </a>
 
-    <a href="/new-update" class="nav-link">
-      <i class="ri-notification-2-line"></i>
-      <p>NEW UPDATES</p>
+    <a href="/mine" class="nav-link">
+      <i class="ri-user-line"></i>
+      <p>MINE VAULT</p>
     </a>
   </div>
 </div>
@@ -31,9 +31,76 @@
 
 <!-- SIDE BAR FOR SMALL SCREEN  -->
 <div class="contain-hamburger">
-  <div class="hamburger" id="hamburger-menu">
-    <i class="ri-menu-3-line" id="open-menu"></i>
+  <section class="burger">
+    <!-- NOTIFICATION BELL -->
+    <div class="hamburger1" id="open-notification">
+      <i class="ri-notification-2-line"></i>
+      <span class="notification-badge">4</span>
+    </div>
+
+    <div class="hamburger" id="hamburger-menu">
+      <!-- SIDE BAR  -->
+      <i class="ri-menu-3-line" id="open-menu"></i>
+    </div>
+  </section>
+
+
+  <!-- Slide-out settings panel -->
+  <div class="notification-panel" id="notificationPanel">
+    <div class="notification-content">
+      <span class="close-notification" id="close-notification"><i class="ri-close-fill"></i></span>
+
+      <!-- Your notification HTML here -->
+      <div class="notification-header">Notifications</div>
+      <div class="notifications">
+
+        <div id="messageBox" class="message-box hidden"></div>
+
+        <div class="notification"
+          data-message="Welcome to our website! <%= user.name %> Trust me, you're not here by mistake — you're right where you need to be. Let’s explore something amazing together.">
+          <div class="avatar-container">
+            <img src="/images/notification-user.png" class="avatar" />
+          </div>
+          <div class="text">
+            <p>Welcome to our website! <%= user.name %> Trust me...</p>
+          </div>
+        </div>
+
+        <div class="notification"
+          data-message="You've taken the first step toward a smarter financial future. At [Your Brand], we believe that everyone deserves the opportunity to grow their wealth with confidence and clarity. Whether you're just starting out or expanding your portfolio, we're here to guide you every step of the way. Explore flexible investment plans, real-time insights, and dedicated support. Your future is bright — and it starts right now.">
+          <div class="avatar-container">
+            <img src="/images/notification-user.png" class="avatar" />
+          </div>
+          <div class="text">
+            <p>You've taken the first step toward a smarter financial...</p>
+          </div>
+        </div>
+
+        <div class="notification"
+          data-message="Spread the word. Earn rewards. Our referral program is your chance to help others while helping yourself! Invite friends, family, or colleagues to join our platform, and for every successful referral, you earn real benefits — cash bonuses, discounts, or exclusive perks. It’s simple: the more you share, the more you earn. Start referring today and turn your network into income!">
+          <div class="avatar-container">
+            <img src="/images/notification-user.png" class="avatar" />
+          </div>
+          <div class="text">
+            <p>Spread the word. Earn rewards. Our referral program...</p>
+          </div>
+        </div>
+
+        <div class="notification"
+          data-message="Test your brain. Win big daily! Our Daily Quiz Game is live — and it’s your chance to have fun, learn something new, and walk away with exciting rewards. Every day brings fresh questions, leaderboard challenges, and the thrill of quick thinking. Whether you're in it for fun or for the prizes, don’t miss your shot at the top spot. Ready to play? Let’s go!">
+          <div class="avatar-container">
+            <img src="/images/notification-user.png" class="avatar" />
+          </div>
+          <div class="text">
+            <p>Test your brain. Win big daily! Our Daily Quiz Game...</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+
+
+
 
   <header class="header">
     <div class="profile-summary">
@@ -49,10 +116,6 @@
                 </div>
 
               </div>
-             <div class="profile-text">
-               <h2 class="username"><%= user.name %></h2>
-               <p class="email"><%= user.email %></p>
-             </div>
         </div>
     </header>
 </div>
@@ -65,6 +128,11 @@
   </div>
 
   <div class="menu">
+    
+    <a href="/dashboard" class="on active">
+      <i class="ri-shopping-cart-line"></i>
+      <span>New Order</span>
+    </a>
     <a href="/wallet" class="on  toasts">
       <i class="ri-wallet-line"></i>
       <span>Fund Wallet</span>
@@ -73,10 +141,6 @@
       <i class="ri-shopping-bag-line"></i>
       <span>All Orders</span>
     </a>
-    <a href="/dashboard" class="on active">
-  <i class="ri-shopping-cart-line"></i>
-  <span>New Order</span>
-</a>
     <a href="/support" class="on toasts">
       <i class="ri-customer-service-2-line"></i>
       <span>Support</span>
@@ -111,16 +175,6 @@
       <i class="ri-logout-box-line"></i>
       <span>Logout</span>
     </a>
-
-      <!-- ALL ABOUT SOURCE CODE -->
-    <data>
-      <div class="sars source-code-btn">
-        <a href="/select-card">
-          <button>
-            <i class="ri-code-s-slash-line"></i> Get Source Code
-          </button></a>
-      </div>
-    </data>
 
   </div>
 </div>
@@ -152,18 +206,9 @@
       <i class="ri-customer-service-2-line"></i>
       <span>Support</span>
     </a>
-    <a href="#" class="on pending-container">
-      <i class="ri-trophy-line"></i>
-      <span>Affiliates</span>
-      <span class="pending-dot">pending</span>
-    </a>
     <a href="/account" class="on buyAccount">
       <i class="ri-user-line"></i>
       <span>Account</span>
-    </a>
-    <a href="/engagement" class="on">
-      <i class="ri-heart-2-line"></i>
-      <span>Engagements</span>
     </a>
     <a href="/api-init" class="on">
       <i class="ri-links-line"></i>
@@ -176,54 +221,25 @@
     <a href="#" class="on pending-container">
       <i class="ri-global-line"></i>
       <span>Child Panel</span>
-      <span class="pending-dot">pending</span>
+      <!-- <span class="pending-dot">Deu</span> -->
+    </a>
+    <a href="/engagement" class="on">
+      <i class="ri-heart-2-line"></i>
+      <span>Engagements</span>
+    </a>
+    <a href="#" class="on pending-container">
+      <i class="ri-trophy-line"></i>
+      <span>Affiliates</span>
+      <span class="pending-dot">Pending</span>
     </a>
     <a href="/auth/logout" class="on">
       <i class="ri-logout-box-line"></i>
       <span>Logout</span>
     </a>
 
-    <!-- ALL ABOUT SOURCE CODE -->
-    <data>
-      <div class="sars source-code-btn">
-        <a href="/select-card">
-          <button>
-            <i class="ri-code-s-slash-line"></i> Get Source Code
-          </button></a>
-      </div>
-    </data>
+
   </div>
 </div>
-
-<!-- Tooltip message -->
-<div class="tooltip-message" id="sourceTooltip">
-  <h1>Attention!!</h1>
-  <p>
-    Ready to own your own Poplox-style website? We' ve made it super easy for you! Download our source code and with
-            just a few simple customizations, you'll have your platform up and running in no time. Here's how: </p>
-
-            <p><span class="check-icon"><i class="ri-check-line"></i></span> Message the admin.</p>
-            <p><span class="check-icon"><i class="ri-check-line"></i></span> Buy the code folder for <code>$5</code>.
-            </p>
-            <p><span class="check-icon"><i class="ri-check-line"></i></span> Go to install dependencies (check
-              <code>package.json</code> ).
-            </p>
-            <p><span class="check-icon"><i class="ri-check-line"></i></span> Fill in all private details inside
-              <code>.env </code>in the root folder.
-            </p>
-            <p><span class="check-icon"><i class="ri-check-line"></i></span> Customize your branding – change the logo,
-              colors
-              ETC.</p>
-            <p><span class="check-icon"><i class="ri-check-line"></i></span> Then you are good to run the code</p>
-            <p><span class="check-icon"><i class="ri-check-line"></i></span> Start the server using
-              <code>npm start</code> or
-              <code>node server.js</code>.
-            </p>
-            <p><span class="check-icon"><i class="ri-check-line"></i></span> Need help? Click the
-              <strong>WhatsApp</strong> icon,
-              The dev is just a click away
-            </p>
-        </div>
 
         <!-- Arrow to toggle sidebar -->
         <div class="toggle-sidebar" id="toggle-btn">
@@ -235,20 +251,33 @@
 
 
 
-        <!-- FUNCTION FOR SOURCE CODE  -->
-        <script>
-          const btn = document.querySelector('.source-code-btn');
-          const tooltip = document.getElementById('sourceTooltip');
+ <!-- FUNCTION TO OPEN NOTIFICATION BAR  -->
+    <script>
+      const openNotification = document.getElementById("open-notification");
+      const closeNotification = document.getElementById("close-notification");
+      const notificationPanel = document.getElementById("notificationPanel")
+      openNotification.addEventListener("click", () => {
+        notificationPanel.classList.add("open");
+      })
+      closeNotification.addEventListener("click", () => {
+        notificationPanel.classList.remove("open");
+      })
+      // Optional: click outside to close
+      document.addEventListener("click", (e) => {
+        if (!notificationPanel.contains(e.target) && !openNotification.contains(e.target)) {
+          notificationPanel.classList.remove("open");
+        }
+      });
+    </script>
 
-          btn.addEventListener('click', function (e) {
-            e.preventDefault();
-            tooltip.style.display = tooltip.style.display === 'block' ? 'none' : 'block';
-          });
+    <!-- notification function  -->
+<script>
+    document.querySelectorAll(' .notification').forEach(notification => {
+        notification.addEventListener('click', () => {
+            const messageBox = document.getElementById('messageBox');
+            messageBox.textContent = notification.getAttribute('data-message');
+            messageBox.classList.add('show');
+        });
+    });
 
-          // Optional: hide tooltip if clicked outside
-          document.addEventListener('click', function (e) {
-            if (!btn.contains(e.target) && !tooltip.contains(e.target)) {
-              tooltip.style.display = 'none';
-            }
-          });
-        </script>
+</script>

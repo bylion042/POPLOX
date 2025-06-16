@@ -1,0 +1,595 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+:root {
+  --primary-color: #0d0d0d;
+  --primary-color-light: #1f2125;
+  --primary-color-extra-light: #35373b;
+  --secondary-color: #696fdd;
+  --secondary-color-dark: #a3a8f0;
+  --text-light: #ccc;
+  --white: #fff;
+  --background-gradient: linear-gradient(135deg, rgb(186, 190, 253) 0%, rgb(66, 71, 158) 100%);
+  --background1: linear-gradient(113.36deg, #000002 -12.22%, #9685de 179.61%);
+  --background2: linear-gradient(180deg, #d6d9fa, rgb(149, 154, 243));
+  --max-width: 1300px;
+}
+
+
+
+body {
+  padding: 0;
+}
+
+.sidebar,
+.toggle-sidebar {
+  display: none;
+}
+
+.main-content {
+  margin-left: 0px;
+  height: auto;
+  padding: 0;
+}
+
+.mine-container {
+  max-width: 500px;
+  margin: 20px auto;
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+/* Header */
+.mine-header {
+  color: var(--white);
+  text-align: center;
+  padding: 20px 20px 20px;
+  position: relative;
+}
+
+
+
+/* ALL ABOUT SETTINGS TAB  */
+
+.settings-panel {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--primary-color);
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: right 0.4s ease-in-out;
+    z-index: 2000;
+    overflow-y: auto;
+    margin-top: 5px;
+  }
+  
+  .settings-panel.open {
+    right: 0;
+  }
+  
+  .settings-content {
+    padding: 3rem 1rem;
+  }
+
+  .icons i {
+    font-size: 23px;
+  }
+  
+  .close-settings {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 25px;
+    cursor: pointer;
+    color: var(--white);
+    transition: background 0.3s, transform 0.3s ease;
+  }
+  
+  .close-settings:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(90deg);
+  }
+
+.setting-content {
+    padding: 20px 10px;
+    z-index: 1000;
+}
+
+.setting-content a {
+    text-decoration: none;
+    color: var(--white);
+    margin-left: 1rem;
+    margin-top: 5rem;
+    font-size: 15px;
+    background: var(--background-gradient);
+    color: var(--white);
+    padding: 8px;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(186, 190, 253, 0.4);
+    animation: bounceActive 0.3s ease;
+}
+
+.settings-container {
+    width: 100%;
+    margin: auto;
+}
+
+.settings-header {
+    text-align: center;
+    font-size: 1.20rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: var(--white);
+}
+
+/* CHANING OF EMAILS, USERNAME AND PHONE NUM */
+  #profileForm {
+        width: 100%;
+        margin: 10px auto;
+        padding: 20px 10px;
+        background: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        font-family: 'Segoe UI', sans-serif;
+       color: var(--text-light);
+    }
+
+    #profileForm label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 500;
+        color: var(--primary-color-light);
+        text-align: start;
+    }
+
+    #profileForm input[type="text"],
+    #profileForm input[type="email"],
+    #profileForm input[type="tel"],
+    #profileForm input[type="password"] {
+        width: 100%;
+        padding: 14px 10px;
+        margin-bottom: 16px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 15px;
+        transition: border 0.3s;
+    }
+
+    #profileForm input:focus {
+        border-color: var(--secondary-color-dark);
+        outline: none;
+    }
+
+.input-container {
+    position: relative;
+    width: 100%;
+}
+
+.input-container input {
+    padding-right: 40px;
+    width: 100%;
+}
+
+input[type="password"] {
+    transition: border 0.2s ease;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 35%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--secondary-color);
+}
+
+
+    #profileForm button {
+        width: 100%;
+        padding: 14px;
+        background: var(--background-gradient);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    #profileForm button:hover {
+        background: var(--secondary-color);
+    }
+
+
+
+
+.setting-item1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 10px;
+    font-size: 1rem;
+}
+
+.setting-label {
+    font-weight: 500;
+    color: var(--text-light);
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 42px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: var(--secondary-color);
+}
+
+input:checked+.slider:before {
+    transform: translateX(18px);
+}
+
+.currency-select {
+    background: none;
+    border: none;
+    font-weight: bold;
+    color: var(--white);
+    border-radius: 3px;
+    background: var(--secondary-color);
+    cursor: pointer;
+    padding: 2px 5px;
+}
+
+.about-value {
+    color: var(--text-light);
+    font-size: 12px;
+}
+
+.delete-account {
+    color: #ff5c5c;
+    text-align: left;
+    padding: 15px 10px;
+    cursor: pointer;
+}
+
+.logout-btn {
+    width: 100%;
+    margin: 20px auto;
+    display: block;
+    background: #ff5c5c;
+    color: var(--white);
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.logout-btn:hover {
+    background: #b73535;
+}
+
+
+
+
+
+
+
+
+
+
+
+.icon {
+  top: 10px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: end;
+}
+
+.profile-summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.profile-img-wrapper {
+  width: 70px;
+  height: 70px;
+  margin-bottom: 10px;
+}
+
+.profile-initials {
+  width: 100%;
+  height: 100%;
+  background-color: var(--secondary-color-dark);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 1.50rem;
+  text-transform: uppercase;
+}
+
+.profile-summary .name {
+  font-size: 1.20rem;
+  color: var(--white);
+  text-transform: uppercase;
+}
+
+.profile-summary .email {
+  font-size: 0.90rem;
+  opacity: 0.8;
+  margin-top: 5px;
+  color: var(--text-light);
+}
+
+/* Stats */
+.stats {
+  background: white;
+  padding: 15px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-around;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.03);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+}
+
+.stat .number {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.stat .label {
+  font-size: 12px;
+  color: #888;
+}
+
+/* Menu */
+.mine-menu {
+  padding: 0 20px 20px;
+}
+
+.mine-menu a {
+  text-decoration: none;
+}
+
+.menu-item {
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  transition: transform 0.2s;
+}
+
+.menu-item:hover {
+  transform: scale(1.03);
+}
+
+.left {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.icon-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.arrow {
+  color: var(--white);
+  font-size: 18px;
+}
+
+
+
+
+/* ALL ABOUT WTHDRAWAL  */
+.review-container {
+  background: #fff;
+  /* width: 100%; */
+  margin: 10px 10px;
+  padding: 20px 10px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.review-container h3 {
+  margin-bottom: 10px;
+  text-align: center;
+  color: #333;
+}
+
+.review-container p.notice {
+  background: var(--secondary-color-dark);
+  color: var(--primary-color-light);
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+
+form label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+form input,
+form select,
+textarea {
+  width: 100%;
+  padding: 12px 10px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  border-radius: 6px;
+}
+
+form input:focus,
+form select:focus {
+  outline: none;
+  border-color: var(--secondary-color-dark);
+}
+
+form button {
+  width: 100%;
+  margin-top: 20px;
+  background: var(--background-gradient);
+  color: white;
+  padding: 13px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background: var(--secondary-color);
+}
+
+
+
+
+
+
+@media (max-width: 800px) {
+  body {
+    padding-bottom: 7rem;
+  }
+
+  .contain-hamburger {
+    display: none;
+  }
+
+  .mine-container {
+    max-width: 500px;
+    margin: auto;
+    background: var(--primary-color);
+    border-radius: 0px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  }
+
+  .mine-header {
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+  }
+
+
+  .stats {
+    background: var(--primary-color);
+    padding: 15px 0;
+    border-radius: 0;
+  }
+
+  .stat .number {
+    font-size: 20px;
+    color: var(--text-light);
+  }
+
+  .stat .label {
+    font-size: 13px;
+    color: #888;
+  }
+
+
+  .mine-menu {
+    padding: 0;
+  }
+
+  .menu-item {
+    background: var(--primary-color);
+    background: transparent;
+    border-radius: 0px;
+    transition: transform 0.3s;
+    padding: 10px 16px;
+    margin-bottom: 0;
+  }
+
+  .left {
+    display: flex;
+    gap: 10px;
+    color: var(--text-light);
+    font-size: 13px;
+    font-weight: bold;
+  }
+
+  .left span {
+    color: var(--white);
+    font-size: 14px;
+  }
+
+  .icon-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .arrow {
+    color: var(--white);
+    font-size: 20px;
+  }
+
+}

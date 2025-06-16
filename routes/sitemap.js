@@ -12,7 +12,8 @@ router.get('/sitemap.xml', (req, res) => {
   <url><loc>https://www.poplox.com/login</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://www.poplox.com/register</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://www.poplox.com/forgot-password</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://www.poplox.com/t&amp;c</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://www.poplox.com/t&c</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://www.poplox.com/reviews</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://www.poplox.com/services</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://www.poplox.com/support</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://www.poplox.com/contact-us</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>

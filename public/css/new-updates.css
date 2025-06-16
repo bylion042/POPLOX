@@ -83,7 +83,9 @@
 
 
 @media (max-width: 800px) {
-
+/* .hamburger1, .notification-panel{
+  display: none;
+} */
 
 .new-update {
     padding: 0px;

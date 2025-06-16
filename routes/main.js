@@ -7,6 +7,7 @@ const User = require("../models/User");
 const PalmPayRequest = require("../models/Palmpay");
 const Service = require('../models/Service');
 const Order = require('../models/Order');
+const Review = require('../models/Review');
 const { getUsdRate } = require('../utils/exchangeRate'); // make sure this exists
 
 
@@ -61,7 +62,7 @@ router.get('/api', (req, res) => {
   res.render('api');
 });
 
-// API-inir Page
+// API-iniT Page
 router.get('/api-init', (req, res) => {
   res.render('api-init');
 });
@@ -75,6 +76,61 @@ router.get('/services', (req, res) => {
 router.get('/engagement', (req, res) => {
   res.render('engagement');
 });
+
+// reviews Page
+router.get('/reviews', async (req, res) => {
+  try {
+    const reviews = await Review.find().sort({ createdAt: -1 }); // show latest first
+    res.render('reviews', { reviews }); // ✅ send to EJS
+  } catch (err) {
+    console.error("Error loading reviews:", err);
+    res.status(500).send("Failed to load reviews");
+  }
+});
+
+// mine Page (Protected)
+router.get('/mine', async (req, res) => {
+  if (!req.session.user) {
+    return res.redirect('/login');
+  }
+
+  try {
+    const userId = req.session.user._id;
+
+    // ✅ Fetch fresh user from DB
+    const freshUser = await User.findById(userId);
+
+    // ✅ Convert balance to USD
+    const usdRate = await getUsdRate();
+    let usdBalance = 0;
+
+    if (usdRate && freshUser.balance) {
+      usdBalance = parseFloat((freshUser.balance / usdRate).toFixed(2));
+
+      // Save USD balance if it changed
+      if (usdBalance !== freshUser.balance_usd) {
+        freshUser.balance_usd = usdBalance;
+        await freshUser.save();
+      }
+    }
+
+    // ✅ Count total orders
+    const totalOrders = await Order.countDocuments({ user: userId });
+
+    // ✅ Render 'mine' page
+    res.render('mine', {
+      user: freshUser,
+      usdBalance,
+      totalSpent: freshUser.totalSpent || 0,
+      totalOrders
+    });
+
+  } catch (err) {
+    console.error("Error loading mine page:", err);
+    res.status(500).send("Something went wrong");
+  }
+});
+
 
 
 

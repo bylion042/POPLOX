@@ -1,0 +1,69 @@
+/* ALL ABOUT ADS  */
+.ads{
+  color: var(--white);
+  font-size: 17px;
+}
+
+
+.banner {
+    display: flex;
+    flex-direction: column;
+    padding: 5px 0;
+    gap: 10px;
+}
+
+.banner-text {
+    font-size: 17px;
+    font-weight: bold;
+    text-align: center;
+    color: var(--text-light);
+}
+
+.banner-slideshow {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner-slideshow img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    z-index: 0;
+}
+
+
+.banner-slideshow img.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+
+
+@media (max-width: 800px) {
+
+/* ALL ABOUT ADS  */
+    .banner-text {
+        font-size: 14px;
+    }
+
+    .banner-slideshow {
+        height: 150px;
+    }
+
+    .banner img {
+        width: 100%;
+    }
+
+}

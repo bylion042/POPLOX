@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
   <link rel="stylesheet" href="/css/dashboard.css">
   <link rel="stylesheet" href="/css/my-order.css">
+  <link rel="stylesheet" href="/css/ads.css">
   <link rel="stylesheet" href="/css/status.css">
 </head>
 
@@ -45,66 +46,74 @@
             <!-- ALL ABOUT STATUS1  -->
             <div class="status1">
 
- 
+
 
               <!-- ALL ABOUT ORDER STATUSES  -->
-           
-                      <h2 class=" header">Order Status</h2>
 
-                      <div class="error-message">
-                      <% if (status && status.error) { %>
-                        <p style="color:red;">
-                          <%= status.error %>
-                        </p>
-                        <% } else if (status && status.status) { %>
+              <h2 class=" header">Order Status</h2>
 
-                          <ul>
-                            <li><strong>Status:</strong>
-                              <%= status.status.toLowerCase() %>
-                            </li>
-                            <li><strong>Start Count:</strong>
-                              <%= status.start_count || 'N/A' %>
-                            </li>
-                            <li><strong>Remains:</strong>
-                              <%= status.remains || 'N/A' %>
-                            </li>
-                            <% if (status.charge) { %>
-                              <li><strong>Charge:</strong> $<%= status.charge %>
-                              </li>
-                              <% } %>
-                          </ul>
-                          <% } else { %>
-                            <p>No order status available.</p>
-                            <% } %>
-</div>
+              <div class="error-message">
+                <% if (status && status.error) { %>
+                  <p style="color:red;">
+                    <%= status.error %>
+                  </p>
+                  <% } else if (status && status.status) { %>
+
+                    <ul>
+                      <li><strong>Status:</strong>
+                        <%= status.status.toLowerCase() %>
+                      </li>
+                      <li><strong>Start Count:</strong>
+                        <%= status.start_count || 'N/A' %>
+                      </li>
+                      <li><strong>Remains:</strong>
+                        <%= status.remains || 'N/A' %>
+                      </li>
+                      <% if (status.charge) { %>
+                        <li><strong>Charge:</strong> $<%= status.charge %>
+                        </li>
+                        <% } %>
+                    </ul>
+                    <% } else { %>
+                      <p>No order status available.</p>
+                      <% } %>
+              </div>
 
 
 
-                            <!-- ALL ABOUT SUCEESS ODER MESSAGE  -->
-                             <div class="sucess-message">
-                                <% if (order && order.order) { %>
-                <p>✅ Order placed successfully!</p>
-                <p><strong>Order ID:</strong>
-                  <%= order.order %>
-                </p>
-                <% if (order.link) { %>
-                  <p><strong>Submitted Link:</strong> <a href="<%= order.link %>" target="_blank">
-                      <%= order.link %>
-                    </a></p>
-                  <% } %>
-                    <a href="/">Place another order</a>
+              <!-- ALL ABOUT SUCEESS ODER MESSAGE  -->
+              <div class="sucess-message">
+                <% if (order && order.order) { %>
+                  <p>✅ Order placed successfully!</p>
+                  <p><strong>Order ID:</strong>
+                    <%= order.order %>
+                  </p>
+                  <% if (order.link) { %>
+                    <p><strong>Submitted Link:</strong> <a href="<%= order.link %>" target="_blank">
+                        <%= order.link %>
+                      </a></p>
                     <% } %>
-                              </div>
+                      <a href="/">Place another order</a>
+                      <% } %>
+              </div>
 
 
-                                           <!-- ALL ABOUT TRACKING ORDER  -->
+              <!-- ALL ABOUT TRACKING ORDER  -->
               <h2 class=" header">Check Order Status</h2>
               <form action="/status" method="POST">
                 <input type="text" name="orderId" placeholder="Enter Order ID" required>
                 <button type="submit">check status</button>
               </form>
 
+
+
+              <!-- ADS  -->
+        <%- include ('partials/ads') %>
+              
             </div>
+
+
+
 
 
 
@@ -121,38 +130,48 @@
                 <button onclick="filterOrders('canceled', event)" class="filter-btn rejected">Canceled</button>
               </div>
 
-            <!-- ALL ABOUT ORDER TABLE  -->
-             <div class="table-scroll">
-              <table id="orders-table">
-                <thead>
-                  <tr>
-                    <th>Order ID</th>
-                    <th>Service</th>
-                    <th>Qty</th>
-                    <th>Status</th>
-                    <th>Date</th>
-                  </tr>
-                </thead>
+              <!-- ALL ABOUT ORDER TABLE  -->
+              <div class="table-scroll">
+                <table id="orders-table">
+                  <thead>
+                    <tr>
+                      <th>Order ID</th>
+                      <th>Service</th>
+                      <th>Qty</th>
+                      <th>Status</th>
+                      <th>Date</th>
+                    </tr>
+                  </thead>
 
-                <tbody>
-                  <% if (orders && orders.length> 0) { %>
-                    <% orders.forEach(order=> { %>
-                      <tr data-status="<%= order.status.toLowerCase() %>">
-                        <td><%= order.order_id %></td>
-                        <td><%= order.service_name %></td>
-                        <td><%= order.quantity %></td>
-                        <td><%= order.status %></td>
-                        <td><%= order.createdAt.toDateString() %></td>
-                      </tr>
-                      <% }) %>
-                        <% } else { %>
-                          <tr>
-                            <td colspan="5">No orders found.</td>
-                          </tr>
-                          <% } %>
-                </tbody>
-              </table>
-            </div>
+                  <tbody>
+                    <% if (orders && orders.length> 0) { %>
+                      <% orders.forEach(order=> { %>
+                        <tr data-status="<%= order.status.toLowerCase() %>">
+                          <td>
+                            <%= order.order_id %>
+                          </td>
+                          <td>
+                            <%= order.service_name %>
+                          </td>
+                          <td>
+                            <%= order.quantity %>
+                          </td>
+                          <td>
+                            <%= order.status %>
+                          </td>
+                          <td>
+                            <%= order.createdAt.toDateString() %>
+                          </td>
+                        </tr>
+                        <% }) %>
+                          <% } else { %>
+                            <tr>
+                              <td colspan="5">No orders found.</td>
+                            </tr>
+                            <% } %>
+                  </tbody>
+                </table>
+              </div>
             </div>
 
 
@@ -190,6 +209,9 @@
       event.target.classList.add('active');
     }
   </script>
+
+
+
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

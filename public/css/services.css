@@ -181,6 +181,10 @@ button .btn-icon {
 
 
 @media (max-width: 600px) {
+    .section__container {
+        padding: 3rem 10px;
+    }
+
 
   /* BUTTONS  */
   .platform-buttons {
@@ -194,7 +198,7 @@ button .btn-icon {
   }
 
   .platform-buttons button {
-    padding: 9px;
+    padding: 10px;
     margin: 3px;
     border: none;
     cursor: pointer;
@@ -204,8 +208,8 @@ button .btn-icon {
   }
 
 button .btn-icon {
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
 }
 
   .category h2 {
