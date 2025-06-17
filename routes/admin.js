@@ -10,6 +10,8 @@ const Order = require('../models/Order');
 const API_KEY = process.env.SMMYZ_API_KEY;
 const API_URL = process.env.SMMYZ_API_URL;
 
+const { getUsdRate } = require('../utils/exchangeRate'); // ✅ Add this line
+
 // GET: Admin Panel - View pending PalmPay submissions
 router.get("/", async (req, res) => {
   try {
@@ -36,27 +38,57 @@ router.post("/palmpay/verify", async (req, res) => {
   try {
     const request = await PalmPayRequest.findById(request_id);
     if (!request) return res.status(404).send("Payment request not found.");
-
     if (request.status !== "pending") return res.status(400).send("Request already processed.");
 
+    const user = await User.findById(request.user_id);
+    if (!user) return res.status(404).send("User not found.");
+
+    const method = request.method?.toLowerCase(); // e.g., 'palmpay' or 'binancepay'
+    const amount = parseFloat(request.amount);
+
     if (action === "approve") {
-      await User.findByIdAndUpdate(request.user_id, {
-        $inc: { balance: parseFloat(request.amount) }
-      });
-      request.status = "approved";
-    } else if (action === "reject") {
-      request.status = "rejected";
-    } else {
+  const usdRate = await getUsdRate(); // Always get fresh rate
+
+  if (!usdRate) {
+    return res.status(500).send("Unable to fetch USD rate.");
+  }
+
+  if (method === "binancepay") {
+    // User paid in USD — use it directly
+    user.balance_usd = parseFloat((user.balance_usd + amount).toFixed(2));
+
+    // Optional: Convert to NGN for display
+    const ngnEquivalent = amount * usdRate;
+    user.balance = parseFloat((user.balance + ngnEquivalent).toFixed(2)); // For display only
+
+    console.log(`✅ BinancePay: Added $${amount} to balance_usd for ${user.email}`);
+  } else {
+    // User paid in NGN — convert to USD
+    const usdEquivalent = amount / usdRate;
+
+    user.balance = parseFloat((user.balance + amount).toFixed(2)); // Track NGN
+    user.balance_usd = parseFloat((user.balance_usd + usdEquivalent).toFixed(2)); // Master balance
+
+    console.log(`✅ PalmPay: Added ₦${amount} (~$${usdEquivalent.toFixed(2)}) to balance_usd for ${user.email}`);
+  }
+
+  request.status = "approved";
+  await user.save();
+  await request.save();
+}
+
+    else {
       return res.status(400).send("Invalid action.");
     }
 
-    await request.save();
     res.redirect("/admin");
+
   } catch (err) {
-    console.error("Error verifying PalmPay request:", err);
+    console.error("❌ Error verifying request:", err);
     res.status(500).send("Something went wrong.");
   }
 });
+
 
 // FETCH SERVICES AND SAVE IN THE DATABASE 
 router.get('/fetch-services', async (req, res) => {
@@ -121,8 +153,6 @@ router.get("/services", async (req, res) => {
   }
 });
 
-
-
 // Update service price
 router.post('/services/update/:id', async (req, res) => {
   try {
@@ -134,8 +164,6 @@ router.post('/services/update/:id', async (req, res) => {
     res.status(500).send('Failed to update service price');
   }
 });
-
-
 
 // Orders Page
 router.get('/orders', async (req, res) => {
@@ -152,7 +180,6 @@ router.get('/orders', async (req, res) => {
     res.status(500).send("Error loading orders");
   }
 });
-
 
 // Delete an order by ID
 router.delete('/delete-order/:id', async (req, res) => {
@@ -181,7 +208,5 @@ router.delete('/delete-all-orders', async (req, res) => {
     res.status(500).json({ success: false });
   }
 });
-
-
 
 module.exports = router;

@@ -270,6 +270,7 @@ border-bottom: 1px solid #414471;
     background-image: url('/images/download1.jpg');
     border-radius: 10px;
     display: none;
+    border: 1px solid var(--secondary-color);
 }
 
 .centered-content h2 {
@@ -718,12 +719,12 @@ font-weight: bold;
     }
 
     .centered-content h2 {
-        font-size: 0.90rem;
+        font-size: 1rem;
         color: var(--white);
     }
 
     .centered-content p {
-        font-size: 0.70rem;
+        font-size: 0.80rem;
         font-weight: bolder;
         color: var(--white);
     }
@@ -766,9 +767,11 @@ font-weight: bold;
 }
 
 .card {
-  padding: 7px 10px;
+  padding: 7px 20px;
   width: 48%;
   gap: 10px;
+  border-radius: 5px;
+  background: var(--background-gradient);
 }
 
 .card .icon {
@@ -776,12 +779,20 @@ font-weight: bold;
 }
 
 .card .icon img {
-    width: 40px;
-    height: 40px;
+  width: 40px;
+  height: 40px;
+  filter: brightness(0) invert(0);
 }
 
 
+.card .info p{
+    color: var(--primary-color-light);
+    font-weight: bold;
+}
 
+.card .info .ngn-balance {
+    color: var(--primary-color-light);
+}
 
 
 

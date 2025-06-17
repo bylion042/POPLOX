@@ -947,7 +947,7 @@ font-size: 1rem;
   font-family: 'Luckiest Guy', cursive;
   position: fixed;
   bottom: 30px;
-  right: 20px;
+  left: 20px;
   color: white;
   border: none;
   border-radius: 50%;
@@ -1254,7 +1254,7 @@ font-size: 1rem;
   }
 
   .header__image img {
-    width: 70%;
+    width: 80%;
     display: flex;
     align-items: center;
     padding-top: 1rem;

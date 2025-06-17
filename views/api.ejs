@@ -93,7 +93,8 @@
         <h2 class="section__header">Poplox API</h2>
         <p class="section__subheader" data-aos="fade-button">
             Welcome to the Poplox API — your gateway to automate orders and access your account data programmatically.
-            This API is designed for developers who want to integrate social media services directly into their own platforms.
+            This API is designed for developers who want to integrate social media services directly into their own
+            platforms.
         </p>
         <br>
 
@@ -201,7 +202,7 @@
                         <p>action</p>
                         <p>service</p>
                         <p>link</p>
-                        <p>quantity	</p>
+                        <p>quantity </p>
                         <p>runs (optional)</p>
                         <p>interval (optional)</p>
                     </div>
@@ -229,7 +230,7 @@
 
 
 
-                        <!-- SECTION 4  -->
+            <!-- SECTION 4  -->
             <section class="content" data-aos="fade-right">
                 <section class="header">
                     <div class="icon-title">
@@ -250,7 +251,7 @@
                         <p>Your API key</p>
                         <p>status</p>
                         <p>Order ID</p>
-                </div>
+                    </div>
                 </div>
 
 
@@ -269,7 +270,7 @@
             </section>
 
 
-                        <!-- SECTION 5  -->
+            <!-- SECTION 5  -->
             <section class="content" data-aos="fade-left">
                 <section class="header">
                     <div class="icon-title">
@@ -290,7 +291,7 @@
                         <p>Your API key</p>
                         <p>status</p>
                         <p>Order IDs (separated by a comma, up to 100 IDs)</p>
-                </div>
+                    </div>
                 </div>
 
 
@@ -321,7 +322,7 @@
             </section>
 
 
-                        <!-- SECTION 6  -->
+            <!-- SECTION 6  -->
             <section class="content" data-aos="fade-right">
                 <section class="header">
                     <div class="icon-title">
@@ -342,7 +343,7 @@
                         <p>Your API key</p>
                         <p>refill</p>
                         <p>Order ID</p>
-                </div>
+                    </div>
                 </div>
 
 
@@ -358,7 +359,7 @@
 
 
 
-                                  <!-- SECTION 7  -->
+            <!-- SECTION 7  -->
             <section class="content" data-aos="fade-left">
                 <section class="header">
                     <div class="icon-title">
@@ -377,9 +378,9 @@
                     <div>
                         <strong>Description</strong>
                         <p>Your API key</p>
-                        <p>	refill</p>
+                        <p> refill</p>
                         <p>Order IDs (separated by a comma, up to 100 IDs)</p>
-                </div>
+                    </div>
                 </div>
 
 
@@ -407,7 +408,7 @@
             </section>
 
 
-                                  <!-- SECTION 8  -->
+            <!-- SECTION 8  -->
             <section class="content" data-aos="fade-right">
                 <section class="header">
                     <div class="icon-title">
@@ -428,7 +429,7 @@
                         <p>Your API key</p>
                         <p>refill_status</p>
                         <p>Refill ID</p>
-                </div>
+                    </div>
                 </div>
 
 
@@ -443,7 +444,7 @@
             </section>
 
 
-                                <!-- SECTION 9  -->
+            <!-- SECTION 9  -->
             <section class="content" data-aos="fade-left">
                 <section class="header">
                     <div class="icon-title">
@@ -464,7 +465,7 @@
                         <p>Your API key</p>
                         <p>refill_status</p>
                         <p>Refill IDs (separated by a comma, up to 100 IDs)</p>
-                </div>
+                    </div>
                 </div>
 
 
@@ -493,7 +494,7 @@
 
 
 
-                                <!-- SECTION 10  -->
+            <!-- SECTION 10  -->
             <section class="content" data-aos="fade-right">
                 <section class="header">
                     <div class="icon-title">
@@ -514,7 +515,7 @@
                         <p>Your API key</p>
                         <p>cancel</p>
                         <p>Order IDs (separated by a comma, up to 100 IDs)</p>
-                </div>
+                    </div>
                 </div>
 
 
@@ -539,7 +540,7 @@
 
 
 
-                                <!-- SECTION 11  -->
+            <!-- SECTION 11  -->
             <section class="content" data-aos="fade-left">
                 <section class="header">
                     <div class="icon-title">
@@ -558,7 +559,7 @@
                         <strong>Description</strong>
                         <p>Your API key</p>
                         <p>balance</p>
-                </div>
+                    </div>
                 </div>
 
 
@@ -573,14 +574,14 @@
                 </div>
             </section>
 
-
-
-
-
-
-
-
         </div>
+
+        <br>
+
+        <a href="/php-example" class="btn btn-primary" style="margin-top: 20px;">
+            See PHP Example
+        </a>
+
 
     </section>
 
@@ -605,24 +606,29 @@
 
 
 
-        <script type="text/javascript">
-            function googleTranslateElementInit() {
-                new google.translate.TranslateElement(
-                    {
-                        pageLanguage: 'en',
-                        includedLanguages: 'en,fr,de,es,it,pt,ru,ar,hi,ja,zh-CN,ko,tr,id,th,pl,nl,sv,cs,ro,fa,uk,vi', // Add desired language codes
-                        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-                    },
-                    'google_translate_element'
-                );
-            }
-        </script>
-        <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-        <script>AOS.init();</script>
-        <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-        <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
-        <script src="/js/index.js"></script>
+        <!-- LIVE AND BOT CHAT  -->
+        <%- include('partials/tawk') %>
+
+
+
+            <script type="text/javascript">
+                function googleTranslateElementInit() {
+                    new google.translate.TranslateElement(
+                        {
+                            pageLanguage: 'en',
+                            includedLanguages: 'en,fr,de,es,it,pt,ru,ar,hi,ja,zh-CN,ko,tr,id,th,pl,nl,sv,cs,ro,fa,uk,vi', // Add desired language codes
+                            layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                        },
+                        'google_translate_element'
+                    );
+                }
+            </script>
+            <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+            <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+            <script>AOS.init();</script>
+            <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+            <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+            <script src="/js/index.js"></script>
 </body>
 
 </html>

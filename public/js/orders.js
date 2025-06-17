@@ -12,16 +12,26 @@ function populateServices() {
     if (!cat || !servicesByCategory[cat]) return;
 
     allServices = servicesByCategory[cat];
-    allServices.forEach(service => {
-        const opt = document.createElement('option');
-        opt.value = service.service_id || service.id;
-        opt.textContent = `${service.name} - $${parseFloat(service.my_price).toFixed(2)}/1k`; // ✅ cleaner formatting
-        opt.setAttribute('data-rate', service.my_price);
-        opt.setAttribute('data-min', service.min);
-        opt.setAttribute('data-max', service.max);
-        opt.setAttribute('data-avgtime', service.average_time || 'N/A');
-        serviceSelect.appendChild(opt);
-    });
+   allServices.forEach(service => {
+    const opt = document.createElement('option');
+    opt.value = service.service_id || service.id;
+    opt.textContent = `${service.name} - $${parseFloat(service.my_price).toFixed(2)}/1k`;
+
+    opt.setAttribute('data-rate', service.my_price);
+    opt.setAttribute('data-min', service.min);
+    opt.setAttribute('data-max', service.max);
+
+    // 🔧 improved avg time fallback
+let avgTime = service.average_time;
+if (!avgTime || avgTime === '0' || avgTime.toLowerCase() === 'n/a' || avgTime.trim() === '') {
+    avgTime = '3–4 hours';
+}
+opt.setAttribute('data-avgtime', avgTime);
+
+
+    serviceSelect.appendChild(opt);
+});
+
 
     filterServiceOptions();
 }

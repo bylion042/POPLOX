@@ -33,7 +33,12 @@ router.get('/', async (req, res) => {
 // ✅ POST /order → place order
 router.post('/order', async (req, res) => {
     const { service, link, quantity } = req.body;
-    const userId = req.session.userId;
+    const userId = req.session.user?._id; // ✅ FIXED
+
+    if (!userId) {
+        return res.redirect('/login'); // 🔐 optional
+    }
+
 
     try {
         if (!service || !link || !quantity) {

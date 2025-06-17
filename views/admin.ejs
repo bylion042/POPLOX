@@ -14,87 +14,88 @@
   <link rel="stylesheet" href="/css/index.css">
 </head>
 
+
 <body>
 
-    <!-- FOR BIG SCREEN  -->
-    <nav class="hide">
-        <div class="nav__logo">
-            <a href="/"><img src="images/logo.png" alt="logo" /></a>
-        </div>
+  <!-- FOR BIG SCREEN  -->
+  <nav class="hide">
+    <div class="nav__logo">
+      <a href="/"><img src="images/logo.png" alt="logo" /></a>
+    </div>
 
-        <div class="nav-hold">
-            <ul class="nav__links">
-                <li class="link"><a href="/">Home</a></li>
-                <li class="link"><a href="/admin">Payments</a></li>
-                <li class="link"><a href="/admin/services">Services</a></li>
-                <li class="link"><a href="/admin/orders">Orders</a></li>
-            </ul>
+    <div class="nav-hold">
+      <ul class="nav__links">
+        <li class="link"><a href="/">Home</a></li>
+        <li class="link"><a href="/admin">Payments</a></li>
+        <li class="link"><a href="/admin/services">Services</a></li>
+        <li class="link"><a href="/admin/orders">Orders</a></li>
+      </ul>
 
-            <a href="/login"><button class="btn join__now transparent">Login</button></a>
-            <!-- <a href="/register"><button class="btn join__now">Register</button></a> -->
-        </div>
-    </nav>
+      <a href="/login"><button class="btn join__now transparent">Login</button></a>
+      <!-- <a href="/register"><button class="btn join__now">Register</button></a> -->
+    </div>
+  </nav>
 
 
-<!-- NAV FOR SMALL SCREEN  -->
-<div class="small-screen-nav">
-  <div class="link-container">
-    <a href="/admin" class="nav-link">
-      <i class="ri-dashboard-line"></i>
-      <p>PAYMENTS</p>
-    </a>
+  <!-- NAV FOR SMALL SCREEN  -->
+  <div class="small-screen-nav">
+    <div class="link-container">
+      <a href="/admin" class="nav-link">
+        <i class="ri-dashboard-line"></i>
+        <p>PAYMENTS</p>
+      </a>
 
- <a href="/admin/orders" class="nav-link">
-      <i class="ri-shopping-bag-line"></i>
-      <p>ALL ORDERS</p>
-    </a>
+      <a href="/admin/orders" class="nav-link">
+        <i class="ri-shopping-bag-line"></i>
+        <p>ALL ORDERS</p>
+      </a>
 
-    <a href="/admin/services" class="nav-link">
-      <i class="ri-heart-2-line"></i>
-      <p>SERVICE PRICE</p>
-    </a>
+      <a href="/admin/services" class="nav-link">
+        <i class="ri-heart-2-line"></i>
+        <p>SERVICE PRICE</p>
+      </a>
 
-    <a href="/mine" class="nav-link">
-      <i class="ri-home-4-line"></i>
-      <p>Home</p>
-    </a>
+      <a href="/mine" class="nav-link">
+        <i class="ri-home-4-line"></i>
+        <p>Home</p>
+      </a>
+    </div>
   </div>
-</div>
 
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-  const navLinks = document.querySelectorAll('.nav-link');
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const navLinks = document.querySelectorAll('.nav-link');
 
-  function updateActiveLink() {
-    const currentPath = window.location.pathname;
+      function updateActiveLink() {
+        const currentPath = window.location.pathname;
 
-    navLinks.forEach(link => {
-      const linkURL = new URL(link.href);
-      const linkPath = linkURL.pathname;
+        navLinks.forEach(link => {
+          const linkURL = new URL(link.href);
+          const linkPath = linkURL.pathname;
 
-      if (linkURL.origin === window.location.origin && linkPath === currentPath) {
-        link.classList.add('active');
-      } else {
-        link.classList.remove('active');
+          if (linkURL.origin === window.location.origin && linkPath === currentPath) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
       }
+
+      updateActiveLink();
+
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          const linkURL = new URL(link.href);
+
+          if (linkURL.origin === window.location.origin) {
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+          }
+        });
+      });
     });
-  }
 
-  updateActiveLink();
-
-  navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      const linkURL = new URL(link.href);
-
-      if (linkURL.origin === window.location.origin) {
-        navLinks.forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
-      }
-    });
-  });
-});
-
-</script>
+  </script>
 
 
 
@@ -145,48 +146,48 @@
     <% if (typeof services !=='undefined' && services.length> 0) { %>
 
       <div class="table-scroll">
-      <table class="order-card">
-        <thead>
-          <tr>
-            <th>Category</th>
-            <th>Name</th>
-            <th>API</th>
-            <th>Your Price</th>
-            <th>Min</th>
-            <th>Max</th>
-            <th>Update</th>
-          </tr>
-        </thead>
-        <tbody id="servicesTable">
-          <% services.forEach(service=> { %>
-            <tr data-platform="<%= service.category.toLowerCase() %>"
-              data-search="<%= service.name.toLowerCase() %> <%= service.category.toLowerCase() %>">
-              <td>
-                <%= service.category %>
-              </td>
-              <td>
-                <%= service.name %>
-              </td>
-              <td>$<%= service.api_price %>
-              </td>
-              <td>
-                <form action="/admin/services/update/<%= service._id %>" method="POST">
-                  <input type="number" name="my_price" value="<%= service.my_price %>" step="0.0001" required>
-              </td>
-              <td>
-                <%= service.min %>
-              </td>
-              <td>
-                <%= service.max %>
-              </td>
-              <td>
-                <button type="submit">Save</button>
-                </form>
-              </td>
+        <table class="order-card">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Name</th>
+              <th>API</th>
+              <th>Your Price</th>
+              <th>Min</th>
+              <th>Max</th>
+              <th>Update</th>
             </tr>
-            <% }) %>
-        </tbody>
-      </table>
+          </thead>
+          <tbody id="servicesTable">
+            <% services.forEach(service=> { %>
+              <tr data-platform="<%= service.category.toLowerCase() %>"
+                data-search="<%= service.name.toLowerCase() %> <%= service.category.toLowerCase() %>">
+                <td>
+                  <%= service.category %>
+                </td>
+                <td>
+                  <%= service.name %>
+                </td>
+                <td>$<%= service.api_price %>
+                </td>
+                <td>
+                  <form action="/admin/services/update/<%= service._id %>" method="POST">
+                    <input type="number" name="my_price" value="<%= service.my_price %>" step="0.0001" required>
+                </td>
+                <td>
+                  <%= service.min %>
+                </td>
+                <td>
+                  <%= service.max %>
+                </td>
+                <td>
+                  <button type="submit">Save</button>
+                  </form>
+                </td>
+              </tr>
+              <% }) %>
+          </tbody>
+        </table>
       </div>
       <% } else { %>
         <p class="fallback-message">No services to display.</p>
@@ -372,9 +373,8 @@
 
 
 
-  <!-- ALL ABOUT PAYMENTS  -->
+  <!-- ALL ABOUT PAYMENTS -->
   <div class="payments" id="admin-home">
-
     <h1>Pending Payments</h1>
 
     <div class="payment-contain">
@@ -384,11 +384,28 @@
             <p><strong>User:</strong>
               <%= payment.user_id.username || payment.user_id.email || "Unknown" %>
             </p>
-            <p><strong>Amount:</strong> ₦<%= Number(payment.amount).toLocaleString('en-NG') %>
+
+            <p>
+              <strong>Payment Method:</strong>
+              <%= payment.method %>
             </p>
+
+            <p>
+              <strong>Amount:</strong>
+              <%= payment.currency==='USD' ? '$' + Number(payment.amount).toLocaleString() : '₦' +
+                Number(payment.amount).toLocaleString('en-NG') %>
+            </p>
+
+            <p>
+              <strong>Currency:</strong>
+              <%= payment.currency %>
+            </p>
+
+
             <p><strong>Session ID:</strong>
               <%= payment.txid %>
             </p>
+
 
             <% if (payment.screenshot) { %>
               <p><strong>User Payment Screenshot:</strong>
@@ -398,22 +415,23 @@
                 <p>No screenshot uploaded.</p>
                 <% } %>
 
-                  <!-- BUTTONS  -->
+                  <!-- BUTTONS -->
                   <form action="/admin/palmpay/verify" method="POST">
                     <input type="hidden" name="request_id" value="<%= payment._id %>">
                     <input type="hidden" name="user_id" value="<%= payment.user_id._id %>">
                     <input type="hidden" name="amount" value="<%= payment.amount %>">
+                    <input type="hidden" name="method" value="<%= payment.method %>">
                     <button type="submit" name="action" value="approve">Approve</button>
                     <button type="submit" name="action" value="reject">Reject</button>
                   </form>
           </div>
           <% }); %>
             <% } else { %>
-              <p class="fallback-message">No pending PalmPay payments.</p>
+              <p class="fallback-message">No pending payments at the moment.</p>
               <% } %>
-
     </div>
   </div>
+
 
 
 

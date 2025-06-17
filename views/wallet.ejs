@@ -43,8 +43,10 @@
                   <div class="total">
                     <h3>Balance</h3>
                     <!-- Display the balance dynamically -->
-                    <h1>$<%= (user.balance_usd || 0).toFixed(2) %></h1>
-                    <p class="ngn-balance">≈ ₦<%= (user.balance || 0).toLocaleString('en-NG') %></p>
+                    <h1>$<%= (user.balance_usd || 0).toFixed(2) %>
+                    </h1>
+                    <p class="ngn-balance">≈ ₦<%= (user.balance || 0).toLocaleString('en-NG') %>
+                    </p>
                   </div>
 
                 </div>
@@ -87,27 +89,30 @@
                       </p>
 
                       <form action="/submit" method="POST" enctype="multipart/form-data">
-                        <div>
-                          <label>Amount Sent</label>
-                          <input type="number" name="amount" placeholder="₦1000" required />
-                        </div>
+  <input type="hidden" name="method" value="PalmPay" />
+  <input type="hidden" name="currency" value="NGN" />
 
-                        <div>
-                          <label>Transaction Session ID</label>
-                          <input type="text" name="txid" placeholder="XXXXXXXXXXXXXXXXXXX" required />
-                        </div>
+  <div>
+    <label>Amount Sent</label>
+    <input type="number" name="amount" placeholder="₦1000" required />
+  </div>
 
-                        <div>
-                          <label>Upload Screenshot (Optional)</label>
-                          <input type="file" name="screenshot" accept="image/*" />
-                        </div>
+  <div>
+    <label>Transaction Session ID</label>
+    <input type="text" name="txid" placeholder="XXXXXXXXXXXXXXXXXXX" required />
+  </div>
 
-                        <div class="chain">
-                          <button type="submit">Submit Payment Details</button>
-                          <button onclick="showImage()">Find Transaction Session ID</button>
-                        </div>
+  <div>
+    <label>Upload Screenshot (Optional)</label>
+    <input type="file" name="screenshot" accept="image/*" />
+  </div>
 
-                      </form>
+  <div class="chain">
+    <button type="submit">Submit Payment Details</button>
+    <button onclick="showImage()">Find Transaction Session ID</button>
+  </div>
+</form>
+
                       <div id="overlay" class="image-overlay" onclick="hideImage()">
                         <div class="image-popup" onclick="event.stopPropagation()">
                           <img src="/images/review4.jpg" alt="Transaction ID Example">
@@ -124,7 +129,6 @@
                     Copy the Binance UID below and send your desired amount to our Binance to get your wallet funded.
                   </p>
 
-
                   <!-- Binance DETAILS -->
                   <div class="bank-detils">
                     <!-- <p>Send payment to:</p> -->
@@ -134,7 +138,7 @@
                         <span id="account-number">1122815931</span>
                         <button class="copy-btn binance" onclick="copyAccount(this)">Copy</button>
                       </li>
-                      <li><strong>Name:</strong> Binance Payment</li>
+                      <li><strong>Payment Name:</strong> Binance Payment</li>
                       <li><strong>Account Name:</strong> POPLOX</li>
                     </ul>
                   </div>
@@ -153,32 +157,35 @@
                       </p>
 
                       <form action="/submit" method="POST" enctype="multipart/form-data">
-                        <div>
-                          <label>Amount Sent</label>
-                          <input type="number" name="amount" placeholder="$1000" required />
-                        </div>
+  <input type="hidden" name="method" value="BinancePay">
+  <input type="hidden" name="currency" value="USD" />
 
-                        <div>
-                          <label>Binance Order TxID</label>
-                          <input type="text" name="txid" placeholder="XXXXXXXXXXXXXXXXXXX" required />
-                        </div>
-
-                        <div>
-                          <label>Upload Screenshot (Optional)</label>
-                          <input type="file" name="screenshot" accept="image/*" />
-                        </div>
-
-                        <div class="chain">
-                          <button type="submit">Submit Payment Details</button>
-<button onclick="showImage2()">Find PalmPay Order ID</button> 
-                </div>
-
-                      </form>
-                      <div id="overlay2" class="image-overlay" onclick="hideImage2()">
-  <div class="image-popup" onclick="event.stopPropagation()">
-    <img src="/images/review5.jpg" alt="Binance Example">
+  <div>
+    <label>Amount Sent</label>
+    <input type="number" name="amount" placeholder="$1000" required />
   </div>
-</div>
+
+  <div>
+    <label>Binance Order TxID</label>
+    <input type="text" name="txid" placeholder="XXXXXXXXXXXXXXXXXXX" required />
+  </div>
+
+  <div>
+    <label>Upload Screenshot (Optional)</label>
+    <input type="file" name="screenshot" accept="image/*" />
+  </div>
+
+  <div class="chain">
+    <button type="submit">Submit Payment Details</button>
+    <button onclick="showImage2()">Find PalmPay Order ID</button>
+  </div>
+</form>
+
+                      <div id="overlay2" class="image-overlay" onclick="hideImage2()">
+                        <div class="image-popup" onclick="event.stopPropagation()">
+                          <img src="/images/review5.jpg" alt="Binance Example">
+                        </div>
+                      </div>
                 </div>
               </div>
 
@@ -215,8 +222,18 @@
                     <% } else { %>
                       <% payments.forEach(payment=> { %>
                         <div class="payment-entry">
-                          <p><strong>Amount:</strong> ₦<%= Number(payment.amount).toLocaleString('en-NG') %>
-                          </p>
+                          <p><strong>Amount:</strong>
+  <%= payment.currency === 'USD'
+    ? '$' + Number(payment.amount).toLocaleString()
+    : '₦' + Number(payment.amount).toLocaleString('en-NG') %>
+</p>
+
+                          <p>
+            <strong>Payment Method:</strong> <%= payment.method %>
+          </p>
+ <p>
+            <strong>Currency:</strong> <%= payment.currency %>
+          </p>
                           <p><strong>Status:</strong>
                             <%= payment.status %>
                           </p>
@@ -301,24 +318,24 @@
   </script>
 
 
-<!-- FUNCTION TO SHOW IMAGE  -->
-<script>
-  function showImage() {
-    document.getElementById("overlay").style.display = "flex";
-  }
+  <!-- FUNCTION TO SHOW IMAGE  -->
+  <script>
+    function showImage() {
+      document.getElementById("overlay").style.display = "flex";
+    }
 
-  function hideImage() {
-    document.getElementById("overlay").style.display = "none";
-  }
+    function hideImage() {
+      document.getElementById("overlay").style.display = "none";
+    }
 
-  function showImage2() {
-    document.getElementById("overlay2").style.display = "flex";
-  }
+    function showImage2() {
+      document.getElementById("overlay2").style.display = "flex";
+    }
 
-  function hideImage2() {
-    document.getElementById("overlay2").style.display = "none";
-  }
-</script>
+    function hideImage2() {
+      document.getElementById("overlay2").style.display = "none";
+    }
+  </script>
 
 
 

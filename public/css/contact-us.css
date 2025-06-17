@@ -85,7 +85,7 @@ textarea {
   position: fixed;
   font-family: 'Luckiest Guy', cursive;
   bottom: 30px;
-  right: 20px;
+  left: 20px;
   background:  #25d366;
   color: white;
   font-size: 26px;

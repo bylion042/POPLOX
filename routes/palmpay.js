@@ -2,7 +2,10 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const path = require("path");
+const User = require('../models/User');
 const PalmPayRequest = require("../models/Palmpay"); // Mongoose model
+const { getUsdRate } = require('../utils/exchangeRate'); // make sure this exists
+
 
 // Screenshot upload setup
 const storage = multer.diskStorage({
@@ -26,28 +29,49 @@ router.get("/wallet", async (req, res) => {
 
     const payments = await PalmPayRequest.find(query).sort({ created_at: -1 });
 
+    const freshUser = await User.findById(userId);
+
+    // Get exchange rate
+    const usdRate = await getUsdRate();
+
+    // Only use this for display (₦ → $), do NOT save it!
+    let convertedUsd = 0;
+    if (usdRate && freshUser.balance) {
+      convertedUsd = parseFloat((freshUser.balance / usdRate).toFixed(2));
+    }
+
     res.render("wallet", {
-      user: req.session.user,
+      user: freshUser,
+      usdBalance: freshUser.balance_usd, // Real USD from BinancePay
+      convertedUsd,                      // ₦ converted for display
       payments,
       msg: req.query.msg
     });
+
   } catch (err) {
     console.error("Error loading wallet:", err);
     res.status(500).send("Failed to load wallet");
   }
 });
 
-// ✅ POST /palmpay/submit – Submit new payment
+
+
+// ✅ POST /submit – Submit payment (PalmPay or Binance)
 router.post("/submit", upload.single("screenshot"), async (req, res) => {
   try {
-    const { amount, txid } = req.body;
+    const { amount, txid, method } = req.body;
     const screenshot = req.file ? `/uploads/${req.file.filename}` : null;
     const userId = req.session.user._id;
+
+    // Determine currency directly from method
+    const currency = method === 'BinancePay' ? 'USD' : 'NGN';
 
     const request = new PalmPayRequest({
       user_id: userId,
       amount,
       txid,
+      method,
+      currency,
       screenshot,
       status: "pending"
     });
@@ -56,9 +80,11 @@ router.post("/submit", upload.single("screenshot"), async (req, res) => {
 
     res.redirect("/wallet?msg=Payment submitted. Please wait for admin approval.");
   } catch (err) {
-    console.error("Error submitting PalmPay request:", err);
+    console.error("Error submitting payment request:", err);
     res.status(500).send("Something went wrong");
   }
 });
+
+
 
 module.exports = router;

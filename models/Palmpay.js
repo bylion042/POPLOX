@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const PalmPayRequestSchema = new mongoose.Schema({
   user_id: {
-    type: mongoose.Schema.Types.ObjectId, // Reference to User model
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: "User"
   },
@@ -15,7 +15,17 @@ const PalmPayRequestSchema = new mongoose.Schema({
     required: true
   },
   screenshot: {
-    type: String // Filename or path to uploaded screenshot
+    type: String
+  },
+  method: {
+    type: String,
+    enum: ["PalmPay", "BinancePay"],
+    required: true
+  },
+  currency: {
+    type: String,
+    enum: ["NGN", "USD"],
+    required: true
   },
   status: {
     type: String,

@@ -9,6 +9,7 @@ const Service = require('../models/Service');
 const Order = require('../models/Order');
 const Review = require('../models/Review');
 const { getUsdRate } = require('../utils/exchangeRate'); // make sure this exists
+const fs = require('fs');
 
 
 
@@ -66,6 +67,20 @@ router.get('/api', (req, res) => {
 router.get('/api-init', (req, res) => {
   res.render('api-init');
 });
+
+// PHP Page
+router.get('/php', (req, res) => {
+  res.render('php');
+});
+
+// PHP example page
+router.get('/php-example', (req, res) => {
+  fs.readFile('./php/api-example.php', 'utf8', (err, phpCode) => {
+    if (err) return res.status(500).send('Error loading PHP example.');
+    res.render('php', { phpCode });
+  });
+});
+
 
 // Services Page
 router.get('/services', (req, res) => {
