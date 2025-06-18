@@ -78,7 +78,7 @@ router.post("/submit", upload.single("screenshot"), async (req, res) => {
 
     await request.save();
 
-    res.redirect("/wallet?msg=Payment submitted. Please wait for admin approval.");
+    res.redirect("/wallet?msg=Payment submitted. Please wait for admin approval, if not approved for 5min click the whatsapp icon to message the admin.");
   } catch (err) {
     console.error("Error submitting payment request:", err);
     res.status(500).send("Something went wrong");
