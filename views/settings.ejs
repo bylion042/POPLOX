@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#121212">
+    <title>settings</title>
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/my-order.css">
+    <link rel="stylesheet" href="/css/ads.css">
+    <link rel="stylesheet" href="/css/setting.css">
+</head>
+
+<body>
+    <div class="container">
+        <%- include ('partials/sidebar') %>
+
+
+            <!-- Main content -->
+            <main class="main-content">
+                <span class="bg__blur"></span>
+                <span class="footer__blur"></span>
+
+                <%- include ('partials/profiles') %>
+
+
+                    <!-- ALL ABOUT entered-content -->
+                    <div class="centered-content">
+                        <h2 class=" header">
+                            Welcome <%= user.name %>
+                        </h2>
+                        <p>Your journey starts here.</p>
+                    </div>
+
+
+
+
+                    <!-- ALL ABOUT THE MAIN CONTENT REGARDIN ODERS -->
+                    <div class="settings">
+
+                        <!-- SECTION1  -->
+                        <div class="settings1">
+
+                            <!-- /* ALL ABOUT REVIEWS  */ -->
+                            <div class="review-container">
+                                <h3>Leave a Review</h3>
+                                <p class="notice">
+                                    We’d love to hear from you! Share your experience using Poplox — your feedback helps
+                                    us grow and serve you better.
+                                </p>
+
+                                <form id="reviewForm">
+                                    <label for="country">Name</label>
+                                    <input type="text" name="name" placeholder="Your Name" required />
+
+                                    <label for="currency">Email</label>
+                                    <input type="email" name="email" placeholder="Your Email (optional)" />
+
+                                    <label for="bank">Rating (1–5 Stars)</label>
+                                    <label>
+                                        <select name="rating">
+                                            <option value="5">★★★★★</option>
+                                            <option value="4">★★★★☆</option>
+                                            <option value="3">★★★☆☆</option>
+                                            <option value="2">★★☆☆☆</option>
+                                            <option value="1">★☆☆☆☆</option>
+                                        </select>
+                                    </label>
+
+                                    <label for="accountNumber">Title</label>
+                                    <input type="text" id="accountNumber" name="title" required
+                                        placeholder="Best SMM Panel I’ve used!" />
+
+                                    <label for="accountName">Full Review</label>
+                                    <textarea id="message" name="review" required
+                                        placeholder="Textarea for detailed experience."></textarea>
+
+                                    <button type="submit">Submit Review</button>
+                                </form>
+
+                            </div>
+                        </div>
+
+
+
+
+
+
+                        <!-- SECTION 2  -->
+                        <div class="settings2">
+                            <!-- ADS  -->
+                            <%- include ('partials/ads') %>
+
+                                <div class="poplox-settings">
+                                    <div class="poplox-settings-inner">
+                                        <div class="poplox-settings-header">Settings</div>
+
+                                        <div class="poplox-setting-item">
+                                            <span class="poplox-setting-label">Alert</span>
+                                            <label class="poplox-switch">
+                                                <input type="checkbox" checked>
+                                                <span class="poplox-slider"></span>
+                                            </label>
+                                        </div>
+
+                                        <div class="poplox-setting-item">
+                                            <span class="poplox-setting-label">Posh Notification</span>
+                                            <label class="poplox-switch">
+                                                <input type="checkbox">
+                                                <span class="poplox-slider"></span>
+                                            </label>
+                                        </div>
+
+                                        <div class="poplox-setting-item">
+                                            <span class="poplox-setting-label">Change currency</span>
+                                            <select class="poplox-currency-select">
+                                                <option value="USD" selected>USD</option>
+                                                <option value="EUR">EUR</option>
+                                                <option value="GBP">GBP</option>
+                                                <option value="KES">KES</option>
+                                                <option value="CAD">CAD</option>
+                                                <option value="NGN">NGN</option>
+                                                <option value="AUD">AUD</option>
+                                                <option value="GHS">GHS</option>
+                                                <option value="ZAR">ZAR</option>
+                                                <option value="INR">INR</option>
+                                                <option value="JPY">JPY</option>
+                                                <option value="CNY">CNY</option>
+                                                <option value="MXN">MXN</option>
+                                                <option value="SGD">SGD</option>
+                                                <option value="BRL">BRL</option>
+                                                <option value="RUB">RUB</option>
+                                                <option value="SAR">SAR</option>
+                                                <option value="AED">AED</option>
+                                                <option value="THB">THB</option>
+                                                <option value="TRY">TRY</option>
+                                                <option value="SEK">SEK</option>
+                                                <option value="NOK">NOK</option>
+                                                <option value="PLN">PLN</option>
+                                                <option value="DKK">DKK</option><!-- options unchanged -->
+                                            </select>
+                                        </div>
+
+                                        <!-- USER DETAILS FORM  -->
+                                        <span class="poplox-setting-label edit">Edit Your Profile Details</span>
+                                        <form id="profileForm">
+                                            <label>Name:</label>
+                                            <input type="text" name="name" placeholder="Enter new name" required />
+
+                                            <label>Email:</label>
+                                            <input type="email" name="email" placeholder="Enter new email" required />
+
+                                            <label>New Password (optional):</label>
+                                            <div class="poplox-input-container">
+                                                <input type="password" id="password" name="newPassword" required
+                                                    placeholder="Enter new password (if changing)">
+                                                <i class="ri-eye-off-line toggle-password"
+                                                    onclick="togglePassword('password', this)"></i>
+                                            </div>
+
+                                            <button type="submit">Save Changes</button>
+                                        </form>
+
+                                        <button class="poplox-logout-btn">Delete Account</button>
+                                    </div>
+                                </div>
+
+                        </div>
+                    </div>
+            </main>
+            <!-- INCLUDE BOT  -->
+            <%- include('partials/bot') %>
+    </div>
+
+<script>
+    // <!-- FUNTION TO ReVIEWS  -->
+  document.getElementById("reviewForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      title: formData.get("title"),
+      review: formData.get("review"),
+      rating: formData.get("rating")
+    };
+
+    try {
+      const response = await fetch("/submit-review", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+
+      const result = await response.json();
+
+      Toastify({
+        text: result.message,
+        duration: 5000,
+        gravity: "top",
+        position: "center",
+        backgroundColor: response.ok ? "#28a745" : "#dc3545"
+      }).showToast();
+
+      if (response.ok) this.reset();
+    } catch (err) {
+      Toastify({
+        text: "Submission failed.",
+        duration: 5000,
+        gravity: "top",
+        position: "center",
+        backgroundColor: "#dc3545"
+      }).showToast();
+    }
+  });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/dashboard.js"></script>
+    <script src="/js/mine-vault.js"></script>
+</body>
+
+</html>
