@@ -43,40 +43,38 @@ router.post("/palmpay/verify", async (req, res) => {
     const user = await User.findById(request.user_id);
     if (!user) return res.status(404).send("User not found.");
 
-    const method = request.method?.toLowerCase(); // e.g., 'palmpay' or 'binancepay'
+    const method = request.method?.toLowerCase();
     const amount = parseFloat(request.amount);
 
     if (action === "approve") {
-  const usdRate = await getUsdRate(); // Always get fresh rate
+      const usdRate = await getUsdRate();
+      if (!usdRate) return res.status(500).send("Unable to fetch USD rate.");
 
-  if (!usdRate) {
-    return res.status(500).send("Unable to fetch USD rate.");
-  }
+      if (method === "binancepay") {
+        user.balance_usd = parseFloat((user.balance_usd + amount).toFixed(2));
+        const ngnEquivalent = amount * usdRate;
+        user.balance = parseFloat((user.balance + ngnEquivalent).toFixed(2));
+        console.log(`✅ BinancePay: Added $${amount} to balance_usd for ${user.email}`);
+      } else {
+        const usdEquivalent = amount / usdRate;
+        user.balance = parseFloat((user.balance + amount).toFixed(2));
+        user.balance_usd = parseFloat((user.balance_usd + usdEquivalent).toFixed(2));
+        console.log(`✅ PalmPay: Added ₦${amount} (~$${usdEquivalent.toFixed(2)}) to balance_usd for ${user.email}`);
+      }
 
-  if (method === "binancepay") {
-    // User paid in USD — use it directly
-    user.balance_usd = parseFloat((user.balance_usd + amount).toFixed(2));
+      request.status = "approved";
+      await user.save();
+      await request.save();
+    }
 
-    // Optional: Convert to NGN for display
-    const ngnEquivalent = amount * usdRate;
-    user.balance = parseFloat((user.balance + ngnEquivalent).toFixed(2)); // For display only
+    // ✅ New block: Reject request
+    else if (action === "reject") {
+      request.status = "rejected";
+      await request.save();
+      console.log(`❌ Rejected payment request from ${user.email}`);
+    }
 
-    console.log(`✅ BinancePay: Added $${amount} to balance_usd for ${user.email}`);
-  } else {
-    // User paid in NGN — convert to USD
-    const usdEquivalent = amount / usdRate;
-
-    user.balance = parseFloat((user.balance + amount).toFixed(2)); // Track NGN
-    user.balance_usd = parseFloat((user.balance_usd + usdEquivalent).toFixed(2)); // Master balance
-
-    console.log(`✅ PalmPay: Added ₦${amount} (~$${usdEquivalent.toFixed(2)}) to balance_usd for ${user.email}`);
-  }
-
-  request.status = "approved";
-  await user.save();
-  await request.save();
-}
-
+    // ❌ Invalid action fallback
     else {
       return res.status(400).send("Invalid action.");
     }
@@ -88,6 +86,7 @@ router.post("/palmpay/verify", async (req, res) => {
     res.status(500).send("Something went wrong.");
   }
 });
+
 
 
 // FETCH SERVICES AND SAVE IN THE DATABASE 
