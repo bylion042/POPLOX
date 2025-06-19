@@ -1,0 +1,88 @@
+:root {
+  --primary-color: #0d0d0d;
+  --primary-color-light: #1f2125;
+  --primary-color-extra-light: #35373b;
+  --secondary-color: #696fdd;
+  --secondary-color-dark: #a3a8f0;
+  --text-light: #ccc;
+  --white: #fff;
+  --background-gradient: linear-gradient(135deg, rgb(186, 190, 253) 0%, rgb(66, 71, 158) 100%);
+  --background1: linear-gradient(113.36deg, #000002 -12.22%, #9685de 179.61%);
+  --background2: linear-gradient(180deg, #d6d9fa, rgb(149, 154, 243));
+  --max-width: 1300px;
+}
+
+
+
+.mail_all {
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 40px;
+  background: var(--primary-color-extra-light);
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-light);
+  transition: all 0.3s ease;
+}
+
+.mail_all input[type="text"],
+.mail_all textarea {
+  width: 100%;
+  padding: 15px;
+  margin: 12px 0;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--primary-color-light);
+  color: var(--white);
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s ease;
+}
+
+.mail_all input[type="text"]::placeholder,
+.mail_all textarea::placeholder {
+  color: var(--text-light);
+}
+
+.mail_all textarea {
+  resize: none;
+}
+
+.mail_all .btn {
+  width: 100%;
+  padding: 14px;
+  background: var(--background-gradient);
+  border: none;
+  color: var(--white);
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.mail_all .btn:hover {
+  background: var(--secondary-color);
+}
+
+
+
+
+
+
+@media (max-width: 1000px) {
+
+.mail_all {
+    max-width: 100%;
+    margin: auto;
+    padding: 0px;
+    background: none;
+    padding: 10px;
+}
+
+.mail_all input[type="text"], .mail_all textarea {
+    padding: 15px;
+    font-size: 16px;
+}
+}

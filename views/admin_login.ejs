@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Control the color of the mobile browser -->
+    <meta name="theme-color" content="#111317">
+    <title>Admin_login</title>
+    <link rel="icon" href="/uploads/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/admin_login.css">
+
+</head>
+
+<body>
+
+    
+  <!-- BACKGROUND BLUR -->
+  <span class="bg__blur"></span>
+  <span class="footer__blur"></span>
+
+
+
+
+    <div class="admin-login">
+
+        <h1>Access Key Required</h1>
+
+        <form action="/admin-login" method="POST">
+            <div class="password-container">
+                <input type="password" id="password" name="password" placeholder="Admin Password" required>
+                <i class="ri-eye-off-line" id="togglePassword"></i>
+            </div>
+
+            <button type="submit" class="btn">Login</button>
+        </form>
+
+    </div>
+
+
+    <!-- funtion to open an close password  -->
+    <script>
+        document.getElementById("togglePassword").addEventListener("click", function () {
+            var passwordField = document.getElementById("password");
+            var icon = this;
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                icon.classList.remove("ri-eye-off-line");
+                icon.classList.add("ri-eye-line"); // Open eye icon
+            } else {
+                passwordField.type = "password";
+                icon.classList.remove("ri-eye-line");
+                icon.classList.add("ri-eye-off-line"); // Closed eye icon
+            }
+        });
+    </script>
+
+
+    <!-- FUNTION FOR TOASTIFY  -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <% if (error) { %>
+        <script>
+            Toastify({
+                text: "<%= error %>",
+                duration: 5000,
+                close: true,
+                gravity: "top",
+                position: "center",
+                backgroundColor: "linear-gradient(to right, #ff416c, #ff4b2b)",
+                stopOnFocus: true,
+            }).showToast();
+        </script>
+        <% } %>
+
+
+</body>
+</html>

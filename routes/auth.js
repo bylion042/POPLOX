@@ -12,9 +12,6 @@ const authenticateUser = (req, res, next) => {
     next();
 };
 
-
-
-
 // Register Route
 router.post('/register', async (req, res) => {
     const { name, email, password, confirmPassword, phone, terms, agreedToTerms } = req.body;
@@ -62,11 +59,6 @@ router.post('/register', async (req, res) => {
     }
 });
 
-
-
-
-
-
 // Login Route
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
@@ -97,23 +89,19 @@ router.post('/login', async (req, res) => {
     }
 });
 
-
-
-
-
-
-// Google OAuth Route
+// ✅ Google OAuth Route
 router.get('/google', passport.authenticate('google', {
     scope: ['profile', 'email']
 }));
 
+// ✅ Callback with env-based URL
 router.get('/google/callback', passport.authenticate('google', {
     failureRedirect: '/login'
 }), (req, res) => {
     req.session.user = req.user;
+    req.session.userId = req.user._id;
     res.redirect('/dashboard');
 });
-
 
 // Logout Route
 router.get('/logout', (req, res) => {

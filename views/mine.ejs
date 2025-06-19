@@ -165,7 +165,7 @@
                                     <img src="/images/offer1.jpeg" alt="Account" class="icon-img" />
                                     <span>Account</span>
                                 </div>
-                                <span class="arrow"><i class="ri-arrow-right-s-line"></i></span>
+                                <span class="arrow"><i class="ri-user-line"></i></span>
                             </div>
                         </a>
                       
@@ -175,7 +175,7 @@
                                     <img src="/images/offer7.jpeg" alt="Affiliates" class="icon-img" />
                                     <span>Affiliates</span>
                                 </div>
-                                <span class="arrow"><i class="ri-arrow-right-s-line"></i></span>
+                                <span class="arrow"><i class="ri-bank-line"></i></span>
                             </div>
                         </a>
                         
@@ -185,7 +185,7 @@
                                     <img src="images/offer6.jpeg" alt="Support" class="icon-img" />
                                     <span>Support</span>
                                 </div>
-                                <span class="arrow"><i class="ri-arrow-right-s-line"></i></span>
+                                <span class="arrow"><i class="ri-customer-service-2-line"></i></span>
                             </div>
                         </a>
 
@@ -195,7 +195,7 @@
                                     <img src="images/offer3.jpeg" alt="Services" class="icon-img" />
                                     <span>Services</span>
                                 </div>
-                                <span class="arrow"><i class="ri-arrow-right-s-line"></i></span>
+                                <span class="arrow"><i class="ri-thunderstorms-line"></i></span>
                             </div>
                         </a>
                         
@@ -205,17 +205,17 @@
                                     <img src="images/offer5.jpeg" alt="Childs Panel" class="icon-img" />
                                     <span>Childs Panel</span>
                                 </div>
-                                <span class="arrow"><i class="ri-arrow-right-s-line"></i></span>
+                                <span class="arrow"><i class="ri-links-line"></i></span>
                             </div>
                         </a>
                         
                         <a href="#">
                         <div class="menu-item">
                             <div class="left">
-                                <img src="/images/offer12.jpg" alt="Refer & Earn" class="icon-img" />
+                                <img src="/images/offer9.jpg" alt="Refer & Earn" class="icon-img" />
                                 <span>Refer & Earn</span>
                             </div>
-                            <span class="arrow"><i class="ri-arrow-right-s-line"></i></span>
+                            <span class="arrow"><i class="ri-group-line"></i></span>
                         </div>
                        </a>
                         
@@ -225,10 +225,24 @@
                                 <img src="/images/offer4.jpeg" alt="API Integration" class="icon-img" />
                                 <span>API Integration</span>
                             </div>
-                            <span class="arrow"><i class="ri-arrow-right-s-line"></i></span>
+                            <span class="arrow"><i class="ri-database-2-line"></i></span>
                         </div>
                        </a>
-                        
+
+
+                       <a href="javascript:void(0)" class="share-btn">
+  <div class="menu-item">
+    <div class="left">
+      <img src="/images/offer10.jpeg" alt="Invite Friends" class="icon-img" />
+      <span>Invite Friends</span>
+    </div>
+    <span class="arrow"><i class="ri-share-forward-line"></i></span>
+  </div>
+</a>
+
+<!-- Hidden input (optional for fallback) -->
+<input type="text" id="referralInput" value="https://poplox.com" hidden>
+
                 </div>
                 </div>
             </div>
@@ -280,6 +294,29 @@
 
 
 
+
+
+
+        <!-- INVIATE FRIENDS FUNCTION  -->
+         <script>
+  document.querySelector('.share-btn').addEventListener('click', () => {
+    const link = document.getElementById('referralInput').value;
+
+    const message = `🚀 I use Poplox to boost my social media — it's fast, cheap, and super effective! Join me here: ${link}`;
+
+    if (navigator.share) {
+      navigator.share({
+        title: 'Boost your socials with Poplox',
+        text: message,
+        url: link
+      }).catch(err => console.error("Share failed:", err));
+    } else {
+      navigator.clipboard.writeText(message).then(() => {
+        alert("Sharing not supported. Invite link copied to clipboard!");
+      });
+    }
+  });
+</script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>

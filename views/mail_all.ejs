@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#121212">
+  <title>Admin Dashboard</title>
+  <link rel="icon" href="/images/favicon.png" type="image/png">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="/css/mail-all.css">
+</head>
+
+
+<body>
+
+  <!-- FOR BIG SCREEN  -->
+  <nav class="hide">
+    <div class="nav__logo">
+      <a href="/"><img src="images/logo.png" alt="logo" /></a>
+    </div>
+
+    <div class="nav-hold">
+      <ul class="nav__links">
+        <li class="link"><a href="/admin">Payments</a></li>
+        <li class="link"><a href="/admin/services">Services</a></li>
+        <li class="link"><a href="/admin/orders">Orders</a></li>
+        <li class="link"><a href="mail_all">Mail Users</a></li>
+      </ul>
+
+      <a href="/login"><button class="btn join__now transparent">Login</button></a>
+      <!-- <a href="/register"><button class="btn join__now">Register</button></a> -->
+    </div>
+  </nav>
+
+
+  <!-- NAV FOR SMALL SCREEN  -->
+  <div class="small-screen-nav">
+    <div class="link-container">
+      <a href="/admin" class="nav-link">
+        <i class="ri-dashboard-line"></i>
+        <p>PAYMENTS</p>
+      </a>
+
+      <a href="/admin/orders" class="nav-link">
+        <i class="ri-shopping-bag-line"></i>
+        <p>ALL ORDERS</p>
+      </a>
+
+      <a href="/admin/services" class="nav-link">
+        <i class="ri-heart-2-line"></i>
+        <p>SERVICE PRICE</p>
+      </a>
+
+      <a href="mail_all" class="nav-link">
+        <i class="ri-home-4-line"></i>
+        <p>MAIL USERS</p>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const navLinks = document.querySelectorAll('.nav-link');
+
+      function updateActiveLink() {
+        const currentPath = window.location.pathname;
+
+        navLinks.forEach(link => {
+          const linkURL = new URL(link.href);
+          const linkPath = linkURL.pathname;
+
+          if (linkURL.origin === window.location.origin && linkPath === currentPath) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+      }
+
+      updateActiveLink();
+
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          const linkURL = new URL(link.href);
+
+          if (linkURL.origin === window.location.origin) {
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+          }
+        });
+      });
+    });
+  </script>
+
+
+
+  <!-- BACKGROUND BLUR -->
+  <span class="bg__blur"></span>
+  <span class="footer__blur"></span>
+
+
+
+
+
+
+  <!-- ALL ABOUT MAILING ALL USER -->
+   <div class="mail_all">
+        <h1>*** Mail to All Agents</h1>
+
+        <!-- Email Form -->
+        <form id="emailForm" action="/send-email" method="POST">
+            <input type="text" name="subject" placeholder="Subject" required><br><br>
+            <textarea name="message" rows="6" cols="40" placeholder="Your message here..." required></textarea><br><br>
+            <button type="submit" class="btn">Mail All User</button>
+        </form>
+    </div>
+
+
+
+
+
+
+  <!-- FLOATING CONTACT  -->
+  <a href="https://wa.me/2347045167609?text=Hi%20Poplox%20Team%2C%20I'm%20interested%20in%20boosting%20my%20socials%20with%20your%20services.%20Can%20you%20tell%20me%20more%3F"
+    class="whatsapp-float" target="_blank" aria-label="Chat with Poplox on WhatsApp">
+    <i class="ri-whatsapp-line"></i>
+  </a>
+
+
+
+
+
+
+
+  <!-- Toastify Notifications -->
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <% if (emailStatus) { %>
+        <script>
+            const emailStatus = "<%= emailStatus %>";
+            Toastify({
+                text: emailStatus,
+                duration: 3000,
+                close: true,
+                gravity: "top",
+                position: "center",
+                backgroundColor: emailStatus.includes('Error')
+                    ? "linear-gradient(to right, #ff416c, #ff4b2b)"
+                    : "linear-gradient(to right, #00b09b, #96c93d)",
+                stopOnFocus: true,
+            }).showToast();
+        </script>
+    <% } %>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+
+</html>

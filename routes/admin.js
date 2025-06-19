@@ -6,6 +6,7 @@ const PalmPayRequest = require("../models/Palmpay");
 const User = require("../models/User");
 const Service = require('../models/Service');
 const Order = require('../models/Order');
+const isAdmin = require('../middleware/isAdmin'); // Adjust path if needed
 
 const API_KEY = process.env.SMMYZ_API_KEY;
 const API_URL = process.env.SMMYZ_API_URL;
@@ -13,7 +14,7 @@ const API_URL = process.env.SMMYZ_API_URL;
 const { getUsdRate } = require('../utils/exchangeRate'); // ✅ Add this line
 
 // GET: Admin Panel - View pending PalmPay submissions
-router.get("/", async (req, res) => {
+router.get("/", isAdmin, async (req, res) => {
   try {
     const requests = await PalmPayRequest.find({ status: "pending" })
       .sort({ created_at: -1 })

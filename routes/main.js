@@ -68,6 +68,12 @@ router.get('/api-init', (req, res) => {
   res.render('api-init');
 });
 
+
+// INVITE Page
+router.get('/invite', (req, res) => {
+  res.render('invite');
+});
+
 // PHP Page
 router.get('/php', (req, res) => {
   res.render('php');
@@ -246,13 +252,14 @@ router.get('/account', isLoggedIn, async (req, res) => {
 
     // ✅ Render account page with all dashboard data
     res.render('account', {
-      user,
-      payments,
-      usdBalance,
-      servicesByCategory,
-      totalSpent: user.totalSpent || 0,
-      totalOrders
-    });
+  user,
+  payments,
+  convertedBalance: user.currency === 'USD' ? user.balance_usd : user.balance,
+  servicesByCategory,
+  totalSpent: user.totalSpent || 0,
+  totalOrders
+});
+
 
   } catch (err) {
     console.error("Error loading account page:", err);

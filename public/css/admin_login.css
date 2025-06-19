@@ -1,0 +1,107 @@
+:root {
+  --primary-color: #0d0d0d;
+  --primary-color-light: #1f2125;
+  --primary-color-extra-light: #35373b;
+  --secondary-color: #696fdd;
+  --secondary-color-dark: #a3a8f0;
+  --text-light: #ccc;
+  --white: #fff;
+  --background-gradient: linear-gradient(135deg, rgb(186, 190, 253) 0%, rgb(66, 71, 158) 100%);
+  --background1: linear-gradient(113.36deg, #000002 -12.22%, #9685de 179.61%);
+  --background2: linear-gradient(180deg, #d6d9fa, rgb(149, 154, 243));
+  --max-width: 1300px;
+}
+
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.admin-login {
+  /* max-width: 100rem; */
+  margin: 80px auto;
+  padding: 40px 30px;
+  background: var(--primary-color-extra-light);
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+  color: var(--text-light);
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+  width: 35%;
+}
+
+.admin-login h1 {
+  font-size: 25px;
+  margin-bottom: 30px;
+  font-family: 'Luckiest Guy', cursive;
+}
+
+
+/* Password Input + Eye Icon Container */
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-container input {
+  width: 100%;
+  padding: 14px 50px 14px 15px;
+  background: var(--primary-color-light);
+  border: none;
+  border-radius: 10px;
+  color: var(--white);
+  font-size: 15px;
+  outline: none;
+}
+
+.password-container input::placeholder {
+  color: var(--text-light);
+}
+
+.password-container i {
+  position: absolute;
+  right: 15px;
+  color: var(--text-light);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Login Button */
+.admin-login .btn {
+  margin-top: 25px;
+  width: 100%;
+  padding: 14px;
+  background: var(--background-gradient);
+  border: none;
+  color: var(--white);
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.admin-login .btn:hover {
+  background: var(--secondary-color);
+}
+
+
+
+
+
+
+
+@media (max-width: 1000px) {
+.admin-login {
+  padding: 40px 10px;
+  background: none;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+  width: 100%;
+}
+
+}
