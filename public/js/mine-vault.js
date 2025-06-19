@@ -121,3 +121,27 @@
             }).showToast();
         }
     });
+
+
+
+
+
+// Add script to send currency to backend
+  function updateCurrency(newCurrency) {
+    fetch('/settings/currency', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ currency: newCurrency })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        alert('Currency updated!');
+        location.reload(); // Reload to reflect new currency in charge + balance
+      } else {
+        alert('Failed to update.');
+      }
+    });
+  }

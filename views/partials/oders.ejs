@@ -90,8 +90,14 @@
             </div>
 
             <!-- Charge Preview -->
+            <!-- Charge Preview -->
             <div class="form-group">
-                <label>Charge: $ <span id="charge">0.00</span></label>
+                <label>
+                    <div class="label">
+                    Charge:$<span id="charge">0.00</span>
+                    <small id="converted-charge"></small>
+                    </div>
+                </label>
             </div>
 
             <button type="submit">Place Order</button>
@@ -123,9 +129,11 @@
 
                 <ul class="guide-list">
                     <li><span class="check-icon"><i class="ri-check-line"></i></span> Go to Settings and activity </li>
-                    <li><span class="check-icon"><i class="ri-check-line"></i></span> Select Follow and invite friends</li>
+                    <li><span class="check-icon"><i class="ri-check-line"></i></span> Select Follow and invite friends
+                    </li>
                     <li><span class="check-icon"><i class="ri-check-line"></i></span> Turn off Flag for review</li>
-                    <li><span class="check-icon"><i class="ri-check-line"></i></span> That’s it we’ll handle the rest!</li>
+                    <li><span class="check-icon"><i class="ri-check-line"></i></span> That’s it we’ll handle the rest!
+                    </li>
                 </ul>
 
                 <!-- <SHOW IMAGE SAMPLE -->
@@ -155,4 +163,5 @@
 <!-- Script Section -->
 <script>
     const servicesByCategory = <%- JSON.stringify(servicesByCategory) %>;
+    const userCurrency = "<%= user.currency %>";
 </script>

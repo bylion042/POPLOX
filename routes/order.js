@@ -5,6 +5,8 @@ const axios = require('axios');
 const User = require('../models/User');
 const Service = require('../models/Service');
 const Order = require('../models/Order');
+const { getExchangeRate } = require('../utils/exchangeRate');
+
 
 const API_URL = process.env.SMMYZ_API_URL;
 const API_KEY = process.env.SMMYZ_API_KEY;
@@ -23,12 +25,14 @@ router.get('/', async (req, res) => {
             servicesByCategory[category].push(service);
         });
 
-        res.render('orders', { servicesByCategory });
+        const user = req.session.user || null; // ✅ include user
+        res.render('orders', { servicesByCategory, user }); // ✅ pass it to EJS
     } catch (error) {
         console.error('Error loading services from DB:', error.message);
-        res.render('orders', { servicesByCategory: {} });
+        res.render('orders', { servicesByCategory: {}, user: null });
     }
 });
+
 
 // ✅ POST /order → place order
 router.post('/order', async (req, res) => {
@@ -240,5 +244,23 @@ router.get('/my-orders', async (req, res) => {
         });
     }
 });
+
+
+
+// 💱 GET /exchange-rate?to=NGN
+router.get('/exchange-rate', async (req, res) => {
+    const toCurrency = req.query.to;
+    if (!toCurrency) return res.status(400).json({ error: 'Missing "to" currency' });
+
+    try {
+        const rate = await getExchangeRate(toCurrency.toUpperCase());
+        if (!rate) return res.status(500).json({ error: 'Conversion rate not available' });
+        res.json({ rate });
+    } catch (err) {
+        console.error('Exchange rate fetch error:', err.message);
+        res.status(500).json({ error: 'Failed to fetch exchange rate' });
+    }
+});
+
 
 module.exports = router;

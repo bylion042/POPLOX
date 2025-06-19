@@ -59,32 +59,18 @@
 
                                     <div class="setting-item1">
                                         <span class="setting-label">Change currency</span>
-                                        <select class="currency-select">
-                                            <option value="USD" selected>USD</option>
-                                            <option value="EUR">EUR</option>
-                                            <option value="GBP">GBP</option>
-                                            <option value="KES">KES</option>
-                                            <option value="CAD">CAD</option>
-                                            <option value="NGN">NGN</option>
-                                            <option value="AUD">AUD</option>
-                                            <option value="GHS">GHS</option>
-                                            <option value="ZAR">ZAR</option>
-                                            <option value="INR">INR</option>
-                                            <option value="JPY">JPY</option>
-                                            <option value="CNY">CNY</option>
-                                            <option value="MXN">MXN</option>
-                                            <option value="SGD">SGD</option>
-                                            <option value="BRL">BRL</option>
-                                            <option value="RUB">RUB</option>
-                                            <option value="SAR">SAR</option>
-                                            <option value="AED">AED</option>
-                                            <option value="THB">THB</option>
-                                            <option value="TRY">TRY</option>
-                                            <option value="SEK">SEK</option>
-                                            <option value="NOK">NOK</option>
-                                            <option value="PLN">PLN</option>
-                                            <option value="DKK">DKK</option>
-                                        </select>
+                                        <select class="poplox-currency-select"
+                                                onchange="updateCurrency(this.value)">
+                                                <% const currencies=["USD", "EUR" , "GBP" , "KES" , "CAD" , "NGN"
+                                                    , "AUD" , "GHS" , "ZAR" , "INR" , "JPY" , "CNY" , "MXN" , "SGD"
+                                                    , "BRL" , "RUB" , "SAR" , "AED" , "THB" , "TRY" , "SEK" , "NOK"
+                                                    , "PLN" , "DKK" ]; %>
+                                                    <% currencies.forEach(cur=> { %>
+                                                        <option value="<%= cur %>" <%=user.currency===cur ? "selected"
+                                                            : "" %>><%= cur %>
+                                                        </option>
+                                                        <% }) %>
+                                            </select>
                                     </div>
 
 

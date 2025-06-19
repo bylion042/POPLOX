@@ -41,13 +41,25 @@
                   </div>
 
                   <div class="total">
-                    <h3>Balance</h3>
-                    <!-- Display the balance dynamically -->
-                    <h1>$<%= (user.balance_usd || 0).toFixed(2) %>
-                    </h1>
-                    <p class="ngn-balance">≈ ₦<%= (user.balance || 0).toLocaleString('en-NG') %>
-                    </p>
-                  </div>
+  <h3>Balance</h3>
+  <h1>$<%= (user.balance_usd || 0).toFixed(2) %></h1>
+
+  <% 
+    const currency = user.currency || 'NGN';
+    const symbolMap = {
+      NGN: '₦', EUR: '€', GBP: '£', INR: '₹', JPY: '¥',
+      CAD: 'C$', AUD: 'A$', ZAR: 'R', GHS: '₵', SGD: 'S$',
+      MXN: 'Mex$', CNY: '¥', BRL: 'R$', RUB: '₽', SAR: '﷼',
+      AED: 'د.إ', THB: '฿', TRY: '₺', SEK: 'kr', NOK: 'kr',
+      PLN: 'zł', DKK: 'kr'
+    };
+    const symbol = symbolMap[currency] || currency + ' ';
+  %>
+  <p class="ngn-balance">
+    ≈ <%= symbol %><%= convertedBalance.toLocaleString(currency === 'NGN' ? 'en-NG' : 'en-US') %>
+  </p>
+</div>
+
 
                 </div>
 
@@ -89,29 +101,29 @@
                       </p>
 
                       <form action="/submit" method="POST" enctype="multipart/form-data">
-  <input type="hidden" name="method" value="PalmPay" />
-  <input type="hidden" name="currency" value="NGN" />
+                        <input type="hidden" name="method" value="PalmPay" />
+                        <input type="hidden" name="currency" value="NGN" />
 
-  <div>
-    <label>Amount Sent</label>
-    <input type="number" name="amount" placeholder="₦1000" required />
-  </div>
+                        <div>
+                          <label>Amount Sent</label>
+                          <input type="number" name="amount" placeholder="₦1000" required />
+                        </div>
 
-  <div>
-    <label>Transaction Session ID</label>
-    <input type="text" name="txid" placeholder="XXXXXXXXXXXXXXXXXXX" required />
-  </div>
+                        <div>
+                          <label>Transaction Session ID</label>
+                          <input type="text" name="txid" placeholder="XXXXXXXXXXXXXXXXXXX" required />
+                        </div>
 
-  <div>
-    <label>Upload Screenshot (Optional)</label>
-    <input type="file" name="screenshot" accept="image/*" />
-  </div>
+                        <div>
+                          <label>Upload Screenshot (Optional)</label>
+                          <input type="file" name="screenshot" accept="image/*" />
+                        </div>
 
-  <div class="chain">
-    <button type="submit">Submit Payment Details</button>
-    <button onclick="showImage()">Find Transaction Session ID</button>
-  </div>
-</form>
+                        <div class="chain">
+                          <button type="submit">Submit Payment Details</button>
+                          <button onclick="showImage()">Find Transaction Session ID</button>
+                        </div>
+                      </form>
 
                       <div id="overlay" class="image-overlay" onclick="hideImage()">
                         <div class="image-popup" onclick="event.stopPropagation()">
@@ -157,29 +169,29 @@
                       </p>
 
                       <form action="/submit" method="POST" enctype="multipart/form-data">
-  <input type="hidden" name="method" value="BinancePay">
-  <input type="hidden" name="currency" value="USD" />
+                        <input type="hidden" name="method" value="BinancePay">
+                        <input type="hidden" name="currency" value="USD" />
 
-  <div>
-    <label>Amount Sent</label>
-    <input type="number" name="amount" placeholder="$1000" required />
-  </div>
+                        <div>
+                          <label>Amount Sent</label>
+                          <input type="number" name="amount" placeholder="$1000" required />
+                        </div>
 
-  <div>
-    <label>Binance Order TxID</label>
-    <input type="text" name="txid" placeholder="XXXXXXXXXXXXXXXXXXX" required />
-  </div>
+                        <div>
+                          <label>Binance Order TxID</label>
+                          <input type="text" name="txid" placeholder="XXXXXXXXXXXXXXXXXXX" required />
+                        </div>
 
-  <div>
-    <label>Upload Screenshot (Optional)</label>
-    <input type="file" name="screenshot" accept="image/*" />
-  </div>
+                        <div>
+                          <label>Upload Screenshot (Optional)</label>
+                          <input type="file" name="screenshot" accept="image/*" />
+                        </div>
 
-  <div class="chain">
-    <button type="submit">Submit Payment Details</button>
-    <button onclick="showImage2()">Find Binance Order ID</button>
-  </div>
-</form>
+                        <div class="chain">
+                          <button type="submit">Submit Payment Details</button>
+                          <button onclick="showImage2()">Find Binance Order ID</button>
+                        </div>
+                      </form>
 
                       <div id="overlay2" class="image-overlay" onclick="hideImage2()">
                         <div class="image-popup" onclick="event.stopPropagation()">
@@ -223,17 +235,18 @@
                       <% payments.forEach(payment=> { %>
                         <div class="payment-entry">
                           <p><strong>Amount:</strong>
-  <%= payment.currency === 'USD'
-    ? '$' + Number(payment.amount).toLocaleString()
-    : '₦' + Number(payment.amount).toLocaleString('en-NG') %>
-</p>
+                            <%= payment.currency==='USD' ? '$' + Number(payment.amount).toLocaleString() : '₦' +
+                              Number(payment.amount).toLocaleString('en-NG') %>
+                          </p>
 
                           <p>
-            <strong>Payment Method:</strong> <%= payment.method %>
-          </p>
- <p>
-            <strong>Currency:</strong> <%= payment.currency %>
-          </p>
+                            <strong>Payment Method:</strong>
+                            <%= payment.method %>
+                          </p>
+                          <p>
+                            <strong>Currency:</strong>
+                            <%= payment.currency %>
+                          </p>
                           <p><strong>Status:</strong>
                             <%= payment.status %>
                           </p>

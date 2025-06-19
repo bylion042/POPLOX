@@ -84,6 +84,7 @@
                                 </form>
 
                             </div>
+                            
                         </div>
 
 
@@ -118,32 +119,19 @@
 
                                         <div class="poplox-setting-item">
                                             <span class="poplox-setting-label">Change currency</span>
-                                            <select class="poplox-currency-select">
-                                                <option value="USD" selected>USD</option>
-                                                <option value="EUR">EUR</option>
-                                                <option value="GBP">GBP</option>
-                                                <option value="KES">KES</option>
-                                                <option value="CAD">CAD</option>
-                                                <option value="NGN">NGN</option>
-                                                <option value="AUD">AUD</option>
-                                                <option value="GHS">GHS</option>
-                                                <option value="ZAR">ZAR</option>
-                                                <option value="INR">INR</option>
-                                                <option value="JPY">JPY</option>
-                                                <option value="CNY">CNY</option>
-                                                <option value="MXN">MXN</option>
-                                                <option value="SGD">SGD</option>
-                                                <option value="BRL">BRL</option>
-                                                <option value="RUB">RUB</option>
-                                                <option value="SAR">SAR</option>
-                                                <option value="AED">AED</option>
-                                                <option value="THB">THB</option>
-                                                <option value="TRY">TRY</option>
-                                                <option value="SEK">SEK</option>
-                                                <option value="NOK">NOK</option>
-                                                <option value="PLN">PLN</option>
-                                                <option value="DKK">DKK</option><!-- options unchanged -->
+                                            <select class="poplox-currency-select"
+                                                onchange="updateCurrency(this.value)">
+                                                <% const currencies=["USD", "EUR" , "GBP" , "KES" , "CAD" , "NGN"
+                                                    , "AUD" , "GHS" , "ZAR" , "INR" , "JPY" , "CNY" , "MXN" , "SGD"
+                                                    , "BRL" , "RUB" , "SAR" , "AED" , "THB" , "TRY" , "SEK" , "NOK"
+                                                    , "PLN" , "DKK" ]; %>
+                                                    <% currencies.forEach(cur=> { %>
+                                                        <option value="<%= cur %>" <%=user.currency===cur ? "selected"
+                                                            : "" %>><%= cur %>
+                                                        </option>
+                                                        <% }) %>
                                             </select>
+
                                         </div>
 
                                         <!-- USER DETAILS FORM  -->
@@ -177,52 +165,76 @@
             <%- include('partials/bot') %>
     </div>
 
+    <script>
+        // <!-- FUNTION TO ReVIEWS  -->
+        document.getElementById("reviewForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const data = {
+                name: formData.get("name"),
+                email: formData.get("email"),
+                title: formData.get("title"),
+                review: formData.get("review"),
+                rating: formData.get("rating")
+            };
+
+            try {
+                const response = await fetch("/submit-review", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                Toastify({
+                    text: result.message,
+                    duration: 5000,
+                    gravity: "top",
+                    position: "center",
+                    backgroundColor: response.ok ? "#28a745" : "#dc3545"
+                }).showToast();
+
+                if (response.ok) this.reset();
+            } catch (err) {
+                Toastify({
+                    text: "Submission failed.",
+                    duration: 5000,
+                    gravity: "top",
+                    position: "center",
+                    backgroundColor: "#dc3545"
+                }).showToast();
+            }
+        });
+    </script>
+
+
+
+
 <script>
-    // <!-- FUNTION TO ReVIEWS  -->
-  document.getElementById("reviewForm").addEventListener("submit", async function (e) {
-    e.preventDefault();
-
-    const formData = new FormData(this);
-    const data = {
-      name: formData.get("name"),
-      email: formData.get("email"),
-      title: formData.get("title"),
-      review: formData.get("review"),
-      rating: formData.get("rating")
-    };
-
-    try {
-      const response = await fetch("/submit-review", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      });
-
-      const result = await response.json();
-
-      Toastify({
-        text: result.message,
-        duration: 5000,
-        gravity: "top",
-        position: "center",
-        backgroundColor: response.ok ? "#28a745" : "#dc3545"
-      }).showToast();
-
-      if (response.ok) this.reset();
-    } catch (err) {
-      Toastify({
-        text: "Submission failed.",
-        duration: 5000,
-        gravity: "top",
-        position: "center",
-        backgroundColor: "#dc3545"
-      }).showToast();
-    }
-  });
+  function updateCurrency(currency) {
+    fetch('/settings/currency', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ currency })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        alert('Currency updated successfully!');
+        location.reload(); // Reload so balance & charge display in new currency
+      } else {
+        alert('Failed to update currency');
+      }
+    });
+  }
 </script>
 
 
-<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/js/dashboard.js"></script>

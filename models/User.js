@@ -24,6 +24,9 @@ const UserSchema = new mongoose.Schema({
     default: 0,
   },
 
+currency: { type: String, default: 'USD' },
+
+
   apiKey: { type: String, default: '' },
 apiKeyCreatedAt: Date,
 });

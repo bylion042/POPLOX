@@ -136,10 +136,22 @@ button:hover {
     background: var(--secondary-color-dark);
 }
 
+.form-group .label{
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  gap: 5px;
+}
+
 #charge {
     font-weight: bold;
     color: #00ff7f;
     font-size: 1.2em;
+}
+
+#converted-charge{
+  font-size: 15px;
+  columns: var(--secondary-color);
 }
 
 .form-group{

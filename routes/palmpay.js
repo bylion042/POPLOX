@@ -3,9 +3,8 @@ const router = express.Router();
 const multer = require("multer");
 const path = require("path");
 const User = require('../models/User');
-const PalmPayRequest = require("../models/Palmpay"); // Mongoose model
-const { getUsdRate } = require('../utils/exchangeRate'); // make sure this exists
-
+const PalmPayRequest = require("../models/Palmpay");
+const { getExchangeRate } = require('../utils/exchangeRate'); // ✅ USE FLEXIBLE VERSION
 
 // Screenshot upload setup
 const storage = multer.diskStorage({
@@ -16,34 +15,33 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-// 🔁 GET /wallet – Show user's payment history with optional status filter
+
+// 🔁 GET /wallet – Show user's wallet + payment history
 router.get("/wallet", async (req, res) => {
   try {
     const userId = req.session.user._id;
     const statusFilter = req.query.status;
 
     let query = { user_id: userId };
-    if (statusFilter) {
-      query.status = statusFilter;
-    }
+    if (statusFilter) query.status = statusFilter;
 
     const payments = await PalmPayRequest.find(query).sort({ created_at: -1 });
-
     const freshUser = await User.findById(userId);
 
-    // Get exchange rate
-    const usdRate = await getUsdRate();
+    // Get user’s selected currency or fallback
+    const currency = freshUser.currency || 'NGN';
+    const rate = await getExchangeRate(currency);
 
-    // Only use this for display (₦ → $), do NOT save it!
-    let convertedUsd = 0;
-    if (usdRate && freshUser.balance) {
-      convertedUsd = parseFloat((freshUser.balance / usdRate).toFixed(2));
+    // Convert USD balance to selected currency
+    let convertedBalance = 0;
+    if (rate && freshUser.balance_usd) {
+      convertedBalance = parseFloat((freshUser.balance_usd * rate).toFixed(2));
     }
 
     res.render("wallet", {
       user: freshUser,
-      usdBalance: freshUser.balance_usd, // Real USD from BinancePay
-      convertedUsd,                      // ₦ converted for display
+      usdBalance: freshUser.balance_usd,
+      convertedBalance, // 🆕 based on selected currency
       payments,
       msg: req.query.msg
     });
@@ -55,7 +53,6 @@ router.get("/wallet", async (req, res) => {
 });
 
 
-
 // ✅ POST /submit – Submit payment (PalmPay or Binance)
 router.post("/submit", upload.single("screenshot"), async (req, res) => {
   try {
@@ -63,7 +60,6 @@ router.post("/submit", upload.single("screenshot"), async (req, res) => {
     const screenshot = req.file ? `/uploads/${req.file.filename}` : null;
     const userId = req.session.user._id;
 
-    // Determine currency directly from method
     const currency = method === 'BinancePay' ? 'USD' : 'NGN';
 
     const request = new PalmPayRequest({
@@ -86,5 +82,18 @@ router.post("/submit", upload.single("screenshot"), async (req, res) => {
 });
 
 
+// ✅ Update user currency preference
+router.post('/settings/currency', async (req, res) => {
+  const userId = req.session.user._id;
+  const { currency } = req.body;
+
+  try {
+    await User.findByIdAndUpdate(userId, { currency });
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Currency update failed:', err);
+    res.json({ success: false });
+  }
+});
 
 module.exports = router;

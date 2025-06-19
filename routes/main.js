@@ -297,7 +297,7 @@ router.get('/dashboard', async (req, res) => {
     // ✅ Fetch user
     const freshUser = await User.findById(userId);
 
-    // ✅ Convert balance to USD
+    // ✅ Convert balance to USD (legacy logic stays)
     const usdRate = await getUsdRate();
     let usdBalance = 0;
 
@@ -310,6 +310,12 @@ router.get('/dashboard', async (req, res) => {
         await freshUser.save();
       }
     }
+
+    // ✅ Convert USD balance to user’s preferred currency
+    const userCurrency = freshUser.currency || 'USD';
+    const { getExchangeRate } = require('../utils/exchangeRate');
+    const rate = await getExchangeRate(userCurrency);
+    const convertedBalance = parseFloat((freshUser.balance_usd * rate).toFixed(2));
 
     // ✅ Fetch PalmPay payment history
     const payments = await PalmPayRequest.find({ user_id: userId }).sort({ created_at: -1 });
@@ -333,9 +339,10 @@ router.get('/dashboard', async (req, res) => {
       user: freshUser,
       payments,
       usdBalance,
+      convertedBalance,
       servicesByCategory,
       totalSpent: freshUser.totalSpent || 0,
-      totalOrders // pass total orders to the view
+      totalOrders
     });
 
   } catch (err) {
@@ -343,7 +350,6 @@ router.get('/dashboard', async (req, res) => {
     res.status(500).send("Something went wrong");
   }
 });
-
 
 
 
