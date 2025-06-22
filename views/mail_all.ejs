@@ -18,10 +18,10 @@
 
 <body>
 
-  <!-- FOR BIG SCREEN  -->
+ <!-- FOR BIG SCREEN  -->
   <nav class="hide">
     <div class="nav__logo">
-      <a href="/"><img src="images/logo.png" alt="logo" /></a>
+      <a href="/"><img src="/images/logo.png" alt="logo" /></a>
     </div>
 
     <div class="nav-hold">
@@ -29,11 +29,11 @@
         <li class="link"><a href="/admin">Payments</a></li>
         <li class="link"><a href="/admin/services">Services</a></li>
         <li class="link"><a href="/admin/orders">Orders</a></li>
+        <li class="link"><a href="/admin/restore">Restore</a></li>
         <li class="link"><a href="mail_all">Mail Users</a></li>
       </ul>
 
       <a href="/login"><button class="btn join__now transparent">Login</button></a>
-      <!-- <a href="/register"><button class="btn join__now">Register</button></a> -->
     </div>
   </nav>
 
@@ -48,18 +48,23 @@
 
       <a href="/admin/orders" class="nav-link">
         <i class="ri-shopping-bag-line"></i>
-        <p>ALL ORDERS</p>
+        <p>ORDERS</p>
       </a>
 
       <a href="/admin/services" class="nav-link">
         <i class="ri-heart-2-line"></i>
-        <p>SERVICE PRICE</p>
+        <p>SERVICE M</p>
       </a>
-
+      
       <a href="mail_all" class="nav-link">
-        <i class="ri-home-4-line"></i>
-        <p>MAIL USERS</p>
+          <i class="ri-mail-send-line"></i>
+          <p>MAIL ALL</p>
       </a>
+        
+        <a href="/admin/restore" class="nav-link">
+          <i class="ri-delete-bin-5-line"></i>
+          <p>RESTORE B</p>
+        </a>
     </div>
   </div>
 
@@ -95,7 +100,10 @@
         });
       });
     });
+
   </script>
+
+
 
 
 
