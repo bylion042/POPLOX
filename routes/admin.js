@@ -6,6 +6,7 @@ const PalmPayRequest = require("../models/Palmpay");
 const User = require("../models/User");
 const Service = require('../models/Service');
 const Order = require('../models/Order');
+const DeletedService = require('../models/DeletedService');
 const isAdmin = require('../middleware/isAdmin'); // Adjust path if needed
 
 const API_KEY = process.env.SMMYZ_API_KEY;
@@ -208,5 +209,71 @@ router.delete('/delete-all-orders', async (req, res) => {
     res.status(500).json({ success: false });
   }
 });
+
+
+
+
+// 🗑️ POST /admin/services/delete/:id
+router.post('/services/delete/:id', async (req, res) => {
+  try {
+    const service = await Service.findById(req.params.id);
+    if (!service) return res.status(404).send("Service not found");
+
+    // Move to deleted collection
+    await DeletedService.create({
+      service_id: service.service_id,
+      name: service.name,
+      category: service.category,
+      api_price: service.api_price,
+      my_price: service.my_price,
+      min: service.min,
+      max: service.max,
+      average_time: service.average_time
+    });
+
+    // Delete from main Service collection
+    await service.deleteOne();
+    res.redirect('/admin/services');
+  } catch (err) {
+    console.error("❌ Delete error:", err.message);
+    res.status(500).send("Error deleting service");
+  }
+});
+
+
+// GET /admin/restore
+router.get('/restore', async (req, res) => {
+  const deletedServices = await DeletedService.find().sort({ deletedAt: -1 });
+  res.render('restore', { deletedServices });
+});
+
+
+// POST /admin/restore/:id
+router.post('/restore/:id', async (req, res) => {
+  try {
+    const deleted = await DeletedService.findById(req.params.id);
+    if (!deleted) return res.status(404).send("Not found");
+
+    // Move back to main services
+    await Service.create({
+      service_id: deleted.service_id,
+      name: deleted.name,
+      category: deleted.category,
+      api_price: deleted.api_price,
+      my_price: deleted.my_price,
+      min: deleted.min,
+      max: deleted.max,
+      average_time: deleted.average_time
+    });
+
+    // Delete from trash
+    await deleted.deleteOne();
+    res.redirect('/admin/restore');
+  } catch (err) {
+    console.error("❌ Restore error:", err.message);
+    res.status(500).send("Error restoring service");
+  }
+});
+
 
 module.exports = router;

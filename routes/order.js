@@ -164,12 +164,11 @@ await Order.create({
 
 
 // ✅ POST /status → check order status
-// ✅ POST /status → check order status
 router.post('/status', async (req, res) => {
     const { orderId } = req.body;
 
     try {
-        const order = await Order.findOne({ order_id: orderId });
+        const order = await Order.findOne({ order_id: orderId, user: req.session.user?._id });
 
         // if order not found, show error (skip user check)
         if (!order) {
@@ -224,20 +223,26 @@ router.post('/status', async (req, res) => {
 
 
 
-// ✅ GET /my-orders → load all orders
+// ✅ GET /my-orders → load loged in user orders
 router.get('/my-orders', async (req, res) => {
-    const userId = req.session.userId;
+    const userId = req.session.user?._id;
+
+    if (!userId) {
+        return res.redirect('/login'); // optional
+    }
 
     try {
         const orders = await Order.find({ user: userId }).sort({ createdAt: -1 });
         res.render('my-order', {
+            user: req.session.user || null,
             order: {},
             status: {},
             orders
         });
     } catch (error) {
-        console.error('❌ Error fetching orders:', error.message);
+        console.error('❌ Error fetching user-specific orders:', error.message);
         res.render('my-order', {
+            user: req.session.user || null,
             order: {},
             status: {},
             orders: []
@@ -261,6 +266,43 @@ router.get('/exchange-rate', async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch exchange rate' });
     }
 });
+
+
+
+// 🔁 Auto-update order statuses every 5 minutes
+async function updateAllOrderStatuses() {
+    try {
+        const updatingOrders = await Order.find({
+            status: { $in: ['pending', 'in progress', 'processing'] }
+        });
+
+        for (const order of updatingOrders) {
+            const formData = new URLSearchParams({
+                key: API_KEY,
+                action: 'status',
+                order: order.order_id
+            });
+
+            const response = await axios.post(API_URL, formData.toString(), {
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            });
+
+            const apiStatus = response.data.status?.toLowerCase();
+
+            if (apiStatus && apiStatus !== order.status) {
+                order.status = apiStatus;
+                await order.save();
+                console.log(`✅ Order ${order.order_id} updated to: ${apiStatus}`);
+            }
+        }
+    } catch (err) {
+        console.error('❌ Auto status update error:', err.message);
+    }
+}
+
+// ⏱️ Run it every 5 minutes
+setInterval(updateAllOrderStatuses, 2 * 60 * 1000); // every 2 minutes
+
 
 
 module.exports = router;

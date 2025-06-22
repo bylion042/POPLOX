@@ -135,7 +135,9 @@ margin-right: 10px;
 /* .hamburger1, .notification-panel{
   display: none;
 } */
-
+.currency-select{
+  display: none;
+}
 
 .section1{
   width: 100%;

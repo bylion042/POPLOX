@@ -1,3 +1,27 @@
+<div class="profile-details">
+
+<!-- CHNAGE CURRENCY   -->
+<select class="currency-select"
+    onchange="updateCurrency(this.value)">
+    <% const currencies=["USD", "EUR" , "GBP" , "KES" , "CAD" , "NGN"
+        , "AUD" , "GHS" , "ZAR" , "INR" , "JPY" , "CNY" , "MXN" , "SGD"
+        , "BRL" , "RUB" , "SAR" , "AED" , "THB" , "TRY" , "SEK" , "NOK"
+        , "PLN" , "DKK" ]; %>
+        <% currencies.forEach(cur=> { %>
+            <option value="<%= cur %>" <%=user.currency===cur ? "selected"
+                : "" %>><%= cur %>
+            </option>
+            <% }) %>
+</select>
+
+
+
+
+
+
+
+
+<!-- USER PROFILE AND DETAILS  -->
 <header class="header1">
   <div class="profile-summary">
     <div class="profile-img-wrapper">
@@ -21,3 +45,5 @@
     </div>
   </div>
 </header>
+
+</div>

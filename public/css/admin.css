@@ -260,6 +260,11 @@
    font-size: 14px;
    border-bottom: 1px solid #333;
  }
+ table.order-card td i{
+   color: rgb(232, 90, 90);
+   font-size: 15px;
+   cursor: pointer;
+ }
 
  /* Alternate row background */
  table.order-card tbody tr:nth-child(even) {
@@ -575,6 +580,12 @@
   cursor: pointer;
   transition: all 0.3s ease;
 }
+
+ table.order-card td i{
+   color: rgb(232, 90, 90);
+   font-size: 20px;
+ }
+
 
 /* 🧾 Inputs inside table */
 .order-card input[type="number"] {

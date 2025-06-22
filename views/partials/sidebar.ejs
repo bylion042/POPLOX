@@ -13,7 +13,7 @@
 
     <a href="/my-order" class="nav-link">
       <i class="ri-shopping-basket-line"></i>
-      <p>ALL ORDERS</p>
+      <p>MY ORDERS</p>
     </a>
 
     <a href="/mine" class="nav-link">
@@ -32,12 +32,23 @@
 <!-- SIDE BAR FOR SMALL SCREEN  -->
 <div class="contain-hamburger">
   <section class="burger">
+    <!-- CURRENCY  CHANGER  -->
+    <select class="currency-select" onchange="updateCurrency(this.value)">
+      <% const currencies=["USD", "EUR" , "GBP" , "KES" , "CAD" , "NGN" , "AUD" , "GHS" , "ZAR" , "INR" , "JPY" , "CNY"
+        , "MXN" , "SGD" , "BRL" , "RUB" , "SAR" , "AED" , "THB" , "TRY" , "SEK" , "NOK" , "PLN" , "DKK" ]; %>
+        <% currencies.forEach(cur=> { %>
+          <option value="<%= cur %>" <%=user.currency===cur ? "selected" : "" %>><%= cur %>
+          </option>
+          <% }) %>
+    </select>
+
     <!-- NOTIFICATION BELL -->
     <div class="hamburger1" id="open-notification">
       <i class="ri-notification-2-line"></i>
       <span class="notification-badge">4</span>
     </div>
 
+    <!-- HAMBUGER  -->
     <div class="hamburger" id="hamburger-menu">
       <!-- SIDE BAR  -->
       <i class="ri-menu-3-line" id="open-menu"></i>
@@ -100,7 +111,8 @@
   </div>
 
 
-  
+
+  <!-- PROFILE HEADER  -->
   <header class="header">
     <div class="profile-summary">
       <div class="profile-img-wrapper">
@@ -138,7 +150,7 @@
     </a>
     <a href="/my-order" class="on toasts">
       <i class="ri-shopping-bag-line"></i>
-      <span>All Orders</span>
+      <span>My Orders</span>
     </a>
     <a href="/support" class="on toasts">
       <i class="ri-customer-service-2-line"></i>
@@ -199,7 +211,7 @@
     </a>
     <a href="/my-order" class="on toasts">
       <i class="ri-shopping-bag-line"></i>
-      <span>All Orders</span>
+      <span>My Orders</span>
     </a>
     <a href="/support" class="on toasts">
       <i class="ri-customer-service-2-line"></i>
@@ -217,14 +229,14 @@
       <i class="ri-notification-2-line"></i>
       <span>New Updates</span>
     </a>
+    <a href="/engagement" class="on">
+      <i class="ri-heart-2-line"></i>
+      <span>Engagements</span>
+    </a>
     <a href="#" class="on pending-container">
       <i class="ri-global-line"></i>
       <span>Child Panel</span>
       <!-- <span class="pending-dot">Deu</span> -->
-    </a>
-    <a href="/engagement" class="on">
-      <i class="ri-heart-2-line"></i>
-      <span>Engagements</span>
     </a>
     <a href="#" class="on pending-container">
       <i class="ri-trophy-line"></i>
@@ -273,12 +285,12 @@
 
     <!-- notification function  -->
 <script>
-    document.querySelectorAll(' .notification').forEach(notification => {
-        notification.addEventListener('click', () => {
-            const messageBox = document.getElementById('messageBox');
-            messageBox.textContent = notification.getAttribute('data-message');
-            messageBox.classList.add('show');
-        });
+  document.querySelectorAll(' .notification').forEach(notification => {
+    notification.addEventListener('click', () => {
+      const messageBox = document.getElementById('messageBox');
+      messageBox.textContent = notification.getAttribute('data-message');
+      messageBox.classList.add('show');
     });
+  });
 
 </script>

@@ -28,11 +28,11 @@
                 <%- include ('partials/profiles') %>
 
 
-                    <!-- ALL ABOUT entered-content -->
+                    <!-- ALL ABOUT Centered-content -->
                     <div class="centered-content">
                         <h2>Welcome <%= user.name %>
                         </h2>
-                        <p>Your journey starts here.</p>
+                        <p>Let Poplox make you Popular.</p>
                     </div>
 
                     <!-- BALANCE CARD  -->
@@ -55,10 +55,30 @@
 
 
 
+<!-- <script>
+  window.addEventListener("load", function () {
+    setTimeout(() => {
+      const frames = document.querySelectorAll("iframe");
+      frames.forEach((frame) => {
+        // Target the correct bot iframe
+        if (frame.style.right === "20px") {
+          frame.style.right = "20px";
+          frame.style.left = "auto";
+          frame.style.bottom = "100px"; // 👈 Move it UP from the bottom
+        }
+      });
+    }, 5000); // Wait for iframe to fully load
+  });
+</script> -->
+
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/js/orders.js"></script>
     <script src="/js/dashboard.js"></script>
+<script src="/js/mine-vault.js"></script>
 </body>
 
 </html>

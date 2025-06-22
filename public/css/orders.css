@@ -110,7 +110,7 @@ select:focus {
     background: #252525;
 }
 
-select {
+.form-group select {
     cursor: pointer;
     background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
     background-repeat: no-repeat;
@@ -121,7 +121,7 @@ select {
 
 button {
     padding: 12px 20px;
-    background: var(--secondary-color);
+    background: var(--background-gradient);
     color: #fff;
     border: none;
     font-size: 14px;
@@ -133,7 +133,7 @@ button {
 }
 
 button:hover {
-    background: var(--secondary-color-dark);
+    background: var(--secondary-color);
 }
 
 .form-group .label{
@@ -220,7 +220,7 @@ input[type="text"]#searchInput:focus {
   text-align: center;
   font-weight: bold;
   margin-top: 10px;
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: var(--white);
 }
 
@@ -404,7 +404,9 @@ button .btn-icon {
   width: 90%;
 }
 
-
+.guide-title {
+  text-align: start;
+}
 
     
 }

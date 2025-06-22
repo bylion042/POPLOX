@@ -253,6 +253,9 @@ padding: 10px 0;
   display: none;
 }
 
+.currency-select{
+  display: none;
+}
   .profile-summary{
 display: none;
 }

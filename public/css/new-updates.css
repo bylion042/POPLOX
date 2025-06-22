@@ -86,6 +86,10 @@
 /* .hamburger1, .notification-panel{
   display: none;
 } */
+.currency-select{
+  display: none;
+}
+
 
 .new-update {
     padding: 0px;
