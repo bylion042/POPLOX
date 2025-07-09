@@ -19,7 +19,7 @@
 
     <div class="container">
         <img src="/images/logo.png" alt="">
-        <p>Register an account!</p>
+        <!-- <p>Register an account!</p> -->
 
         <form action="/auth/register" method="POST">
             <label for="name">Name</label>
@@ -51,13 +51,17 @@
 
 
         <!-- Google OAuth -->
-<div class="google-login">
-    <p>or</p>
-    <a href="/auth/google" class="google-btn">
-        <img src="/images/google-logo.png" alt="Google logo" class="google-logo">
-        Sign up with Google
-    </a>
-</div>
+        <div class="google-login">
+            <p>or</p>
+            <a href="/auth/google" class="google-btn" style="text-decoration: none;">
+                <img src="/images/google-logo.png" alt="Google logo" class="google-logo">
+                Sign up with Google
+            </a> 
+            <a href="/auth/twitter" class="google-btn" style="margin-top: 10px; text-decoration: none;">
+                <img src="/images/x-logo.png" alt="Twitter logo" class="google-logo">
+                Sign in with Twitter
+            </a>
+        </div>
 
 
 
@@ -70,63 +74,63 @@
 
 
 
-<!-- LIVE AND BOT CHAT  -->
-<%- include('partials/tawk') %>
+    <!-- LIVE AND BOT CHAT  -->
+    <%- include('partials/tawk') %>
 
 
 
-    <!-- Password Toggle Script -->
-    <script>
-        function togglePassword(fieldId, icon) {
-            let input = document.getElementById(fieldId);
-            if (input.type === "password") {
-                input.type = "text";
-                icon.classList.replace("ri-eye-off-line", "ri-eye-line");
-            } else {
-                input.type = "password";
-                icon.classList.replace("ri-eye-line", "ri-eye-off-line");
-            }
-        }
-    </script>
-
-    <!-- Password Match Checker -->
-    <script>
-        const password = document.getElementById('password');
-        const confirmPassword = document.getElementById('confirmPassword');
-
-        confirmPassword.addEventListener('input', () => {
-            if (confirmPassword.value === "") {
-                confirmPassword.style.border = "1px solid #a3a2a2";
-            } else if (confirmPassword.value !== password.value) {
-                confirmPassword.style.border = "2px solid #ff4d4f";
-            } else {
-                confirmPassword.style.border = "2px solid #4caf50";
-            }
-        });
-
-        password.addEventListener('input', () => {
-            if (confirmPassword.value !== "") {
-                confirmPassword.dispatchEvent(new Event('input'));
-            }
-        });
-    </script>
-
-    <!-- Toastify Script -->
-    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <% if (typeof message !== 'undefined') { %>
+        <!-- Password Toggle Script -->
         <script>
-            Toastify({
-                text: "<%= message %>",
-                duration: 3000,
-                gravity: "top",
-                position: "right",
-                backgroundColor: "<%= messageType === 'error' ? 'red' : 'green' %>",
-                close: true
-            }).showToast();
+            function togglePassword(fieldId, icon) {
+                let input = document.getElementById(fieldId);
+                if (input.type === "password") {
+                    input.type = "text";
+                    icon.classList.replace("ri-eye-off-line", "ri-eye-line");
+                } else {
+                    input.type = "password";
+                    icon.classList.replace("ri-eye-line", "ri-eye-off-line");
+                }
+            }
         </script>
-    <% } %>
 
-    <script src="/js/scripts.js"></script>
+        <!-- Password Match Checker -->
+        <script>
+            const password = document.getElementById('password');
+            const confirmPassword = document.getElementById('confirmPassword');
+
+            confirmPassword.addEventListener('input', () => {
+                if (confirmPassword.value === "") {
+                    confirmPassword.style.border = "1px solid #a3a2a2";
+                } else if (confirmPassword.value !== password.value) {
+                    confirmPassword.style.border = "2px solid #ff4d4f";
+                } else {
+                    confirmPassword.style.border = "2px solid #4caf50";
+                }
+            });
+
+            password.addEventListener('input', () => {
+                if (confirmPassword.value !== "") {
+                    confirmPassword.dispatchEvent(new Event('input'));
+                }
+            });
+        </script>
+
+        <!-- Toastify Script -->
+        <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+        <% if (typeof message !=='undefined' ) { %>
+            <script>
+                Toastify({
+                    text: "<%= message %>",
+                    duration: 3000,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "<%= messageType === 'error' ? 'red' : 'green' %>",
+                    close: true
+                }).showToast();
+            </script>
+            <% } %>
+
+                <script src="/js/scripts.js"></script>
 </body>
 
 </html>

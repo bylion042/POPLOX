@@ -21,6 +21,7 @@ app.set('views', './views');
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static('public'));
+const detectUserCurrency = require('./middleware/geoCurrency');
 
 // Sessions
 app.use(session({
@@ -32,6 +33,9 @@ app.use(session({
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
+// apply globally (recommended if you show balance on many pages)
+app.use(detectUserCurrency);
+
 
 // Routes
 const mainRoutes = require('./routes/main');
@@ -46,6 +50,7 @@ const reviewRoutes = require('./routes/review');
 const apiRoutes = require('./routes/api');
 const admin_login = require('./routes/admin_login');
 const sitemapRoute = require('./routes/sitemap'); // For SEO
+const flutterwaveRoutes = require('./routes/flutterwave');
 
 // Use Routes
 app.use('/', mainRoutes);
@@ -60,6 +65,7 @@ app.use('/', reviewRoutes);                      // Reviews page
 app.use('/api', apiRoutes);                      // API v2 endpoint
 app.use(admin_login);                            // Admin login form route
 app.use('/', sitemapRoute);                      // Sitemap.xml for SEO
+app.use('/flutterwave', flutterwaveRoutes);
 
 // Start Server
 const PORT = process.env.PORT || 3000;
