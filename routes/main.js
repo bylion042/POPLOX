@@ -118,28 +118,30 @@ router.get('/mine', async (req, res) => {
   try {
     const userId = req.session.user._id;
 
-    // Fetch fresh user from DB
+    // ✅ Fetch fresh user from DB
     const freshUser = await User.findById(userId);
 
-    // Get user's preferred currency (default to USD)
-    const userCurrency = freshUser.currency || 'USD';
-    const { getExchangeRate } = require('../utils/exchangeRate');
-    const rate = await getExchangeRate(userCurrency);
+    // ✅ Convert balance to USD
+    const usdRate = await getUsdRate();
+    let usdBalance = 0;
 
-    // Use balance_usd as main balance
-    const usdBalance = freshUser.balance_usd || 0;
+    if (usdRate && freshUser.balance) {
+      usdBalance = parseFloat((freshUser.balance / usdRate).toFixed(2));
 
-    // Dynamically convert to user's currency (for display only)
-    const convertedBalance = parseFloat((usdBalance * rate).toFixed(2));
+      // Save USD balance if it changed
+      if (usdBalance !== freshUser.balance_usd) {
+        freshUser.balance_usd = usdBalance;
+        await freshUser.save();
+      }
+    }
 
-    // Count total orders
+    // ✅ Count total orders
     const totalOrders = await Order.countDocuments({ user: userId });
 
-    // Render 'mine' page
+    // ✅ Render 'mine' page
     res.render('mine', {
       user: freshUser,
       usdBalance,
-      convertedBalance,
       totalSpent: freshUser.totalSpent || 0,
       totalOrders
     });
@@ -151,8 +153,7 @@ router.get('/mine', async (req, res) => {
 });
 
 
-
-// settings Page (Protected)
+// mine Page (Protected)
 router.get('/settings', async (req, res) => {
   if (!req.session.user) {
     return res.redirect('/login');
@@ -161,34 +162,36 @@ router.get('/settings', async (req, res) => {
   try {
     const userId = req.session.user._id;
 
-    // Fetch fresh user from DB
+    // ✅ Fetch fresh user from DB
     const freshUser = await User.findById(userId);
 
-    // Get user's preferred currency (default to USD)
-    const userCurrency = freshUser.currency || 'USD';
-    const { getExchangeRate } = require('../utils/exchangeRate');
-    const rate = await getExchangeRate(userCurrency);
+    // ✅ Convert balance to USD
+    const usdRate = await getUsdRate();
+    let usdBalance = 0;
 
-    // Use balance_usd as main balance
-    const usdBalance = freshUser.balance_usd || 0;
+    if (usdRate && freshUser.balance) {
+      usdBalance = parseFloat((freshUser.balance / usdRate).toFixed(2));
 
-    // Dynamically convert for display only
-    const convertedBalance = parseFloat((usdBalance * rate).toFixed(2));
+      // Save USD balance if it changed
+      if (usdBalance !== freshUser.balance_usd) {
+        freshUser.balance_usd = usdBalance;
+        await freshUser.save();
+      }
+    }
 
-    // Count total orders
+    // ✅ Count total orders
     const totalOrders = await Order.countDocuments({ user: userId });
 
-    // Render 'settings' page
+    // ✅ Render 'mine' page
     res.render('settings', {
       user: freshUser,
       usdBalance,
-      convertedBalance,
       totalSpent: freshUser.totalSpent || 0,
       totalOrders
     });
 
   } catch (err) {
-    console.error("Error loading settings page:", err);
+    console.error("Error loading mine page:", err);
     res.status(500).send("Something went wrong");
   }
 });
@@ -298,22 +301,33 @@ router.get('/dashboard', async (req, res) => {
   try {
     const userId = req.session.user._id;
 
-    // Fetch user
+    // ✅ Fetch user
     const freshUser = await User.findById(userId);
 
-    // Use balance_usd as main balance
-    const usdBalance = freshUser.balance_usd || 0;
+    // ✅ Convert balance to USD (legacy logic stays)
+    const usdRate = await getUsdRate();
+    let usdBalance = 0;
 
-    // Convert USD balance to user's preferred currency (dynamic only)
+    if (usdRate && freshUser.balance) {
+      usdBalance = parseFloat((freshUser.balance / usdRate).toFixed(2));
+
+      // Save USD balance if it changed
+      if (usdBalance !== freshUser.balance_usd) {
+        freshUser.balance_usd = usdBalance;
+        await freshUser.save();
+      }
+    }
+
+    // ✅ Convert USD balance to user’s preferred currency
     const userCurrency = freshUser.currency || 'USD';
     const { getExchangeRate } = require('../utils/exchangeRate');
     const rate = await getExchangeRate(userCurrency);
-    const convertedBalance = parseFloat((usdBalance * rate).toFixed(2));
+    const convertedBalance = parseFloat((freshUser.balance_usd * rate).toFixed(2));
 
-    // Fetch PalmPay payment history
+    // ✅ Fetch PalmPay payment history
     const payments = await PalmPayRequest.find({ user_id: userId }).sort({ created_at: -1 });
 
-    // Fetch services and group by category (for order form)
+    // ✅ Fetch services and group by category (for order form)
     const services = await Service.find().sort({ category: 1 });
     const servicesByCategory = {};
     services.forEach(service => {
@@ -324,10 +338,10 @@ router.get('/dashboard', async (req, res) => {
       servicesByCategory[category].push(service);
     });
 
-    // Count total orders
+    // ✅ Count total orders for this user
     const totalOrders = await Order.countDocuments({ user: userId });
 
-    // Render dashboard
+    // ✅ Render dashboard
     res.render('dashboard', {
       user: freshUser,
       payments,
@@ -414,22 +428,27 @@ router.get('/new-update', async (req, res) => {
   try {
     const userId = req.session.user._id;
 
-    // Fetch user
+    // ✅ Fetch user
     const freshUser = await User.findById(userId);
 
-    // Use balance_usd as main balance
-    const usdBalance = freshUser.balance_usd || 0;
+    // ✅ Convert balance to USD
+    const usdRate = await getUsdRate();
+    let usdBalance = 0;
 
-    // Convert to user's preferred currency (dynamic only)
-    const userCurrency = freshUser.currency || 'USD';
-    const { getExchangeRate } = require('../utils/exchangeRate');
-    const rate = await getExchangeRate(userCurrency);
-    const convertedBalance = parseFloat((usdBalance * rate).toFixed(2));
+    if (usdRate && freshUser.balance) {
+      usdBalance = parseFloat((freshUser.balance / usdRate).toFixed(2));
 
-    // Fetch PalmPay payment history
+      // Save USD balance if it changed
+      if (usdBalance !== freshUser.balance_usd) {
+        freshUser.balance_usd = usdBalance;
+        await freshUser.save();
+      }
+    }
+
+    // ✅ Fetch PalmPay payment history
     const payments = await PalmPayRequest.find({ user_id: userId }).sort({ created_at: -1 });
 
-    // Fetch services and group by category
+    // ✅ Fetch services and group by category
     const services = await Service.find().sort({ category: 1 });
     const servicesByCategory = {};
     services.forEach(service => {
@@ -440,29 +459,28 @@ router.get('/new-update', async (req, res) => {
       servicesByCategory[category].push(service);
     });
 
-    // Count total orders
+    // ✅ Count total orders
     const totalOrders = await Order.countDocuments({ user: userId });
 
-    // Fetch new services from external API
-    const response = await axios.post(process.env.SMMYZ_API_URL, {
-      key: process.env.SMMYZ_API_KEY,
-      action: 'services'
-    });
+    // ✅ Fetch new services from API
+const response = await axios.post(process.env.SMMYZ_API_URL, {
+  key: process.env.SMMYZ_API_KEY, // ✅ Correct usage
+  action: 'services'
+});
 
     const apiServices = response.data;
     const existingServiceIds = await Service.find().distinct('service_id');
     const newServices = apiServices.filter(svc => !existingServiceIds.includes(svc.service));
 
-    // Render view
+    // ✅ Render new-update view with newServices
     res.render('new-update', {
       user: freshUser,
       payments,
       usdBalance,
-      convertedBalance,
       servicesByCategory,
       totalSpent: freshUser.totalSpent || 0,
       totalOrders,
-      newServices
+      newServices // ✅ passed to EJS
     });
 
   } catch (err) {
@@ -470,6 +488,9 @@ router.get('/new-update', async (req, res) => {
     res.status(500).send("Something went wrong");
   }
 });
+
+
+
 
 
 // Logout

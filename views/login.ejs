@@ -18,7 +18,7 @@
 
     <div class="container">
         <img src="/images/logo.png" alt="Logo">
-        <!-- <p>Sign in now to start trading!</p> -->
+        <p>Sign in now to start trading!</p>
 
         <form action="/auth/login" method="POST">
             <label for="email">Email</label>
@@ -35,20 +35,14 @@
 
 
 
-        <!-- Google & Twitter OAuth -->
+        <!-- Google OAuth -->
         <div class="google-login">
             <p>or</p>
-            <a href="/auth/google" class="google-btn" style="text-decoration: none;">
+            <a href="/auth/google" class="google-btn">
                 <img src="/images/google-logo.png" alt="Google logo" class="google-logo">
                 Sign in with Google
             </a>
-            <a href="/auth/twitter" class="google-btn" style="margin-top: 10px; text-decoration: none;">
-                <img src="/images/x-logo.png" alt="Twitter logo" class="google-logo">
-                Sign in with Twitter
-            </a>
-
         </div>
-
 
 
         <p>New on our platform? <a href="/register">Create an account</a></p>
@@ -62,42 +56,42 @@
     <span class="footer__blur"></span>
 
 
-    <!-- LIVE AND BOT CHAT  -->
-    <%- include('partials/tawk') %>
+<!-- LIVE AND BOT CHAT  -->
+<%- include('partials/tawk') %>
 
 
 
-        <!-- Password toggle -->
-        <script>
-            function togglePassword(fieldId, icon) {
-                let input = document.getElementById(fieldId);
-                if (input.type === "password") {
-                    input.type = "text";
-                    icon.classList.replace("ri-eye-off-line", "ri-eye-line");
-                } else {
-                    input.type = "password";
-                    icon.classList.replace("ri-eye-line", "ri-eye-off-line");
-                }
+    <!-- Password toggle -->
+    <script>
+        function togglePassword(fieldId, icon) {
+            let input = document.getElementById(fieldId);
+            if (input.type === "password") {
+                input.type = "text";
+                icon.classList.replace("ri-eye-off-line", "ri-eye-line");
+            } else {
+                input.type = "password";
+                icon.classList.replace("ri-eye-line", "ri-eye-off-line");
             }
+        }
+    </script>
+
+    <!-- Toastify Script -->
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <% if (typeof message !=='undefined' ) { %>
+        <script>
+            Toastify({
+                text: "<%= message %>",
+                duration: 3000,
+                gravity: "top",
+                position: "right",
+                backgroundColor: "<%= messageType === 'error' ? 'red' : 'green' %>",
+                close: true
+            }).showToast();
         </script>
+        <% } %>
 
-        <!-- Toastify Script -->
-        <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-        <% if (typeof message !=='undefined' ) { %>
-            <script>
-                Toastify({
-                    text: "<%= message %>",
-                    duration: 3000,
-                    gravity: "top",
-                    position: "right",
-                    backgroundColor: "<%= messageType === 'error' ? 'red' : 'green' %>",
-                    close: true
-                }).showToast();
-            </script>
-            <% } %>
-
-                <!-- App Script -->
-                <script src="/js/scripts.js"></script>
+            <!-- App Script -->
+            <script src="/js/scripts.js"></script>
 </body>
 
 </html>

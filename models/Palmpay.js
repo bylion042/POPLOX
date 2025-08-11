@@ -19,7 +19,7 @@ const PalmPayRequestSchema = new mongoose.Schema({
   },
   method: {
     type: String,
-    enum: ["PalmPay", "BinancePay", "Flutterwave"], // added Flutterwave
+    enum: ["PalmPay", "BinancePay"],
     required: true
   },
   currency: {

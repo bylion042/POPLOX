@@ -5,7 +5,6 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, lowercase: true, trim: true, required: true, unique: true },
   password: { type: String },
   googleId: { type: String },
-  googlePhoto: { type: String },           // 🆕 Google profile photo
   termsAccepted: { type: Boolean },
   createdAt: { type: Date, default: Date.now },
 
@@ -13,40 +12,34 @@ const UserSchema = new mongoose.Schema({
   resetCode: { type: String },
   resetCodeExpires: { type: Date },
 
-  // 💰 Balance in NGN
+  // 💰 Add this for balance in NGN:
   balance: { type: Number, default: 0 },
 
-  // 💵 USD equivalent of balance
+  // 💵 Store USD equivalent of balance
   balance_usd: { type: Number, default: 0 },
 
-  // Total spent
-  totalSpent: { type: Number, default: 0 },
+  // total spent money 
+  totalSpent: {
+    type: Number,
+    default: 0,
+  },
 
-  currency: { type: String, default: 'USD' },
+currency: { type: String, default: 'USD' },
+
 
   apiKey: { type: String, default: '' },
-  apiKeyCreatedAt: Date,
-
-  // 🐦 Twitter fields
-  twitter_id: { type: String, unique: true, sparse: true },
-  username: { type: String },
-  profile_image_url: { type: String },
-  accessToken: { type: String },
-  refreshToken: { type: String },
+apiKeyCreatedAt: Date,
 });
 
-// ✅ Ensure user has at least one login method
+
+// Ensure either password or Google ID exists
 UserSchema.path('password').validate(function (value) {
-  return this.googleId || this.twitter_id || value;
-}, 'Password is required unless logged in with Google or Twitter');
+  return this.googleId || value;
+}, 'Password is required unless logged in with Google');
 
 UserSchema.path('googleId').validate(function (value) {
-  return this.password || this.twitter_id || value;
-}, 'Google ID required unless using password or Twitter');
-
-UserSchema.path('twitter_id').validate(function (value) {
-  return this.password || this.googleId || value;
-}, 'Twitter ID required unless using password or Google');
+  return this.password || value;
+}, 'Google ID is required unless using password');
 
 const User = mongoose.model('User', UserSchema);
 module.exports = User;

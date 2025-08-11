@@ -36,110 +36,101 @@
                 <div class="header">
                   <h2>Fund Account</h2>
                   <div class="toggle">
-                    <button id="palmpayBtn" class="active">Flutterwave</button>
+                    <button id="palmpayBtn" class="active">Palm Pay</button>
                     <button id="binanceBtn">Binance Pay</button>
                   </div>
 
                   <div class="total">
-                    <h3>Balance</h3>
-                    <h1>$<%= (user.balance_usd || 0).toFixed(2) %>
-                    </h1>
+  <h3>Balance</h3>
+  <h1>$<%= (user.balance_usd || 0).toFixed(2) %></h1>
 
-                    <% const currency=user.currency || 'NGN' ; const symbolMap={ NGN: '₦' , EUR: '€' , GBP: '£' ,
-                      INR: '₹' , JPY: '¥' , CAD: 'C$' , AUD: 'A$' , ZAR: 'R' , GHS: '₵' , SGD: 'S$' , MXN: 'Mex$' ,
-                      CNY: '¥' , BRL: 'R$' , RUB: '₽' , SAR: '﷼' , AED: 'د.إ' , THB: '฿' , TRY: '₺' , SEK: 'kr' ,
-                      NOK: 'kr' , PLN: 'zł' , DKK: 'kr' }; const symbol=symbolMap[currency] || currency + ' ' ; %>
-                      <p class="ngn-balance">
-                        ≈ <%= symbol %>
-                          <%= convertedBalance.toLocaleString(currency==='NGN' ? 'en-NG' : 'en-US' ) %>
-                      </p>
-                  </div>
+  <% 
+    const currency = user.currency || 'NGN';
+    const symbolMap = {
+      NGN: '₦', EUR: '€', GBP: '£', INR: '₹', JPY: '¥',
+      CAD: 'C$', AUD: 'A$', ZAR: 'R', GHS: '₵', SGD: 'S$',
+      MXN: 'Mex$', CNY: '¥', BRL: 'R$', RUB: '₽', SAR: '﷼',
+      AED: 'د.إ', THB: '฿', TRY: '₺', SEK: 'kr', NOK: 'kr',
+      PLN: 'zł', DKK: 'kr'
+    };
+    const symbol = symbolMap[currency] || currency + ' ';
+  %>
+  <p class="ngn-balance">
+    ≈ <%= symbol %><%= convertedBalance.toLocaleString(currency === 'NGN' ? 'en-NG' : 'en-US') %>
+  </p>
+</div>
+
 
                 </div>
 
 
-
-
-                <!-- ALL ABOUT FLUTTERWAVE FUNDING  -->
+                <!-- ALL ABOUT PALMPAY FUNDING  -->
                 <div class="palmpay-plan">
 
+                  <!-- <h2 class="wallet">Fund Wallet to our PalmPay</h2> -->
                   <p class="wallet-text">
-                    Enter the amount you want to fund and pay securely using Flutterwave.
+                    Copy the Account Number below and send your desired amount to our PalmPay to get your wallet funded.
                   </p>
 
-                  <!-- FLUTTER WAVE DETAILS -->
+
+                  <!-- BANK DETAILS -->
                   <div class="bank-detils">
+                    <!-- <p>Send payment to:</p> -->
                     <ul>
                       <li>
-                        <strong>Payment Method:</strong>
-                        <span>Flutterwave Secure Checkout</span>
+                        <strong>Account Number:</strong>
+                        <span id="account-number">7045167609</span>
+                        <button class="copy-btn" onclick="copyAccount(this)">Copy</button>
                       </li>
-                      <li>
-                        <strong>Supported Options:</strong>
-                        Card, Bank Transfer, USSD, Goggle pay etc
-                      </li>
-                      <li>
-                        <strong>Processor:</strong>
-                        Flutterwave Payments
-                      </li>
+                      <li><strong>Bank Name:</strong> PalmPay MFB</li>
+                      <li><strong>Account Name:</strong> Chidera Kingsley Ezeaka</li>
                     </ul>
                   </div>
 
-                  <h2 class="wallet">How it works</h2>
-                  <p class="wallet-text">
-                    Enter the amount you want to fund and click “Fund with Flutterwave.” You’ll be securely redirected
-                    to Flutterwave’s payment gateway where you can complete your payment using a card, bank transfer,
-                    USSD, or other available options. Once payment is successful, your wallet will be updated
-                    automatically.
-                  </p>
+                  <% if (typeof msg !=="undefined" ) { %>
+                    <p class="success">
+                      <%= msg %>
+                    </p>
+                    <% } %>
 
+                      <!-- CONFIRM TRANSACTION FORM  -->
+                      <h2 class="wallet">Fill your Transaction Details</h2>
+                      <p class="wallet-text">
+                        Please make sure to enter the exact amount you sent, provide the correct transaction Session ID,
+                        and optionally upload a screenshot of the payment for faster verification.
+                      </p>
 
-                  <form action="/flutterwave/pay" method="POST" onsubmit="return validateFlutterwaveAmount()">
-                    <input type="hidden" name="currency" value="USD" />
-                    <div>
-                      <label>Amount to Fund (<%= user.currency || 'USD' %>)</label>
-                      <input type="number" name="amount"
-                        placeholder="<%= user.currency === 'NGN' ? 'min - ₦500' : 'min - $0.50 (half a dollar)' %>"
-                        required step="0.01" />
-                    </div>
+                      <form action="/submit" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="method" value="PalmPay" />
+                        <input type="hidden" name="currency" value="NGN" />
 
-                    <div class="chain">
-                      <button type="submit" class="flutterwave-btn">Fund with Flutterwave</button>
-                      <button type="button" class="help-btn" onclick="openFlutterwaveInfo()">About Flutterwave</button>
-                    </div>
-                    <!-- FUNCTION TO PROTECT AMMOUT  -->
-                    <script>
-                      function validateFlutterwaveAmount() {
-                        const amountInput = document.querySelector('input[name="amount"]');
-                        const amount = parseFloat(amountInput.value);
-                        const currency = "<%= user.currency || 'USD' %>";
+                        <div>
+                          <label>Amount Sent</label>
+                          <input type="number" name="amount" placeholder="₦1000" required />
+                        </div>
 
-                        if (currency === "NGN" && amount < 500) {
-                          Toastify({
-                            text: "Minimum amount is ₦500",
-                            duration: 3000,
-                            close: true,
-                            gravity: "top",
-                            position: "right",
-                            backgroundColor: "#f44336"
-                          }).showToast();
-                          return false; // block form submission
-                        }
-                        return true; // allow
-                      }
-                    </script>
+                        <div>
+                          <label>Transaction Session ID</label>
+                          <input type="text" name="txid" placeholder="XXXXXXXXXXXXXXXXXXX" required />
+                        </div>
 
+                        <div>
+                          <label>Upload Screenshot (Optional)</label>
+                          <input type="file" name="screenshot" accept="image/*" />
+                        </div>
 
-                    <!-- FUNCTION TO TAKE USER TO ABOUT-FLUTTERWAV  -->
-                    <script>
-                      function openFlutterwaveInfo() {
-                        window.open('https://www.flutterwave.com/ng', '_blank');
-                      }
-                    </script>
+                        <div class="chain">
+                          <button type="submit">Submit Payment Details</button>
+                          <button onclick="showImage()">Find Transaction Session ID</button>
+                        </div>
+                      </form>
 
-                  </form>
+                      <div id="overlay" class="image-overlay" onclick="hideImage()">
+                        <div class="image-popup" onclick="event.stopPropagation()">
+                          <img src="/images/review4.jpg" alt="Transaction ID Example">
+                        </div>
+                      </div>
                 </div>
-
 
 
 
@@ -183,12 +174,12 @@
 
                         <div>
                           <label>Amount Sent</label>
-                          <input type="number" name="amount" placeholder="min- $0.50" required />
+                          <input type="number" name="amount" placeholder="$1000" required />
                         </div>
 
                         <div>
                           <label>Binance Order TxID</label>
-                          <input type="text" name="txid" placeholder="01010XXXXXXXXX01010" required />
+                          <input type="text" name="txid" placeholder="XXXXXXXXXXXXXXXXXXX" required />
                         </div>
 
                         <div>
@@ -273,7 +264,9 @@
 
             </div>
           </div>
+
       </main>
+
 
       <!-- INCLUDE BOT  -->
       <%- include('partials/bot') %>
@@ -364,7 +357,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <!-- <script src="/js/orders.js"></script> -->
   <script src="/js/dashboard.js"></script>
 </body>
 

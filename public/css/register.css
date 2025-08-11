@@ -36,8 +36,8 @@ body {
 
 .container {
     background: var(--primary-color-light);
-    padding: 30px 20px;
-    border-radius: 20px;
+    padding: 30px;
+    border-radius: 16px;
     box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
     width: 100%;
     max-width: 450px;
@@ -59,7 +59,7 @@ body {
 
 .container img {
     width: 40%;
-    /* margin-bottom: 1rem; */
+    margin-bottom: 1rem;
 }
 
 p {
@@ -120,7 +120,7 @@ input[type="password"] {
 .toggle-password {
     position: absolute;
     right: 12px;
-    top: 55%;
+    top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
     font-size: 18px;
@@ -221,9 +221,9 @@ input[type="password"] {
     display: inline-flex;
     text-align: center;
     align-items: center;
-    padding: 9px;
+    padding: 7px;
     border: 1px solid #ccc;
-    border-radius: 8px;
+    border-radius: 5px;
     text-decoration: none;
     color: var(--primary-color-extra-light);
     font-size: 15px;
@@ -231,11 +231,9 @@ input[type="password"] {
     background-color: #fff;
 }
 
-
-
 .google-login .google-logo {
-    width: 7%;
-    height: 7%;
+    width: 6%;
+    height: 6%;
     margin-right: 10px;
     margin-bottom: 0;
     display: flex;
@@ -261,6 +259,7 @@ a:hover {
     color: var(--secondary-color);
     font-weight: 500;
     text-decoration: none;
+    margin-bottom: 15px;
     font-size: 15px;
     transition: color 0.3s ease;
 }
@@ -316,17 +315,4 @@ a:hover {
     .back-link {
         font-size: 13px;
     }
-
-
-        .google-btn {
-    padding: 7px;
-    background-color: #fff;
-}
-
-    .google-login .google-logo {
-    width: 10%;
-    height: 10%;
-    margin-right: 15px;
-}
-
 }

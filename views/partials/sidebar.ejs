@@ -113,32 +113,22 @@
 
 
   <!-- PROFILE HEADER  -->
-<header class="header">
-  <div class="profile-summary">
-    <div class="profile-img-wrapper">
-      <% if (user.twitter_id && user.profile_image_url) { %>
-        <img src="<%= user.profile_image_url %>" alt="Twitter profile" class="profile-photo">
-      <% } else { %>
+  <header class="header">
+    <div class="profile-summary">
+      <div class="profile-img-wrapper">
         <div class="profile-initials">
-          <% 
-            const safeName = (user && user.name) ? user.name : 'User';
-            const nameParts = safeName.trim().split(' ');
-            let initials = '';
-            if (nameParts.length === 1) {
-              initials = nameParts[0].substring(0, 2);
-            } else {
-              initials = nameParts[0][0] + nameParts[1][0];
-            }
-          %>
-          <%= initials.toUpperCase() %>
+          <% const nameParts=user.name.trim().split(' ');
+                    let initials = '';
+                    if (nameParts.length === 1) {
+                    initials = nameParts[0].substring(0, 2);
+                    } else {
+                    initials = nameParts[0][0] + nameParts[1][0]; }%>
+                  <%= initials.toUpperCase() %>
+                </div>
+
+              </div>
         </div>
-      <% } %>
-    </div>
-  </div>
-</header>
-
-
-
+    </header>
 </div>
 
 <div class="menu-container" id="menu-container">
